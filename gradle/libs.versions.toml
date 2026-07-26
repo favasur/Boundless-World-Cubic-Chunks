@@ -15,7 +15,12 @@ neoforge26 = "21.1.54"
 fabricLoader26 = "0.16.9"
 fabricApi26 = "0.104.0+1.21.1"
 
-[libraries]
+# Single source of truth for the mod's aVersion. Consumed by both neoforge
+# subprojects' `processResources` filter so META-INF/neoforge.mods.toml's
+# `${version}` placeholder expands to this string at packaging time.
+cubicchunks = "0.4.0+1.21.1"
+
+[libraries]	
 minecraft121 = { module = "com.mojang:minecraft", version.ref = "minecraft121" }
 neoforge121 = { module = "net.neoforged:neoforge", version.ref = "neoforge121" }
 fabricLoader121 = { module = "net.fabricmc:fabric-loader", version.ref = "fabricLoader121" }

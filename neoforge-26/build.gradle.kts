@@ -9,6 +9,13 @@ plugins {
     id("net.neoforged.moddev") version "1.0.21"
 }
 
+// The 26.x toml uses `${version}` (this file). The moddev plugin substitutes
+// it from `project.version`; if we don't declare one, the literal
+// `${version}` ends up in the jar and FML throws `InvalidModFileException`.
+// `libs.versions.cubicchunks` is the single source of truth shared with
+// neoforge-1_21 so the two subprojects can't drift.
+version = libs.versions.cubicchunks.get()
+
 dependencies {
     implementation(project(":common"))
     // JAR-in-JAR mirror of neoforge-1_21 — the published mod jar will contain
@@ -49,15 +56,30 @@ tasks.withType<JavaCompile> {
 // alias to 1.21.x so the build is a stub that proves the 26.x toolchain
 // works; when 1.26.x ships, swap the aliases to the real coordinates.
 //
-// We disable EVERY task in this module when the opt-in is absent (not just
+// 26.x builds are opt-in via `-Pbuild.26x=true` or `BUILD_26X=true`. When the
+// opt-in is absent we disable every task in this module (not just
 // `build`/`jar`/`assemble`) because the NeoForge moddev plugin's `modDev`
 // task set still configures RemapJar / sourcesJar / etc. and reads
-// `build/devlibs/...` paths the same way Loom does.
+// `build/devlibs/...` paths the same way Loom does. When the opt-in IS
+// present, we register the same mod-metadata substitution wiring as
+// neoforge-1_21 so the toml's `${version}` placeholder expands from
+// `project.version` at packaging time instead of being shipped as a
+// literal that FML rejects. `inputs.property` registers `project.version`
+// as a hashable task input so edits to `libs.versions.cubicchunks`
+// invalidate this task's incremental cache automatically (no
+// `--rerun-tasks` required).
 val build26x: Boolean =
     (project.findProperty("build.26x") as String?)?.toBoolean() == true ||
         System.getenv("BUILD_26X")?.toBoolean() == true
 if (!build26x) {
     tasks.configureEach {
         enabled = false
+    }
+} else {
+    tasks.processResources {
+        inputs.property("cubicchunks.version", project.version.toString())
+        filesMatching("META-INF/neoforge.mods.toml") {
+            expand("version" to project.version.toString())
+        }
     }
 }
