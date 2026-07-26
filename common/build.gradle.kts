@@ -34,6 +34,11 @@ publishing {
             from(components["java"])
             groupId = "io.github.opencubicchunks"
             artifactId = "cubicchunks-common"
+            // Maven coord version is free-form (placeholder sentinel until the
+            // first real release). The modId version in
+            // common/src/main/resources/fabric.mod.json is the semver-valid
+            // "0.1.0" that the platforms depend on via
+            // fabric.mod.json's depends.cubicchunks_common: ">=0.1.0".
             version = "0.0.0-placeholder"
         }
     }
