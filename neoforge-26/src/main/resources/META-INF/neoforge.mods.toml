@@ -1,18 +1,24 @@
 modLoader = "javafml"
-loaderVersion = "[26,)" # TODO: adjust to actual NeoForge 26.x loader version range when released
+# loaderVersion 26 is not yet released; this constraint will fail-open at
+# install time until a real NeoForge 26.x ships. Replace with the actual
+# version range when it does.
+loaderVersion = "[26,)"
 license = "MIT"
 
 [[mods]]
 modId = "cubicchunks"
 version = "${file.jarVersion}"
-displayName = "CubicChunks"
+displayName = "CubicChunks (NeoForge 26.x forward-compatible)"
 authors = "BoundlessWorld-CubicChunks"
 description = "Infinite vertical world height for Minecraft. NeoForge 26.x forward-compatible module."
 
+# The 26.x coordinates in libs.versions.toml currently alias 1.21.x. When
+# Minecraft 1.26.x and NeoForge 26.x actually ship, update both this range
+# AND libs.versions.toml so the launcher's version check matches the actual
+# release.
 [[dependencies.cubicchunks]]
 modId = "neoforge"
 mandatory = true
-# TODO: update to actual NeoForge 26.x version range when available
 versionRange = "[21.1.0,)"
 ordering = "NONE"
 side = "BOTH"
@@ -20,7 +26,33 @@ side = "BOTH"
 [[dependencies.cubicchunks]]
 modId = "minecraft"
 mandatory = true
-# TODO: update to actual Minecraft 1.26.x version range when available
 versionRange = "[1.21.1,1.22)"
 ordering = "NONE"
 side = "BOTH"
+
+# JAR-in-JAR dependency on the bundled :common module — same pattern as
+# neoforge-1_21/src/main/resources/META-INF/neoforge.mods.toml. Required
+# because neoforge-26 does not yet have a real :common dep pin.
+[[dependencies.cubicchunks]]
+modId = "cubicchunks_common"
+type = "jarJar"
+targetPackage = "io.github.opencubicchunks.cubicchunks"
+
+# Mirror neoforge-1_21's mixin config loadout so the transition to 26.x is
+# a version bump, not a manifest rewrite. The configs themselves live in
+# common-0.4.jar's META-INF resources when this module is built against the
+# 1.21.x-bridge coordinates in libs.versions.toml.
+[[mixins]]
+config = "cubicchunks.mixins.json"
+
+[[mixins]]
+config = "cubicchunks.client.mixins.json"
+
+[[mixins]]
+config = "cubicchunks.fixes.worldgen.mixins.json"
+
+[[mixins]]
+config = "cubicchunks.immersiveportals.mixins.json"
+
+[[mixins]]
+config = "cubicchunks.mixins.optifine.json"

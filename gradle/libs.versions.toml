@@ -3,11 +3,27 @@ minecraft121 = "1.21.1"
 neoforge121 = "21.1.54"
 fabricLoader121 = "0.16.9"
 fabricApi121 = "0.104.0+1.21.1"
+# 26.x placeholders. Real Minecraft 1.26.x / Fabric Loader 26.x / NeoForge 26.x
+# versions do not yet exist as stable releases. Pointing at 1.21.1 / 21.1.54
+# keeps Gradle's config-phase resolution from crashing on a missing artifact;
+# when 1.26.x ships, swap these to the real coordinates. The 26.x modules are
+# opt-in: `-Pbuild.26x=true` on the CLI or `BUILD_26X=true` in the env
+# activates the build; the default `./gradlew build` skips them.
+# BRIDGE: bump when MC 1.26.x + Fabric Loader 26.x + NeoForge 26.x ship.
+minecraft26 = "1.21.1"
+neoforge26 = "21.1.54"
+fabricLoader26 = "0.16.9"
+fabricApi26 = "0.104.0+1.21.1"
 
 [libraries]
 minecraft121 = { module = "com.mojang:minecraft", version.ref = "minecraft121" }
 neoforge121 = { module = "net.neoforged:neoforge", version.ref = "neoforge121" }
 fabricLoader121 = { module = "net.fabricmc:fabric-loader", version.ref = "fabricLoader121" }
 fabricApi121 = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabricApi121" }
+
+minecraft26 = { module = "com.mojang:minecraft", version.ref = "minecraft26" }
+neoforge26 = { module = "net.neoforged:neoforge", version.ref = "neoforge26" }
+fabricLoader26 = { module = "net.fabricmc:fabric-loader", version.ref = "fabricLoader26" }
+fabricApi26 = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabricApi26" }
 
 [bundles]

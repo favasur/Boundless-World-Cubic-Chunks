@@ -12,10 +12,12 @@ plugins {
 }
 
 dependencies {
-    minecraft(libs.minecraft121)
+    // 26.x coordinates: currently aliased to 1.21.x in libs.versions.toml;
+    // swap to the actual 1.26.x coordinate when Mojang releases it.
+    minecraft(libs.minecraft26)
     mappings(loom.officialMojangMappings())
-    modImplementation(libs.fabricLoader121)
-    modImplementation(libs.fabricApi121)
+    modImplementation(libs.fabricLoader26)
+    modImplementation(libs.fabricApi26)
 
     // :common is a mavenLocal dep (not project(":common")) for the same reason
     // documented in fabric-1_21/build.gradle.kts — avoids Loom 1.9-SNAPSHOT's
@@ -35,4 +37,23 @@ java {
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
     options.release = 21
+}
+
+// Opt-in: 26.x modules don't build by default because 1.26.x is not yet
+// released. Enable with `-Pbuild.26x=true` on the CLI or `BUILD_26X=true`
+// in the env. The 26.x maven coordinates in libs.versions.toml currently
+// alias to 1.21.x so the build is a stub that proves the 26.x toolchain
+// works; when 1.26.x ships, swap the aliases to the real coordinates.
+//
+// We disable EVERY task in this module when the opt-in is absent (not just
+// `build`/`jar`/`assemble`) because Loom's `remapJar` task reads
+// `build/devlibs/<artifact>-dev.jar` regardless of whether `:build` is
+// requested, and that fails when the module has never been compiled.
+val build26x: Boolean =
+    (project.findProperty("build.26x") as String?)?.toBoolean() == true ||
+        System.getenv("BUILD_26X")?.toBoolean() == true
+if (!build26x) {
+    tasks.configureEach {
+        enabled = false
+    }
 }
