@@ -5,6 +5,9 @@ plugins {
 
 dependencies {
     implementation(project(":common"))
+    // NeoForge's JAR-in-JAR loader pattern: the published mod jar will contain
+    // :common's classes inline, so a single drop into .minecraft/mods is enough.
+    jarJar(project(":common"))
 }
 
 neoForge {

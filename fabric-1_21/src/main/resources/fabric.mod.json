@@ -26,7 +26,8 @@
     "cubicchunks.mixins.json",
     "cubicchunks.client.mixins.json",
     "cubicchunks.fixes.worldgen.mixins.json",
-    "cubicchunks.immersiveportals.mixins.json"
+    "cubicchunks.immersiveportals.mixins.json",
+    "cubicchunks.mixins.optifine.json"
   ],
   "depends": {
     "fabricloader": ">=0.16.0",

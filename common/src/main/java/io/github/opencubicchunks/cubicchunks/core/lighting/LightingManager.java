@@ -8,6 +8,9 @@ import io.github.opencubicchunks.cubicchunks.core.CubicChunks;
 import io.github.opencubicchunks.cubicchunks.core.asm.mixin.ICubicWorldInternal;
 import io.github.opencubicchunks.cubicchunks.core.world.ICubeProviderInternal;
 import io.github.opencubicchunks.cubicchunks.core.world.cube.Cube;
+import io.github.opencubicchunks.cubicchunks.core.CubicChunksConfig;
+import io.github.opencubicchunks.cubicchunks.core.lighting.LightingMode;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
@@ -24,6 +27,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
 import java.util.function.Consumer;
 
 // @Original: 1.12.2:io.github.opencubicchunks.cubicchunks.core.lighting.LightingManager
@@ -124,20 +129,54 @@ public class LightingManager implements ILightingManager {
         this.toUpdate.clear();
         int total = updateSet.size();
         long ms = -System.currentTimeMillis();
-        Iterator<CubeLightUpdateInfo> iterator = updateSet.iterator();
 
-        while (iterator.hasNext()) {
-            CubeLightUpdateInfo cubeLightUpdateInfo = iterator.next();
-            cubeLightUpdateInfo.tick();
-            if (!cubeLightUpdateInfo.hasUpdates()) {
-                iterator.remove();
+        if (CubicChunksConfig.lightingMode == LightingMode.ASYNC_BATCHED) {
+            // ADDITIVE: opt-in async dispatch. SYNC is the default and preserves
+            // the original sequential walk one-for-one. Only fires when the user
+            // explicitly flips the config flag to ASYNC_BATCHED.
+            // NOTE: CompletableFuture.allOf(...).join() intentionally blocks the
+            // calling tick thread until all per-cube relight fan-outs complete.
+            // This keeps onTick() semantically equivalent to SYNC (work done
+            // before this tick's tracker flush) while parallelising only the
+            // internal cube work. If Minecraft's background executor is ever
+            // saturated and the join stalls, the server's tick-watcher will
+            // log a watchdog warning, which is the correct signal.
+            List<CompletableFuture<Void>> futures = new ArrayList<>(updateSet.size());
+            for (CubeLightUpdateInfo cubeLightUpdateInfo : updateSet) {
+                futures.add(CompletableFuture.runAsync(cubeLightUpdateInfo::tick, Util.backgroundExecutor()));
+            }
+            try {
+                CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
+            } catch (CompletionException ce) {
+                CubicChunks.LOGGER.debug("Async-batched lighting dispatch: one or more cube relights failed: {}", ce.getMessage());
+            }
+            Iterator<CubeLightUpdateInfo> asyncIterator = updateSet.iterator();
+            while (asyncIterator.hasNext()) {
+                if (!asyncIterator.next().hasUpdates()) {
+                    asyncIterator.remove();
+                }
+            }
+        } else {
+            Iterator<CubeLightUpdateInfo> iterator = updateSet.iterator();
+            while (iterator.hasNext()) {
+                CubeLightUpdateInfo cubeLightUpdateInfo = iterator.next();
+                cubeLightUpdateInfo.tick();
+                if (!cubeLightUpdateInfo.hasUpdates()) {
+                    iterator.remove();
+                }
             }
         }
 
         ms += System.currentTimeMillis();
         int updated = total - updateSet.size();
-        if (ms > 50L && updated > 0) {
-            CubicChunks.LOGGER.debug("Light tick: {} cubes, {} updated in {}ms, {}ms/cube", total, updated, ms, (double) ms / (double) updated);
+        // The `ms` measurement only makes sense under SYNC: under ASYNC_BATCHED
+        // the wall-clock includes the .join() wait across N background threads,
+        // which inflates the apparent per-cube timing. Guard the diagnostic
+        // behind the mode check so the log stays meaningful.
+        if (CubicChunksConfig.lightingMode == LightingMode.SYNC && ms > 50L && updated > 0) {
+            CubicChunks.LOGGER.debug("Light tick (sync): {} cubes, {} updated in {}ms, {}ms/cube", total, updated, ms, (double) ms / (double) updated);
+        } else if (CubicChunksConfig.lightingMode == LightingMode.ASYNC_BATCHED && ms > 50L && updated > 0) {
+            CubicChunks.LOGGER.debug("Light tick (async-batched): {} cubes, {} updated in {}ms wall-clock", total, updated, ms);
         }
 
         this.toUpdate.addAll(updateSet);

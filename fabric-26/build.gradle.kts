@@ -4,6 +4,8 @@
 
 plugins {
     java
+    // Pinned to loom 1.9.4 — match common/build.gradle.kts to keep cross-project
+    // eager-resolution semantics consistent across modules.
     id("fabric-loom") version "1.9-SNAPSHOT"
 }
 
@@ -13,7 +15,8 @@ dependencies {
     modImplementation(libs.fabricLoader121)
     modImplementation(libs.fabricApi121)
 
-    implementation(project(":common"))
+    modImplementation(project(":common"))
+    include(project(":common"))
 }
 
 java {

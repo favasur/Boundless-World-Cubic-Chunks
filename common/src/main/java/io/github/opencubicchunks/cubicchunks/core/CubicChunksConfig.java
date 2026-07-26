@@ -1,5 +1,7 @@
 package io.github.opencubicchunks.cubicchunks.core;
 
+import io.github.opencubicchunks.cubicchunks.core.lighting.LightingMode;
+
 // @Original: 1.12.2:io.github.opencubicchunks.cubicchunks.core.CubicChunksConfig
 public final class CubicChunksConfig {
     public static int chunkGCInterval = 200;
@@ -38,6 +40,32 @@ public final class CubicChunksConfig {
      * and 'End' ServerLevels are absorbed into the overworld's save file.
      */
     public static boolean stackingDimensionsEnabled = true;
+
+    /**
+     * Lighting dispatch mode for {@code LightingManager.onTick()}. Default
+     * {@link io.github.opencubicchunks.cubicchunks.core.lighting.LightingMode#SYNC}
+     * preserves existing behaviour one-for-one. Switching to
+     * {@link io.github.opencubicchunks.cubicchunks.core.lighting.LightingMode#ASYNC_BATCHED}
+     * fans out each {@code CubeLightUpdateInfo.tick()} to
+     * {@code Util.backgroundExecutor()} and joins on
+     * {@code CompletableFuture.allOf(...)}. This is purely additive — no other
+     * code reads this field and the default keeps the original sequential path.
+     *
+     * <p>Override at JVM launch with {@code -Dcubicchunks.lightingMode=ASYNC_BATCHED}.
+     */
+    public static LightingMode lightingMode = LightingMode.SYNC;
+
+    static {
+        // System-property override: -Dcubicchunks.lightingMode=ASYNC_BATCHED
+        String prop = System.getProperty("cubicchunks.lightingMode");
+        if (prop != null && !prop.isEmpty()) {
+            try {
+                lightingMode = LightingMode.valueOf(prop);
+            } catch (IllegalArgumentException ignored) {
+                // Falls through to default; bad value should never crash a load.
+            }
+        }
+    }
 
     private CubicChunksConfig() {
     }
