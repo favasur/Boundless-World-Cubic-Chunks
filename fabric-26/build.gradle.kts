@@ -22,7 +22,7 @@ dependencies {
     // config-phase cross-project JAR read. Build sequence:
     // ./gradlew --configure-on-demand --no-daemon --no-configuration-cache :common:publishMavenJavaPublicationToMavenLocal
     // then ./gradlew clean build -x test --no-daemon --no-configuration-cache.
-    modImplementation("io.github.opencubicchunks:cubicchunks-common:0.0.0-placeholder")
+    modImplementation("io.github.opencubicchunks:cubicchunks-common:0.4")
 }
 
 java {

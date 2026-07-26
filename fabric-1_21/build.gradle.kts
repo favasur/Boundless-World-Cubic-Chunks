@@ -23,7 +23,7 @@ dependencies {
     // runtime link between the platform jar and common's classes is restored
     // via fabric.mod.json's `depends.cubicchunks_common` sibling-mod entry —
     // drop BOTH `common-*.jar` AND `fabric-1_21-*.jar` into `.minecraft/mods`.
-    modImplementation("io.github.opencubicchunks:cubicchunks-common:0.0.0-placeholder")
+    modImplementation("io.github.opencubicchunks:cubicchunks-common:0.4")
 }
 
 java {

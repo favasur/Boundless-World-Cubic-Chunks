@@ -4,7 +4,7 @@ plugins {
 
 allprojects {
     group = "io.github.opencubicchunks"
-    version = "0.0.0-placeholder"
+    version = "0.4"
 
     repositories {
         // mavenLocal lets the platform modules consume :common as a published

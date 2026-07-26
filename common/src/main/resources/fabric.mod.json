@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "cubicchunks_common",
-  "version": "0.1.0",
+  "version": "0.4",
   "name": "BoundlessWorld-CubicChunks (Common Library)",
   "description": "Common library for BoundlessWorld-CubicChunks. Fabric-loom requires a fabric.mod.json so this submodule pulls Minecraft and the Mixin runtime onto its compile classpath; the loader-specific mods (fabric-1_21, neoforge-1_21, fabric-26, neoforge-26) are the actual mod entry points.",
   "authors": [
