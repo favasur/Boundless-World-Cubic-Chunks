@@ -41,5 +41,12 @@ nul
 # Uncomment if you want to track them:
 # CubicChunks-1.12.2-*-all.jar
 # [CC]CubicChunksCompatibilityHelper-*.jar
-# immersive-portals-*-mc1.21.1-fabric.jar
-# immersive_portals-*-all.jar
+
+# Immersive Portals jars — they aren't project source. The IP source under
+# `ip_source/` is what downstream consumers build against; the ~5 MB of
+# released jars across both upstream naming families (hyphen + underscore)
+# are pulled from Modrinth / the IP releases page. One broad glob covers
+# future MC versions and loader-suffix variants too; anchored to `.jar`,
+# so it cannot collide with the `.java` files under `ip_source/` or any
+# of the `.json` mixin configs.
+**/immersive[-_]portals*.jar
