@@ -323,7 +323,7 @@ public final class BandedFeaturePlacer {
         // createStructures/applyBiomeDecoration/placeInChunk calls, get swallowed,
         // and leave Bastion/NetherFortress/EndCity unplaced).
         throw new IllegalStateException(
-                "OpenCubicChunks: could not locate net.minecraft.world.level.StructureManager on the ServerLevel instance. "
+                "BoundlessWorld-CubicChunks: could not locate net.minecraft.world.level.StructureManager on the ServerLevel instance. "
               + "Vanilla's createStructures / applyBiomeDecoration / placeInChunk take the pre-rename StructureManager type, "
               + "not the renamed StructureTemplateManager. Auto-discovery failed — patch the resolveStructureManager helper or "
               + "set a System property to skip structure placement for now.");

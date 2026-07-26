@@ -1,4 +1,5 @@
 {
+  "_": "Empty placeholder config. The mixins[] and client[] arrays are intentionally empty — there is no OptiFine/Embeddium build target released for Minecraft 1.21.x at the time of authorship. When a 1.21.x port of OptiFine (or an Embeddium/Iris fork that inherits its foliage culling hooks) ships, drop the foliage/cull-shadowed-cube mixins into this file and they will be picked up by every platform manifest that references `cubicchunks.mixins.optifine.json` (fabric-1_21, fabric-26, neoforge-1_21). `required: false` makes the config opt-in — the mod loads unchanged on a stock Fabric/NeoForge install.",
   "required": false,
   "minVersion": "0.8",
   "package": "io.github.opencubicchunks.cubicchunks.core.asm.mixin.optifine",

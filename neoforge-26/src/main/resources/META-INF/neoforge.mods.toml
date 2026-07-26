@@ -6,7 +6,7 @@ license = "MIT"
 modId = "cubicchunks"
 version = "${file.jarVersion}"
 displayName = "CubicChunks"
-authors = "OpenCubicChunks"
+authors = "BoundlessWorld-CubicChunks"
 description = "Infinite vertical world height for Minecraft. NeoForge 26.x forward-compatible module."
 
 [[dependencies.cubicchunks]]

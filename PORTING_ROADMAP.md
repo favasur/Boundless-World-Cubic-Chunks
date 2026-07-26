@@ -221,6 +221,6 @@ Strategy: port only the critical Mixins first; defer non-critical ones.
 ## Reference links
 
 - Original 1.12.2 source (decompiled): `decompiled/`
-- OpenCubicChunks / CubicChunks3 (modern rewrite, WIP): https://github.com/OpenCubicChunks/CubicChunks3
+- Upstream OpenCubicChunks / CubicChunks3 (modern rewrite, WIP): https://github.com/OpenCubicChunks/CubicChunks3
 - NeoForge docs: https://docs.neoforged.net/
 - Fabric docs: https://fabricmc.net/develop/

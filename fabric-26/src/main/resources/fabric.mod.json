@@ -5,11 +5,11 @@
   "name": "CubicChunks",
   "description": "Infinite vertical world height for Minecraft. Fabric 26.x forward-compatible module.",
   "authors": [
-    "OpenCubicChunks"
+    "BoundlessWorld-CubicChunks"
   ],
   "contact": {
-    "homepage": "https://github.com/OpenCubicChunks/CubicChunks",
-    "sources": "https://github.com/OpenCubicChunks/CubicChunks"
+    "homepage": "https://github.com/favasur/Boundless-World-Cubic-Chunks",
+    "sources": "https://github.com/favasur/Boundless-World-Cubic-Chunks"
   },
   "license": "MIT",
   "icon": "assets/cubicchunks/icon.png",

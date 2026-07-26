@@ -7,7 +7,7 @@ modId = "cubicchunks"
 version = "${version}"
 displayName = "CubicChunks"
 description = "Infinite vertical world height for Minecraft."
-authors = "OpenCubicChunks"
+authors = "BoundlessWorld-CubicChunks"
 
 [[mixins]]
 config = "cubicchunks.mixins.json"
