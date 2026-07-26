@@ -3,6 +3,7 @@ package io.github.opencubicchunks.cubicchunks.fabric;
 import io.github.opencubicchunks.cubicchunks.api.world.ICubeProvider;
 import io.github.opencubicchunks.cubicchunks.api.worldgen.stack.StackedDimensionRegistry;
 import io.github.opencubicchunks.cubicchunks.common.CubicChunksConstants;
+import io.github.opencubicchunks.cubicchunks.core.CubicChunks;
 import io.github.opencubicchunks.cubicchunks.core.CubicChunksConfig;
 import io.github.opencubicchunks.cubicchunks.core.asm.mixin.ICubicWorldInternal;
 import io.github.opencubicchunks.cubicchunks.core.network.NetworkDispatcher;
@@ -17,6 +18,7 @@ import io.github.opencubicchunks.cubicchunks.core.server.CubeProviderServer;
 import io.github.opencubicchunks.cubicchunks.core.util.ICubicPlatform;
 import net.minecraft.resources.ResourceLocation;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.server.level.ServerLevel;
@@ -51,6 +53,12 @@ public class CubicChunksFabric implements ModInitializer {
         PayloadTypeRegistry.playS2C().register(CubeBlockChangePayload.TYPE, CubeBlockChangePayload.STREAM_CODEC);
         PayloadTypeRegistry.playS2C().register(CubeSkyLightPayload.TYPE, CubeSkyLightPayload.STREAM_CODEC);
         PayloadTypeRegistry.playS2C().register(HeightMapPayload.TYPE, HeightMapPayload.STREAM_CODEC);
+
+        // 1.21.x removed MinecraftServer.getServer(); capture the server reference at
+        // SERVER_STARTED so FabricCubicPlatform.mainThreadExecutor() can return it on the
+        // server side without a static accessor.
+        ServerLifecycleEvents.SERVER_STARTED.register(server -> FabricCubicPlatform.setServer(server));
+        ServerLifecycleEvents.SERVER_STOPPING.register(server -> FabricCubicPlatform.setServer(null));
 
         ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> {
             ServerPlayer player = handler.getPlayer();

@@ -25,7 +25,19 @@ import java.util.Collections;
  * 1.21 port: extend LevelChunk so all abstract ChunkAccess methods are inherited natively.
  */
 public class EmptyColumn extends LevelChunk implements IColumn, IColumnInternal {
-    private static final LevelChunkSection[] EMPTY_SECTIONS = new LevelChunkSection[0];
+    private static LevelChunkSection[] forEmptyColumn(ServerLevel world) {
+        // Vanilla LevelChunk expects 24 sections covering overworld Y=[-64..319].
+        // Passing a zero-length array made the parent's heightmap setup NPE on first
+        // getHeight() call. Allocate 24 empty sections keyed to the world's biome
+        // registry so all heightmap and getHeight-with-staging paths return a sane value.
+        LevelChunkSection[] sections = new LevelChunkSection[24];
+        net.minecraft.core.Registry<net.minecraft.world.level.biome.Biome> biomes =
+                world.registryAccess().registryOrThrow(net.minecraft.core.registries.Registries.BIOME);
+        for (int i = 0; i < sections.length; i++) {
+            sections[i] = new LevelChunkSection(biomes);
+        }
+        return sections;
+    }
 
     @Override public int getX() { return this.chunkPos.x; }
     @Override public int getZ() { return this.chunkPos.z; }
@@ -42,7 +54,7 @@ public class EmptyColumn extends LevelChunk implements IColumn, IColumnInternal 
                 new net.minecraft.world.ticks.LevelChunkTicks<net.minecraft.world.level.block.Block>(),
                 new net.minecraft.world.ticks.LevelChunkTicks<net.minecraft.world.level.material.Fluid>(),
                 0L,
-                EMPTY_SECTIONS,
+                forEmptyColumn(world),
                 null,
                 null);
         this.emptyCube = new BlankCube(this);

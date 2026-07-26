@@ -1,5 +1,6 @@
 package io.github.opencubicchunks.cubicchunks.core.asm.mixin.common;
 
+import io.github.opencubicchunks.cubicchunks.core.CubicChunks;
 import io.github.opencubicchunks.cubicchunks.core.CubicChunksConfig;
 import io.github.opencubicchunks.cubicchunks.core.worldgen.stack.StackedDimensionTeleporter;
 import net.minecraft.resources.ResourceLocation;
@@ -23,6 +24,37 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ServerPlayer.class)
 public abstract class MixinServerPlayer_StackedPortals {
 
+    // 1.21.1: TeleportTarget.PostDimensionTransition lives at
+    // net.minecraft.world.TeleportTarget$PostDimensionTransition in the Yarn mapping,
+    // and the class isn't directly importable across all 1.21.x mappings. Resolve ONE
+    // via reflection on first-class load and cache statically; if resolution fails,
+    // stacked portals will NPE rather than silently teleporting wrong. We also cache
+    // the DimensionTransition 6-arg ctor reflectively so we never have to type-name
+    // PostDimensionTransition from a source file (the explicit cast Object→PostDim…
+    // can't downcast through a non-importable class).
+    private static final Object cc$NONE_POST_TRANSITION;
+    @SuppressWarnings("unchecked")
+    private static final java.lang.reflect.Constructor<DimensionTransition> cc$DIMENSION_TRANSITION_CTOR;
+
+    static {
+        Object none = null;
+        java.lang.reflect.Constructor<DimensionTransition> ctor = null;
+        try {
+            Class<?> inner = Class.forName("net.minecraft.world.TeleportTarget$PostDimensionTransition");
+            java.lang.reflect.Field f = inner.getDeclaredField("NONE");
+            none = f.get(null);
+            // Resolve the 6-arg ctor via Class.getConstructor — since DimensionTransition
+            // is importable, javac compiles this; the inner-class arg is supplied reflectively.
+            ctor = DimensionTransition.class.getConstructor(
+                    ServerLevel.class, Vec3.class, Vec3.class, float.class, float.class, inner);
+            CubicChunks.LOGGER.info("Stacked-portal teleport: resolved {} as NONE PostDimensionTransition", inner.getEnclosingClass().getName());
+        } catch (Throwable t) {
+            CubicChunks.LOGGER.error("Stacked-portal teleport: could not resolve TeleportTarget.PostDimensionTransition.NONE; stepping into a Nether/End portal will NPE.", t);
+        }
+        cc$NONE_POST_TRANSITION = none;
+        cc$DIMENSION_TRANSITION_CTOR = ctor;
+    }
+
     @Inject(
             method = "changeDimension(Lnet/minecraft/world/level/portal/DimensionTransition;)Lnet/minecraft/world/level/portal/DimensionTransition;",
             at = @At("HEAD"),
@@ -31,6 +63,14 @@ public abstract class MixinServerPlayer_StackedPortals {
     )
     private void cc$interceptStackedPortal(DimensionTransition transition, CallbackInfoReturnable<DimensionTransition> cir) {
         if (!CubicChunksConfig.stackingDimensionsEnabled) {
+            return;
+        }
+        // If static init couldn't resolve the DimensionTransition 6-arg ctor (PostDimensionTransition
+        // class missing or renamed), the engine's vanilla changeDimension will NPE on the
+        // real Nether/End transition. Fail loudly here so the player sees why the mod is
+        // broken rather than getting an opaque NPE inside the teleport path.
+        if (cc$DIMENSION_TRANSITION_CTOR == null || cc$NONE_POST_TRANSITION == null) {
+            CubicChunks.LOGGER.warn("Stacked-portal teleport: missing PostDimensionTransition — falling back to vanilla teleport (will likely NPE).");
             return;
         }
         ServerPlayer self = (ServerPlayer) (Object) this;
@@ -62,13 +102,22 @@ public abstract class MixinServerPlayer_StackedPortals {
         // 1.21.1: DimensionTransition ctors are (ServerLevel, Vec3, Vec3, float, float, PostDimensionTransition)
         // and (ServerLevel, Entity, PostDimensionTransition). Use the 6-arg form with zero velocity
         // and PostDimensionTransition.NONE so the engine performs an in-place teleport.
-        DimensionTransition stacked = new DimensionTransition(
-                currentLevel,
-                new Vec3(self.getX(), targetY.doubleValue(), self.getZ()),
-                Vec3.ZERO,
-                self.getYRot(),
-                self.getXRot(),
-                null);
-        cir.setReturnValue(stacked);
+        // The ctor is invoked via reflection because PostDimensionTransition isn't importable
+        // in the current Yarn mapping — see the static initializer above.
+        DimensionTransition stacked = null;
+        try {
+            stacked = cc$DIMENSION_TRANSITION_CTOR.newInstance(
+                    currentLevel,
+                    new Vec3(self.getX(), targetY.doubleValue(), self.getZ()),
+                    Vec3.ZERO,
+                    self.getYRot(),
+                    self.getXRot(),
+                    cc$NONE_POST_TRANSITION);
+        } catch (ReflectiveOperationException e) {
+            CubicChunks.LOGGER.error("Stacked-portal teleport: failed to construct DimensionTransition", e);
+        }
+        if (stacked != null) {
+            cir.setReturnValue(stacked);
+        }
     }
 }

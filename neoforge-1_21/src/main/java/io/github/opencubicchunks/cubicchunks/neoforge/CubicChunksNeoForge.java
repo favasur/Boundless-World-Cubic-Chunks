@@ -3,6 +3,7 @@ package io.github.opencubicchunks.cubicchunks.neoforge;
 import io.github.opencubicchunks.cubicchunks.api.world.ICubeProvider;
 import io.github.opencubicchunks.cubicchunks.api.worldgen.stack.StackedDimensionRegistry;
 import io.github.opencubicchunks.cubicchunks.common.CubicChunksConstants;
+import io.github.opencubicchunks.cubicchunks.core.CubicChunks;
 import io.github.opencubicchunks.cubicchunks.core.CubicChunksConfig;
 import io.github.opencubicchunks.cubicchunks.core.asm.mixin.ICubicWorldInternal;
 import io.github.opencubicchunks.cubicchunks.core.network.ClientPacketHandler;
@@ -24,6 +25,8 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.server.ServerStartedEvent;
+import net.neoforged.neoforge.event.server.ServerStoppedEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +41,23 @@ public class CubicChunksNeoForge {
         modBus.addListener(this::setup);
         modBus.addListener(this::registerPackets);
         NeoForge.EVENT_BUS.addListener(this::onPlayerLoggedOut);
+        NeoForge.EVENT_BUS.addListener(this::onServerStarted);
+        NeoForge.EVENT_BUS.addListener(this::onServerStopped);
         NetworkDispatcher.setInstance(new NeoForgeNetworkDispatcher());
+    }
+
+    private void onServerStarted(ServerStartedEvent event) {
+        // 1.21.x removed MinecraftServer.getServer(); capture the reference here
+        // so NeoForgeCubicPlatform.mainThreadExecutor() can return it on the server side.
+        NeoForgeCubicPlatform.setServer(event.getServer());
+    }
+
+    private void onServerStopped(ServerStoppedEvent event) {
+        // Without this, the static SERVER field still points at the dead MinecraftServer
+        // after a world closes. A subsequent server-start would then hand callers a
+        // stopped instance from a prior run, and mainThreadExecutor() would silently
+        // run tasks against an unbound thread loop.
+        NeoForgeCubicPlatform.setServer(null);
     }
 
     private void onPlayerLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {

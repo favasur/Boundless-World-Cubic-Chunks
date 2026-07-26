@@ -315,10 +315,18 @@ public final class BandedFeaturePlacer {
                     return v;
                 }
             }
-        } catch (Throwable ignored) {
-            // fall through to the structural-template fallback
+        } catch (Throwable t) {
+            LOGGER.error("Failed to resolve net.minecraft.world.level.StructureManager on ServerLevel via field walk; stacked-band structure placement will not run.", t);
         }
-        return level.getStructureManager();
+        // Fail loudly instead of silently falling back to StructureTemplateManager
+        // (which would then throw IllegalArgumentException inside the reflective
+        // createStructures/applyBiomeDecoration/placeInChunk calls, get swallowed,
+        // and leave Bastion/NetherFortress/EndCity unplaced).
+        throw new IllegalStateException(
+                "OpenCubicChunks: could not locate net.minecraft.world.level.StructureManager on the ServerLevel instance. "
+              + "Vanilla's createStructures / applyBiomeDecoration / placeInChunk take the pre-rename StructureManager type, "
+              + "not the renamed StructureTemplateManager. Auto-discovery failed — patch the resolveStructureManager helper or "
+              + "set a System property to skip structure placement for now.");
     }
 
     /**

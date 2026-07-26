@@ -8,11 +8,19 @@ import net.minecraft.world.level.Level;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.common.NeoForge;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 // @Original: 1.21: NeoForge-specific LoaderPlatform shim. Adds fireEvent so common.go
 // code can publish events without referencing Forge-only classes.
 public class NeoForgeCubicPlatform implements ICubicPlatform {
+
+    // 1.21.x removed MinecraftServer.getServer(); the platform holds the reference
+    // captured from ServerStartedEvent and exposed via setServer().
+    private static volatile @Nullable MinecraftServer SERVER;
+
+    public static void setServer(MinecraftServer server) {
+        SERVER = server;
+    }
 
     @Override
     public boolean isClient() {
@@ -27,7 +35,9 @@ public class NeoForgeCubicPlatform implements ICubicPlatform {
     @Override
     public BlockableEventLoop<?> mainThreadExecutor() {
         if (isClient()) return Minecraft.getInstance();
-        return MinecraftServer.getServer();
+        MinecraftServer s = SERVER;
+        if (s == null) throw new IllegalStateException("Server not started yet; NeoForgeCubicPlatform.setServer() must be called from ServerStartedEvent before mainThreadExecutor() runs on the server side.");
+        return s;
     }
 
     @Nullable
@@ -39,6 +49,8 @@ public class NeoForgeCubicPlatform implements ICubicPlatform {
 
     @Override
     public void fireEvent(Object event) {
-        NeoForge.EVENT_BUS.post(event);
+        if (event instanceof net.neoforged.bus.api.Event ne) {
+            NeoForge.EVENT_BUS.post(ne);
+        }
     }
 }

@@ -25,6 +25,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import net.minecraft.core.Holder;
+import net.minecraft.world.level.biome.Biome;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
@@ -161,6 +163,43 @@ public abstract class MixinLevelChunk implements IColumn, IColumnInternal {
 
     public static void cc$clearBandYOffset() {
         cc$BAND_Y_OFFSET.remove();
+    }
+
+    /**
+     * Read-side route for {@link ChunkAccess#getNoiseBiome(int, int, int)}.
+     * Populates a band's biome palette correctly during applyBiomeDecoration so the
+     * End band's chorus/purpur/obsidian-pillar features read End-band biomes instead
+     * of the overworld column's. Caller must push cc$BAND_Y_OFFSET before invoking
+     * vanilla's chunk generator against an overworld column for a stacked band.
+     */
+    @Inject(
+            method = "getNoiseBiome(III)Lnet/minecraft/core/Holder;",
+            at = @At("HEAD"),
+            cancellable = true,
+            require = 0
+    )
+    private void cc$getNoiseBiome(int x, int y, int z, CallbackInfoReturnable<Holder<Biome>> cir) {
+        if (!this.cc$isCubicColumn) {
+            return;
+        }
+        Integer bandOffset = cc$BAND_Y_OFFSET.get();
+        if (bandOffset == null) {
+            return;
+        }
+        int blockY = (y * 4) + bandOffset;
+        int cubeY = Coords.blockToCube(blockY);
+        Cube cube = this.cc$getLoadedCube(cubeY);
+        if (cube == null) {
+            return;
+        }
+        LevelChunkSection storage = cube.getStorage();
+        if (storage == null) {
+            return;
+        }
+        Holder<Biome> b = storage.getNoiseBiome(x & 3, (blockY >> 2) & 3, z & 3);
+        if (b != null) {
+            cir.setReturnValue(b);
+        }
     }
 
     /**
