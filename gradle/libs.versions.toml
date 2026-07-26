@@ -1,0 +1,13 @@
+[versions]
+minecraft121 = "1.21.1"
+neoforge121 = "21.1.54"
+fabricLoader121 = "0.16.9"
+fabricApi121 = "0.104.0+1.21.1"
+
+[libraries]
+minecraft121 = { module = "com.mojang:minecraft", version.ref = "minecraft121" }
+neoforge121 = { module = "net.neoforged:neoforge", version.ref = "neoforge121" }
+fabricLoader121 = { module = "net.fabricmc:fabric-loader", version.ref = "fabricLoader121" }
+fabricApi121 = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabricApi121" }
+
+[bundles]

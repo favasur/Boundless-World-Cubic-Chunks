@@ -1,0 +1,51 @@
+1.12.2 Class,1.12.2 Method,1.21.x Class,1.21.x Method,Status,Original Signature,Notes
+io.github.opencubicchunks.cubicchunks.api.util.Bits,,io.github.opencubicchunks.cubicchunks.api.util.Bits,,Ported (built),class Bits,No game dependencies; 1:1 port
+io.github.opencubicchunks.cubicchunks.api.util.Box,,io.github.opencubicchunks.cubicchunks.api.util.Box,,Ported (built),class Box,No game dependencies; 1:1 port
+io.github.opencubicchunks.cubicchunks.api.util.MathUtil,,io.github.opencubicchunks.cubicchunks.api.util.MathUtil,,Ported (built),class MathUtil,Constructor made private/final for utility class; MathHelper.func_76125_a -> Mth.clamp
+io.github.opencubicchunks.cubicchunks.api.util.XYZMap,,io.github.opencubicchunks.cubicchunks.api.util.XYZMap,,Ported (built),class XYZMap,log4j -> slf4j; randomWrappedIterator omitted due to broken decompilation
+io.github.opencubicchunks.cubicchunks.api.util.XZMap,,io.github.opencubicchunks.cubicchunks.api.util.XZMap,,Ported (built),class XZMap,No game dependencies; 1:1 port
+io.github.opencubicchunks.cubicchunks.core.util.AddressTools,,io.github.opencubicchunks.cubicchunks.api.util.AddressTools,,Ported (built),class AddressTools,Moved from core.util to api.util; BlockPos getters updated
+io.github.opencubicchunks.cubicchunks.api.worldgen.populator.ICubicPopulator,,io.github.opencubicchunks.cubicchunks.api.worldgen.populator.ICubicPopulator,,Ported (built),interface ICubicPopulator,World -> Level; Biome raw type
+io.github.opencubicchunks.cubicchunks.api.worldgen.LoadingData,,io.github.opencubicchunks.cubicchunks.api.worldgen.LoadingData,,Ported (built),class LoadingData,NBTTagCompound -> CompoundTag
+io.github.opencubicchunks.cubicchunks.api.worldgen.CubePrimer,,io.github.opencubicchunks.cubicchunks.api.worldgen.CubePrimer,,Ported (built),class CubePrimer,IBlockState -> BlockState; Block.BLOCK_STATE_REGISTRY
+io.github.opencubicchunks.cubicchunks.api.worldgen.ICubeGenerator,,io.github.opencubicchunks.cubicchunks.api.worldgen.ICubeGenerator,,Ported (built),interface ICubeGenerator,World -> Level; Chunk -> ChunkAccess; EnumCreatureType -> MobCategory
+io.github.opencubicchunks.cubicchunks.api.worldgen.CubeGeneratorsRegistry,,io.github.opencubicchunks.cubicchunks.api.worldgen.CubeGeneratorsRegistry,,Ported (built),class CubeGeneratorsRegistry,World -> Level; ChunkPos updated
+io.github.opencubicchunks.cubicchunks.core.world.cube.Cube,,io.github.opencubicchunks.cubicchunks.core.world.cube.Cube,,Ported (built),class Cube,ExtendedBlockStorage -> LevelChunkSection; removed Forge capabilities; entities use Set<Entity>
+io.github.opencubicchunks.cubicchunks.core.world.column.CubeMap,,io.github.opencubicchunks.cubicchunks.core.world.column.CubeMap,,Ported (built),class CubeMap,Storage tick array uses LevelChunkSection
+io.github.opencubicchunks.cubicchunks.core.world.EntityContainer,,io.github.opencubicchunks.cubicchunks.core.world.EntityContainer,,Ported (built),class EntityContainer,ClassInheritanceMultiMap -> Set<Entity>; NBT via CompoundTag
+io.github.opencubicchunks.cubicchunks.core.world.BlankEntityContainer,,io.github.opencubicchunks.cubicchunks.core.world.BlankEntityContainer,,Ported (built),class BlankEntityContainer,No-op entity container
+io.github.opencubicchunks.cubicchunks.core.world.column.ColumnTileEntityMap,,io.github.opencubicchunks.cubicchunks.core.world.column.ColumnTileEntityMap,,Ported (built),class ColumnTileEntityMap,TileEntity -> BlockEntity
+io.github.opencubicchunks.cubicchunks.core.world.StagingHeightMap,,io.github.opencubicchunks.cubicchunks.core.world.StagingHeightMap,,Ported (built),class StagingHeightMap,ExtendedBlockStorage -> LevelChunkSection
+io.github.opencubicchunks.cubicchunks.core.world.ServerHeightMap,,io.github.opencubicchunks.cubicchunks.core.world.ServerHeightMap,,Ported (built),class ServerHeightMap,Segment-based opacity index
+io.github.opencubicchunks.cubicchunks.core.world.ClientHeightMap,,io.github.opencubicchunks.cubicchunks.core.world.ClientHeightMap,,Ported (built),class ClientHeightMap,Depends on IColumn instead of Chunk
+io.github.opencubicchunks.cubicchunks.core.world.NewServerHeightMap,,io.github.opencubicchunks.cubicchunks.core.world.NewServerHeightMap,,Stubbed,class NewServerHeightMap,Experimental; stubbed
+io.github.opencubicchunks.cubicchunks.core.lighting.ILightingManager,,io.github.opencubicchunks.cubicchunks.core.lighting.ILightingManager,,Ported (built),interface ILightingManager,EnumSkyBlock -> LightLayer; Chunk -> LevelChunk
+io.github.opencubicchunks.cubicchunks.core.lighting.LightingManager,,io.github.opencubicchunks.cubicchunks.core.lighting.LightingManager,,Ported (built),class LightingManager,Light propagation delegated to 1.21 LightEngine
+io.github.opencubicchunks.cubicchunks.core.lighting.LightUpdateTracker,,io.github.opencubicchunks.cubicchunks.core.lighting.LightUpdateTracker,,Ported (built),class LightUpdateTracker,TShortList -> List<Short>
+io.github.opencubicchunks.cubicchunks.core.lighting.LightPropagator,,io.github.opencubicchunks.cubicchunks.core.lighting.LightPropagator,,Stubbed,class LightPropagator,Stub for future propagation implementation
+io.github.opencubicchunks.cubicchunks.core.lighting.ILightBlockAccess,,io.github.opencubicchunks.cubicchunks.core.lighting.ILightBlockAccess,,Stubbed,interface ILightBlockAccess,Stub for future light block access
+io.github.opencubicchunks.cubicchunks.core.lighting.LightUpdateQueue,,io.github.opencubicchunks.cubicchunks.core.lighting.LightUpdateQueue,,Stubbed,class LightUpdateQueue,Stub
+io.github.opencubicchunks.cubicchunks.core.lighting.SkyLightUpdateCubeSelector,,io.github.opencubicchunks.cubicchunks.core.lighting.SkyLightUpdateCubeSelector,,Stubbed,class SkyLightUpdateCubeSelector,Stub
+io.github.opencubicchunks.cubicchunks.core.lighting.FirstLightProcessor,,io.github.opencubicchunks.cubicchunks.core.lighting.FirstLightProcessor,,Stubbed,class FirstLightProcessor,Stub
+io.github.opencubicchunks.cubicchunks.core.util.FastCubeBlockAccess,,io.github.opencubicchunks.cubicchunks.core.util.FastCubeBlockAccess,,Stubbed,class FastCubeBlockAccess,Stub for future block region access
+io.github.opencubicchunks.cubicchunks.core.util.ticket.ITicket,,io.github.opencubicchunks.cubicchunks.core.util.ticket.ITicket,,Ported (built),interface ITicket,Loader-agnostic ticket interface
+io.github.opencubicchunks.cubicchunks.core.util.ticket.TicketList,,io.github.opencubicchunks.cubicchunks.core.util.ticket.TicketList,,Ported (built),class TicketList,Removed Forge server internals
+io.github.opencubicchunks.cubicchunks.core.util.CompatHandler,,io.github.opencubicchunks.cubicchunks.core.util.CompatHandler,,Stubbed,class CompatHandler,Loader-specific hooks stubbed
+io.github.opencubicchunks.cubicchunks.core.CubicChunks,,io.github.opencubicchunks.cubicchunks.core.CubicChunks,,Ported (built),class CubicChunks,Minimal loader-agnostic logger/constants
+io.github.opencubicchunks.cubicchunks.core.CubicChunksConfig,,io.github.opencubicchunks.cubicchunks.core.CubicChunksConfig,,Ported (built),class CubicChunksConfig,Loader-agnostic config constants
+io.github.opencubicchunks.cubicchunks.api.world.CubeEvent,,io.github.opencubicchunks.cubicchunks.api.world.CubeEvent,,Ported (built),class CubeEvent,Removed NeoForge WorldEvent dependency
+io.github.opencubicchunks.cubicchunks.core.world.IColumnInternal,,io.github.opencubicchunks.cubicchunks.core.world.IColumnInternal,,Ported (built),interface IColumnInternal,Staging heightmap hooks
+io.github.opencubicchunks.cubicchunks.core.world.ICubeProviderInternal,,io.github.opencubicchunks.cubicchunks.core.world.ICubeProviderInternal,,Ported (built),interface ICubeProviderInternal,Extends ICubeProvider
+io.github.opencubicchunks.cubicchunks.core.asm.mixin.ICubicWorldInternal,,io.github.opencubicchunks.cubicchunks.core.asm.mixin.ICubicWorldInternal,,Ported (built),interface ICubicWorldInternal,Minimal; exposes LightingManager
+TODO,VanillaCompatibilityGeneratorProviderBase,TODO,loader-specific,TODO,class VanillaCompatibilityGeneratorProviderBase,Forge registry API; move to NeoForge/Fabric modules
+TODO,neoforge-26 module,TODO,neoforge-26,In Progress,module,Placeholder module mirroring neoforge-1_21
+TODO,fabric-26 module,TODO,fabric-26,In Progress,module,Placeholder module mirroring fabric-1_21
+io.github.opencubicchunks.cubicchunks.api.world.ICubeProviderServer,,io.github.opencubicchunks.cubicchunks.api.world.ICubeProviderServer,,Ported (built),interface ICubeProviderServer,Server-side cube provider requirement enum and accessors
+io.github.opencubicchunks.cubicchunks.core.world.cube.BlankCube,,io.github.opencubicchunks.cubicchunks.core.world.cube.BlankCube,,Ported (built),class BlankCube,Empty cube placeholder for 1.21
+io.github.opencubicchunks.cubicchunks.core.server.EmptyColumn,,io.github.opencubicchunks.cubicchunks.core.server.EmptyColumn,,Ported (built),class EmptyColumn,Empty column placeholder for 1.21
+io.github.opencubicchunks.cubicchunks.core.server.CubeProviderServer,,io.github.opencubicchunks.cubicchunks.core.server.CubeProviderServer,,Ported (built),class CubeProviderServer,Skeleton; 1.21 ServerChunkCache integration TODO
+io.github.opencubicchunks.cubicchunks.core.server.PlayerCubeMap,,io.github.opencubicchunks.cubicchunks.core.server.PlayerCubeMap,,Ported (built),class PlayerCubeMap,Skeleton; player cube watcher management
+io.github.opencubicchunks.cubicchunks.core.server.CubeWatcher,,io.github.opencubicchunks.cubicchunks.core.server.CubeWatcher,,Ported (built),class CubeWatcher,Skeleton; per-cube player tracking
+io.github.opencubicchunks.cubicchunks.core.server.ColumnWatcher,,io.github.opencubicchunks.cubicchunks.core.server.ColumnWatcher,,Ported (built),class ColumnWatcher,Skeleton; per-column player tracking
+io.github.opencubicchunks.cubicchunks.core.server.chunkio.ICubeIO,,io.github.opencubicchunks.cubicchunks.core.server.chunkio.ICubeIO,,Ported (built),interface ICubeIO,NBT loading/saving interface
+io.github.opencubicchunks.cubicchunks.core.server.chunkio.async.forge.AsyncWorldIOExecutor,,io.github.opencubicchunks.cubicchunks.core.server.chunkio.async.forge.AsyncWorldIOExecutor,,Stubbed,class AsyncWorldIOExecutor,Stub; needs real async I/O implementation

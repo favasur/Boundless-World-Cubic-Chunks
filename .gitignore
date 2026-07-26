@@ -1,0 +1,45 @@
+# Gradle / build outputs
+.gradle/
+build/
+**/build/
+common/build/
+fabric-1_21/build/
+fabric-26/build/
+neoforge-1_21/build/
+neoforge-26/build/
+
+# IDE & OS
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+.DS_Store
+Thumbs.db
+
+# Freebuff / Daemon internals
+.freebuff/
+.freebuff-*/
+
+# Logs
+*.log
+logs/
+
+# Local environment
+.env
+.env.local
+
+# Crash dumps
+hs_err_pid*
+*.hprof
+
+# Loose build artifacts in root (not source)
+nul
+
+# Keep the original 1.12.2 reference jar + compat helper jar OUT of source control
+# (re-download via gradle / mod page if needed)
+# Uncomment if you want to track them:
+# CubicChunks-1.12.2-*-all.jar
+# [CC]CubicChunksCompatibilityHelper-*.jar
+# immersive-portals-*-mc1.21.1-fabric.jar
+# immersive_portals-*-all.jar

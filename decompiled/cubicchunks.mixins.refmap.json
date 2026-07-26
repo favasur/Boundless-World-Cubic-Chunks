@@ -1,0 +1,1786 @@
+{
+  "mappings": {
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketSpawnPainting": {
+      "writePacketData": "Lnet/minecraft/network/play/server/SPacketSpawnPainting;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V",
+      "Lnet/minecraft/network/play/server/SPacketSpawnPainting;position:Lnet/minecraft/util/math/BlockPos;": "Lnet/minecraft/network/play/server/SPacketSpawnPainting;field_179838_b:Lnet/minecraft/util/math/BlockPos;"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/vanillaclient/ICPacketUpdateSign": {
+      "pos": "field_179723_a:Lnet/minecraft/util/math/BlockPos;"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinAnvilSaveHandler": {
+      "getChunkLoader": "Lnet/minecraft/world/chunk/storage/AnvilSaveHandler;func_75763_a(Lnet/minecraft/world/WorldProvider;)Lnet/minecraft/world/chunk/storage/IChunkLoader;"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/common/MixinChunkCache": {
+      "getBlockState": "Lnet/minecraft/world/ChunkCache;func_180495_p(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/state/IBlockState;"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/common/MixinWalkNodeProcessor": {
+      "getSafePoint": "Lnet/minecraft/pathfinding/WalkNodeProcessor;func_186332_a(IIIIDLnet/minecraft/util/EnumFacing;)Lnet/minecraft/pathfinding/PathPoint;",
+      "getPathNodeType": "Lnet/minecraft/pathfinding/WalkNodeProcessor;func_186319_a(Lnet/minecraft/world/IBlockAccess;IIILnet/minecraft/entity/EntityLiving;IIIZZ)Lnet/minecraft/pathfinding/PathNodeType;",
+      "Lnet/minecraft/world/World;collidesWithAnyBlock(Lnet/minecraft/util/math/AxisAlignedBB;)Z": "Lnet/minecraft/world/World;func_184143_b(Lnet/minecraft/util/math/AxisAlignedBB;)Z"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/client/MixinChunkCache_Vanilla": {
+      "getBiome": "Lnet/minecraft/world/ChunkCache;func_180494_b(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/world/biome/Biome;"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketSpawnGlobalEntity": {
+      "Lnet/minecraft/network/play/server/SPacketSpawnGlobalEntity;z:D": "Lnet/minecraft/network/play/server/SPacketSpawnGlobalEntity;field_149055_d:D",
+      "Lnet/minecraft/network/play/server/SPacketSpawnGlobalEntity;y:D": "Lnet/minecraft/network/play/server/SPacketSpawnGlobalEntity;field_149058_c:D",
+      "writePacketData": "Lnet/minecraft/network/play/server/SPacketSpawnGlobalEntity;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V",
+      "Lnet/minecraft/network/play/server/SPacketSpawnGlobalEntity;x:D": "Lnet/minecraft/network/play/server/SPacketSpawnGlobalEntity;field_149057_b:D"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/common/MixinWorldServer_UpdateBlocks": {
+      "Lnet/minecraft/world/GameRules;getInt(Ljava/lang/String;)I": "Lnet/minecraft/world/GameRules;func_180263_c(Ljava/lang/String;)I",
+      "updateBlocks": "Lnet/minecraft/world/WorldServer;func_147456_g()V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/IChunkProviderClient": {
+      "loadedChunks": "field_73236_b:Lit/unimi/dsi/fastutil/longs/Long2ObjectMap;"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/IContainerLocalRenderInformation": {
+      "net.minecraft.client.renderer.RenderGlobal$ContainerLocalRenderInformation": "net/minecraft/client/renderer/RenderGlobal$ContainerLocalRenderInformation",
+      "renderChunk": "field_178036_a:Lnet/minecraft/client/renderer/chunk/RenderChunk;"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinTeleporter": {
+      "Lnet/minecraft/util/math/BlockPos;add(III)Lnet/minecraft/util/math/BlockPos;": "Lnet/minecraft/util/math/BlockPos;func_177982_a(III)Lnet/minecraft/util/math/BlockPos;",
+      "Lnet/minecraft/util/math/BlockPos;down()Lnet/minecraft/util/math/BlockPos;": "Lnet/minecraft/util/math/BlockPos;func_177977_b()Lnet/minecraft/util/math/BlockPos;",
+      "placeInExistingPortal": "Lnet/minecraft/world/Teleporter;func_180620_b(Lnet/minecraft/entity/Entity;F)Z"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/fakeheight/MixinBiomeDecorator": {
+      "genDecorations": "Lnet/minecraft/world/biome/BiomeDecorator;func_150513_a(Lnet/minecraft/world/biome/Biome;Lnet/minecraft/world/World;Ljava/util/Random;)V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinMinecraftServer": {
+      "initialWorldChunkLoad": "Lnet/minecraft/server/MinecraftServer;func_71222_d()V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketCustomSound": {
+      "writePacketData": "Lnet/minecraft/network/play/server/SPacketCustomSound;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V",
+      "Lnet/minecraft/network/play/server/SPacketCustomSound;x:I": "Lnet/minecraft/network/play/server/SPacketCustomSound;field_186934_c:I",
+      "Lnet/minecraft/network/play/server/SPacketCustomSound;z:I": "Lnet/minecraft/network/play/server/SPacketCustomSound;field_186936_e:I",
+      "Lnet/minecraft/network/play/server/SPacketCustomSound;y:I": "Lnet/minecraft/network/play/server/SPacketCustomSound;field_186935_d:I"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinTileEntityEndGateway": {
+      "Lnet/minecraft/world/chunk/Chunk;getTopFilledSegment()I": "Lnet/minecraft/world/chunk/Chunk;func_76625_h()I",
+      "findExitPortal": "Lnet/minecraft/tileentity/TileEntityEndGateway;func_184311_k()V",
+      "findSpawnpointInChunk": "Lnet/minecraft/tileentity/TileEntityEndGateway;func_184307_a(Lnet/minecraft/world/chunk/Chunk;)Lnet/minecraft/util/math/BlockPos;"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketSpawnPosition": {
+      "writePacketData": "Lnet/minecraft/network/play/server/SPacketSpawnPosition;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V",
+      "Lnet/minecraft/network/play/server/SPacketSpawnPosition;spawnBlockPos:Lnet/minecraft/util/math/BlockPos;": "Lnet/minecraft/network/play/server/SPacketSpawnPosition;field_179801_a:Lnet/minecraft/util/math/BlockPos;"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinBlockChorusFlower": {
+      "updateTick": "Lnet/minecraft/block/BlockChorusFlower;func_180650_b(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/state/IBlockState;Ljava/util/Random;)V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketBlockBreakAnim": {
+      "Lnet/minecraft/network/play/server/SPacketBlockBreakAnim;position:Lnet/minecraft/util/math/BlockPos;": "Lnet/minecraft/network/play/server/SPacketBlockBreakAnim;field_179822_b:Lnet/minecraft/util/math/BlockPos;",
+      "writePacketData": "Lnet/minecraft/network/play/server/SPacketBlockBreakAnim;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinChunkCache_HeightLimits": {
+      "getBlockState": "Lnet/minecraft/world/ChunkCache;func_180495_p(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/state/IBlockState;"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/noncritical/client/MixinViewFrustum_VertViewDistance": {
+      "setCountChunksXYZ": "Lnet/minecraft/client/renderer/ViewFrustum;func_178159_a(I)V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/tree/MixinWorldGenShrub": {
+      "generate": "Lnet/minecraft/world/gen/feature/WorldGenShrub;func_180709_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;)Z"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinNetHandlerPlayServer": {
+      "processCustomPayload": "Lnet/minecraft/network/NetHandlerPlayServer;func_147349_a(Lnet/minecraft/network/play/client/CPacketCustomPayload;)V",
+      "Lnet/minecraft/network/PacketThreadUtil;checkThreadAndEnqueue(Lnet/minecraft/network/Packet;Lnet/minecraft/network/INetHandler;Lnet/minecraft/util/IThreadListener;)V": "Lnet/minecraft/network/PacketThreadUtil;func_180031_a(Lnet/minecraft/network/Packet;Lnet/minecraft/network/INetHandler;Lnet/minecraft/util/IThreadListener;)V",
+      "processUpdateSign": "Lnet/minecraft/network/NetHandlerPlayServer;func_147343_a(Lnet/minecraft/network/play/client/CPacketUpdateSign;)V",
+      "processTryUseItemOnBlock": "Lnet/minecraft/network/NetHandlerPlayServer;func_184337_a(Lnet/minecraft/network/play/client/CPacketPlayerTryUseItemOnBlock;)V",
+      "processTabComplete": "Lnet/minecraft/network/NetHandlerPlayServer;func_147341_a(Lnet/minecraft/network/play/client/CPacketTabComplete;)V",
+      "processPlayer": "Lnet/minecraft/network/NetHandlerPlayServer;func_147347_a(Lnet/minecraft/network/play/client/CPacketPlayer;)V",
+      "processConfirmTeleport": "Lnet/minecraft/network/NetHandlerPlayServer;func_184339_a(Lnet/minecraft/network/play/client/CPacketConfirmTeleport;)V",
+      "processVehicleMove": "Lnet/minecraft/network/NetHandlerPlayServer;func_184338_a(Lnet/minecraft/network/play/client/CPacketVehicleMove;)V",
+      "sendPacket": "Lnet/minecraft/network/NetHandlerPlayServer;func_147359_a(Lnet/minecraft/network/Packet;)V",
+      "processPlayerDigging": "Lnet/minecraft/network/NetHandlerPlayServer;func_147345_a(Lnet/minecraft/network/play/client/CPacketPlayerDigging;)V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/client/vertviewdist/MixinEntityRenderer": {
+      "updateRenderer": "Lnet/minecraft/client/renderer/EntityRenderer;func_78464_a()V",
+      "setupCameraTransform": "Lnet/minecraft/client/renderer/EntityRenderer;func_78479_a(FI)V",
+      "renderWorldPass": "Lnet/minecraft/client/renderer/EntityRenderer;func_175068_a(IFJ)V",
+      "updateFogColor": "Lnet/minecraft/client/renderer/EntityRenderer;func_78466_h(F)V",
+      "Lnet/minecraft/client/settings/GameSettings;renderDistanceChunks:I": "Lnet/minecraft/client/settings/GameSettings;field_151451_c:I"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/noncritical/client/MixinRenderWorker": {
+      "processTask": "Lnet/minecraft/client/renderer/chunk/ChunkRenderWorker;func_178474_a(Lnet/minecraft/client/renderer/chunk/ChunkCompileTaskGenerator;)V",
+      "Lnet/minecraft/client/renderer/chunk/ChunkRenderWorker;isChunkExisting(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/world/World;)Z": "Lnet/minecraft/client/renderer/chunk/ChunkRenderWorker;func_188263_a(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/world/World;)Z"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/MixinRenderGlobal": {
+      "renderEntities": "Lnet/minecraft/client/renderer/RenderGlobal;func_180446_a(Lnet/minecraft/entity/Entity;Lnet/minecraft/client/renderer/culling/ICamera;F)V",
+      "Lnet/minecraft/client/renderer/Tessellator;draw()V": "Lnet/minecraft/client/renderer/Tessellator;func_78381_a()V",
+      "Lnet/minecraft/client/multiplayer/WorldClient;getChunk(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/world/chunk/Chunk;": "Lnet/minecraft/client/multiplayer/WorldClient;func_175726_f(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/world/chunk/Chunk;",
+      "renderWorldBorder": "Lnet/minecraft/client/renderer/RenderGlobal;func_180449_a(Lnet/minecraft/entity/Entity;F)V",
+      "Lnet/minecraft/world/chunk/Chunk;getEntityLists()[Lnet/minecraft/util/ClassInheritanceMultiMap;": "Lnet/minecraft/world/chunk/Chunk;func_177429_s()[Lnet/minecraft/util/ClassInheritanceMultiMap;",
+      "Lnet/minecraft/util/math/BlockPos;getY()I": "Lnet/minecraft/util/math/BlockPos;func_177956_o()I"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketParticles": {
+      "Lnet/minecraft/network/play/server/SPacketParticles;yCoord:F": "Lnet/minecraft/network/play/server/SPacketParticles;field_149235_c:F",
+      "Lnet/minecraft/network/play/server/SPacketParticles;zCoord:F": "Lnet/minecraft/network/play/server/SPacketParticles;field_149232_d:F",
+      "writePacketData": "Lnet/minecraft/network/play/server/SPacketParticles;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V",
+      "Lnet/minecraft/network/play/server/SPacketParticles;xCoord:F": "Lnet/minecraft/network/play/server/SPacketParticles;field_149234_b:F"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/tree/MixinWorldGenSwamp": {
+      "Lnet/minecraft/block/material/Material;WATER:Lnet/minecraft/block/material/Material;": "Lnet/minecraft/block/material/Material;field_151586_h:Lnet/minecraft/block/material/Material;",
+      "generate": "Lnet/minecraft/world/gen/feature/WorldGenSwamp;func_180709_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;)Z"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinBlockGrass": {
+      "updateTick": "Lnet/minecraft/block/BlockGrass;func_180650_b(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/state/IBlockState;Ljava/util/Random;)V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/client/optifine/MixinRenderList": {
+      "renderChunkLayer": "func_178001_a(Lnet/minecraft/util/BlockRenderLayer;)V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketSignEditorOpen": {
+      "writePacketData": "Lnet/minecraft/network/play/server/SPacketSignEditorOpen;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V",
+      "Lnet/minecraft/network/play/server/SPacketSignEditorOpen;signPosition:Lnet/minecraft/util/math/BlockPos;": "Lnet/minecraft/network/play/server/SPacketSignEditorOpen;field_179778_a:Lnet/minecraft/util/math/BlockPos;"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinRegionFileCache": {
+      "clearRegionFileReferences": "Lnet/minecraft/world/chunk/storage/RegionFileCache;func_76551_a()V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/isblockloaded/MixinEntity": {
+      "getBrightness": "Lnet/minecraft/entity/Entity;func_70013_c()F"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/client/MixinEntity_PrepareSpawn": {
+      "preparePlayerToSpawn": "Lnet/minecraft/entity/Entity;func_70065_x()V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinBlockSkull_WitherSpawnLimits": {
+      "checkWitherSpawn": "Lnet/minecraft/block/BlockSkull;func_180679_a(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/tileentity/TileEntitySkull;)V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/MixinWorldGenFlowers": {
+      "generate": "Lnet/minecraft/world/gen/feature/WorldGenFlowers;func_180709_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;)Z"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinNetHandlerPlayServer": {
+      "isMovePlayerPacketInvalid": "Lnet/minecraft/network/NetHandlerPlayServer;func_183006_b(Lnet/minecraft/network/play/client/CPacketPlayer;)Z",
+      "Lnet/minecraft/network/play/client/CPacketPlayer;getZ(D)D": "Lnet/minecraft/network/play/client/CPacketPlayer;func_187000_c(D)D",
+      "Lnet/minecraft/network/play/client/CPacketPlayer;getY(D)D": "Lnet/minecraft/network/play/client/CPacketPlayer;func_186996_b(D)D"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/client/MixinEntityPlayerSP": {
+      "onUpdate": "Lnet/minecraft/client/entity/EntityPlayerSP;func_70071_h_()V",
+      "Lnet/minecraft/world/World;isBlockLoaded(Lnet/minecraft/util/math/BlockPos;)Z": "Lnet/minecraft/world/World;func_175667_e(Lnet/minecraft/util/math/BlockPos;)Z"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/MixinWorldGenBigMushroom": {
+      "generate": "Lnet/minecraft/world/gen/feature/WorldGenBigMushroom;func_180709_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;)Z"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/tree/MixinWorldGenTree_BirchSavanna": {
+      "generate": "func_180709_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;)Z"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/MixinWorldGenDeadBush": {
+      "generate": "Lnet/minecraft/world/gen/feature/WorldGenDeadBush;func_180709_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;)Z"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/client/IGuiVideoSettings": {
+      "optionsRowList": "field_146501_h:Lnet/minecraft/client/gui/GuiListExtended;"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinEntityLivingBase": {
+      "Lnet/minecraft/util/math/BlockPos$PooledMutableBlockPos;setPos(DDD)Lnet/minecraft/util/math/BlockPos$PooledMutableBlockPos;": "Lnet/minecraft/util/math/BlockPos$PooledMutableBlockPos;func_189532_c(DDD)Lnet/minecraft/util/math/BlockPos$PooledMutableBlockPos;",
+      "attemptTeleport": "Lnet/minecraft/entity/EntityLivingBase;func_184595_k(DDD)Z",
+      "travel": "Lnet/minecraft/entity/EntityLivingBase;func_191986_a(FFF)V",
+      "Lnet/minecraft/util/math/BlockPos;getY()I": "Lnet/minecraft/util/math/BlockPos;func_177956_o()I"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/client/optifine/MixinRenderGlobalOptifine_E": {
+      "setupTerrain": "Lnet/minecraft/client/renderer/RenderGlobal;func_174970_a(Lnet/minecraft/entity/Entity;DLnet/minecraft/client/renderer/culling/ICamera;IZ)V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/noncritical/common/command/MixinCommandBase": {
+      "Lnet/minecraft/command/CommandBase;parseDouble(DLjava/lang/String;IIZ)D": "Lnet/minecraft/command/CommandBase;func_175769_b(DLjava/lang/String;IIZ)D",
+      "parseBlockPos": "Lnet/minecraft/command/CommandBase;func_175757_a(Lnet/minecraft/command/ICommandSender;[Ljava/lang/String;IZ)Lnet/minecraft/util/math/BlockPos;"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/EntityBat_AiHeightLimit": {
+      "updateAITasks": "Lnet/minecraft/entity/passive/EntityBat;func_70619_bc()V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/MixinViewFrustum_RenderHeightFix": {
+      "getRenderChunk": "Lnet/minecraft/client/renderer/ViewFrustum;func_178161_a(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/client/renderer/chunk/RenderChunk;",
+      "updateChunkPositions": "Lnet/minecraft/client/renderer/ViewFrustum;func_178163_a(DD)V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/IGuiOptionsRowList": {
+      "options": "field_148184_k:Ljava/util/List;"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinWorld_Tick": {
+      "Lnet/minecraft/world/World;isAreaLoaded(IIIIIIZ)Z": "Lnet/minecraft/world/World;func_175663_a(IIIIIIZ)Z",
+      "updateEntityWithOptionalForce": "Lnet/minecraft/world/World;func_72866_a(Lnet/minecraft/entity/Entity;Z)V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinEntity_DeathFix": {
+      "onEntityUpdate": "Lnet/minecraft/entity/Entity;func_70030_z()V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinWorld": {
+      "checkLightFor": "Lnet/minecraft/world/World;func_180500_c(Lnet/minecraft/world/EnumSkyBlock;Lnet/minecraft/util/math/BlockPos;)Z",
+      "getTopSolidOrLiquidBlock": "Lnet/minecraft/world/World;func_175672_r(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/util/math/BlockPos;",
+      "markChunkDirty": "Lnet/minecraft/world/World;func_175646_b(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/tileentity/TileEntity;)V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/IGuiScreen": {
+      "buttonList": "field_146292_n:Ljava/util/List;"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/client/optifine/MixinRenderChunk": {
+      "Lnet/minecraft/client/renderer/BufferBuilder;setTranslation(DDD)V": "Lnet/minecraft/client/renderer/BufferBuilder;func_178969_c(DDD)V",
+      "preRenderBlocks": "Lnet/minecraft/client/renderer/chunk/RenderChunk;func_178573_a(Lnet/minecraft/client/renderer/BufferBuilder;Lnet/minecraft/util/math/BlockPos;)V",
+      "setPosition": "Lnet/minecraft/client/renderer/chunk/RenderChunk;func_189562_a(III)V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/noncritical/common/MixinTileEntityBeacon": {
+      "updateSegmentColors": "Lnet/minecraft/tileentity/TileEntityBeacon;func_146003_y()V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinWorldProvider": {
+      "canCoordinateBeSpawn": "Lnet/minecraft/world/WorldProvider;func_76566_a(II)Z"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/tree/MixinWorldGenTrees": {
+      "generate": "Lnet/minecraft/world/gen/feature/WorldGenTrees;func_180709_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;)Z"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/MixinWorld_HeightLimits": {
+      "Lnet/minecraft/util/math/BlockPos;getY()I": "Lnet/minecraft/util/math/BlockPos;func_177956_o()I",
+      "getLightFromNeighborsFor": "Lnet/minecraft/world/World;func_175705_a(Lnet/minecraft/world/EnumSkyBlock;Lnet/minecraft/util/math/BlockPos;)I",
+      "Lnet/minecraft/util/math/BlockPos;getZ()I": "Lnet/minecraft/util/math/BlockPos;func_177952_p()I"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketUpdateTileEntity": {
+      "Lnet/minecraft/network/play/server/SPacketUpdateTileEntity;nbt:Lnet/minecraft/nbt/NBTTagCompound;": "Lnet/minecraft/network/play/server/SPacketUpdateTileEntity;field_148860_e:Lnet/minecraft/nbt/NBTTagCompound;",
+      "writePacketData": "Lnet/minecraft/network/play/server/SPacketUpdateTileEntity;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V",
+      "Lnet/minecraft/network/play/server/SPacketUpdateTileEntity;blockPos:Lnet/minecraft/util/math/BlockPos;": "Lnet/minecraft/network/play/server/SPacketUpdateTileEntity;field_179824_a:Lnet/minecraft/util/math/BlockPos;"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinBlockStaticLiquid": {
+      "getCanBlockBurn": "Lnet/minecraft/block/BlockStaticLiquid;func_176368_m(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;)Z",
+      "updateTick": "Lnet/minecraft/block/BlockStaticLiquid;func_180650_b(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/state/IBlockState;Ljava/util/Random;)V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/tree/MixinWorldGenCanopyTree": {
+      "generate": "Lnet/minecraft/world/gen/feature/WorldGenCanopyTree;func_180709_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;)Z"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/vanillaclient/ISPacketChunkData": {
+      "fullChunk": "field_149279_g:Z",
+      "availableSections": "field_186948_c:I",
+      "chunkX": "field_149284_a:I",
+      "buffer": "field_186949_d:[B",
+      "tileEntityTags": "field_189557_e:Ljava/util/List;",
+      "chunkZ": "field_149282_b:I"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinEntityTrackerEntry": {
+      "isPlayerWatchingThisChunk": "Lnet/minecraft/entity/EntityTrackerEntry;func_73121_d(Lnet/minecraft/entity/player/EntityPlayerMP;)Z",
+      "isVisibleTo": "Lnet/minecraft/entity/EntityTrackerEntry;func_180233_c(Lnet/minecraft/entity/player/EntityPlayerMP;)Z"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinWorldServer": {
+      "updateBlocks": "Lnet/minecraft/world/WorldServer;func_147456_g()V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinWorldSettings": {
+      "\u003cinit\u003e(JLnet/minecraft/world/GameType;ZZLnet/minecraft/world/WorldType;)V": "Lnet/minecraft/world/WorldSettings;\u003cinit\u003e(JLnet/minecraft/world/GameType;ZZLnet/minecraft/world/WorldType;)V",
+      "\u003cinit\u003e(Lnet/minecraft/world/storage/WorldInfo;)V": "Lnet/minecraft/world/WorldSettings;\u003cinit\u003e(Lnet/minecraft/world/storage/WorldInfo;)V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/vanillaclient/ICPacketVehicleMove": {
+      "x": "field_187007_a:D",
+      "y": "field_187008_b:D",
+      "z": "field_187009_c:D"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinWalkNodeProcessor_HeightLimit": {
+      "getSafePoint": "Lnet/minecraft/pathfinding/WalkNodeProcessor;func_186332_a(IIIIDLnet/minecraft/util/EnumFacing;)Lnet/minecraft/pathfinding/PathPoint;",
+      "getStart": "Lnet/minecraft/pathfinding/WalkNodeProcessor;func_186318_b()Lnet/minecraft/pathfinding/PathPoint;",
+      "getPathNodeType(Lnet/minecraft/world/IBlockAccess;III)Lnet/minecraft/pathfinding/PathNodeType;": "Lnet/minecraft/pathfinding/WalkNodeProcessor;func_186330_a(Lnet/minecraft/world/IBlockAccess;III)Lnet/minecraft/pathfinding/PathNodeType;",
+      "Lnet/minecraft/world/IBlockAccess;getBlockState(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/state/IBlockState;": "Lnet/minecraft/world/IBlockAccess;func_180495_p(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/state/IBlockState;"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinBlockMushroom": {
+      "canBlockStay": "Lnet/minecraft/block/BlockMushroom;func_180671_f(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/state/IBlockState;)Z"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/server/MixinDedicatedServer_HeightLimits": {
+      "init": "Lnet/minecraft/server/dedicated/DedicatedServer;func_71197_b()Z"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinEntityBoat": {
+      "checkInWater": "Lnet/minecraft/entity/item/EntityBoat;func_184446_u()Z"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/noncritical/common/command/MixinCommandTP": {
+      "execute": "Lnet/minecraft/command/CommandTP;func_184881_a(Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/command/ICommandSender;[Ljava/lang/String;)V",
+      "Lnet/minecraft/command/CommandTP;getEntity(Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/command/ICommandSender;Ljava/lang/String;)Lnet/minecraft/entity/Entity;": "Lnet/minecraft/command/CommandTP;func_184885_b(Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/command/ICommandSender;Ljava/lang/String;)Lnet/minecraft/entity/Entity;",
+      "Lnet/minecraft/command/CommandTP;getCommandSenderAsPlayer(Lnet/minecraft/command/ICommandSender;)Lnet/minecraft/entity/player/EntityPlayerMP;": "Lnet/minecraft/command/CommandTP;func_71521_c(Lnet/minecraft/command/ICommandSender;)Lnet/minecraft/entity/player/EntityPlayerMP;"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/client/isblockloaded/MixinEntity": {
+      "getBrightnessForRender": "Lnet/minecraft/entity/Entity;func_70070_b()I"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinEntityFallingBlock_HeightLimits": {
+      "onUpdate": "Lnet/minecraft/entity/item/EntityFallingBlock;func_70071_h_()V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinEntityMinecart_KillFix": {
+      "onUpdate": "Lnet/minecraft/entity/item/EntityMinecart;func_70071_h_()V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/noncritical/client/MixinGuiOverlayDebug": {
+      "call": "Lnet/minecraft/client/gui/GuiOverlayDebug;call()Ljava/util/List;",
+      "Lnet/minecraft/world/chunk/Chunk;isEmpty()Z": "Lnet/minecraft/world/chunk/Chunk;func_76621_g()Z",
+      "Lnet/minecraft/client/multiplayer/WorldClient;isBlockLoaded(Lnet/minecraft/util/math/BlockPos;)Z": "Lnet/minecraft/client/multiplayer/WorldClient;func_175667_e(Lnet/minecraft/util/math/BlockPos;)Z",
+      "Lnet/minecraft/world/chunk/Chunk;getBiome(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/world/biome/BiomeProvider;)Lnet/minecraft/world/biome/Biome;": "Lnet/minecraft/world/chunk/Chunk;func_177411_a(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/world/biome/BiomeProvider;)Lnet/minecraft/world/biome/Biome;"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/MixinWorldProvider": {
+      "getVoidFogYFactor": "Lnet/minecraft/world/WorldProvider;func_76565_k()D"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketSpawnExperienceOrb": {
+      "Lnet/minecraft/network/play/server/SPacketSpawnExperienceOrb;posZ:D": "Lnet/minecraft/network/play/server/SPacketSpawnExperienceOrb;field_148988_d:D",
+      "writePacketData": "Lnet/minecraft/network/play/server/SPacketSpawnExperienceOrb;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V",
+      "Lnet/minecraft/network/play/server/SPacketSpawnExperienceOrb;posX:D": "Lnet/minecraft/network/play/server/SPacketSpawnExperienceOrb;field_148990_b:D",
+      "Lnet/minecraft/network/play/server/SPacketSpawnExperienceOrb;posY:D": "Lnet/minecraft/network/play/server/SPacketSpawnExperienceOrb;field_148991_c:D"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/noncritical/common/MixinBlockPistonBase_HeightFix": {
+      "canPush": "Lnet/minecraft/block/BlockPistonBase;func_185646_a(Lnet/minecraft/block/state/IBlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/EnumFacing;ZLnet/minecraft/util/EnumFacing;)Z",
+      "Lnet/minecraft/util/math/BlockPos;getY()I": "Lnet/minecraft/util/math/BlockPos;func_177956_o()I"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketSpawnPlayer": {
+      "writePacketData": "Lnet/minecraft/network/play/server/SPacketSpawnPlayer;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V",
+      "Lnet/minecraft/network/play/server/SPacketSpawnPlayer;y:D": "Lnet/minecraft/network/play/server/SPacketSpawnPlayer;field_148953_d:D",
+      "Lnet/minecraft/network/play/server/SPacketSpawnPlayer;x:D": "Lnet/minecraft/network/play/server/SPacketSpawnPlayer;field_148956_c:D",
+      "Lnet/minecraft/network/play/server/SPacketSpawnPlayer;z:D": "Lnet/minecraft/network/play/server/SPacketSpawnPlayer;field_148954_e:D"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/MixinWorldGenDoublePlants": {
+      "generate": "Lnet/minecraft/world/gen/feature/WorldGenDoublePlant;func_180709_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;)Z"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/INetHandlerPlayClient": {
+      "world": "field_147300_g:Lnet/minecraft/client/multiplayer/WorldClient;"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/MixinWorldGenTallGrass": {
+      "generate": "Lnet/minecraft/world/gen/feature/WorldGenTallGrass;func_180709_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;)Z"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/MixinChunkCache_HeightLimits": {
+      "getLightFor": "Lnet/minecraft/world/ChunkCache;func_175628_b(Lnet/minecraft/world/EnumSkyBlock;Lnet/minecraft/util/math/BlockPos;)I",
+      "getLightForExt": "Lnet/minecraft/world/ChunkCache;func_175629_a(Lnet/minecraft/world/EnumSkyBlock;Lnet/minecraft/util/math/BlockPos;)I",
+      "Lnet/minecraft/util/math/BlockPos;getY()I": "Lnet/minecraft/util/math/BlockPos;func_177956_o()I",
+      "Lnet/minecraft/world/ChunkCache;getBlockState(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/state/IBlockState;": "Lnet/minecraft/world/ChunkCache;func_180495_p(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/state/IBlockState;"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketSoundEffect": {
+      "Lnet/minecraft/network/play/server/SPacketSoundEffect;posX:I": "Lnet/minecraft/network/play/server/SPacketSoundEffect;field_149217_b:I",
+      "writePacketData": "Lnet/minecraft/network/play/server/SPacketSoundEffect;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V",
+      "Lnet/minecraft/network/play/server/SPacketSoundEffect;posY:I": "Lnet/minecraft/network/play/server/SPacketSoundEffect;field_149218_c:I",
+      "Lnet/minecraft/network/play/server/SPacketSoundEffect;posZ:I": "Lnet/minecraft/network/play/server/SPacketSoundEffect;field_149215_d:I"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/MixinWorldGenDesertWells": {
+      "generate": "Lnet/minecraft/world/gen/feature/WorldGenDesertWells;func_180709_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;)Z"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/tree/MixinWorldGenHugeTrees": {
+      "isSpaceAt": "Lnet/minecraft/world/gen/feature/WorldGenHugeTrees;func_175926_c(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;I)Z"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/noncritical/common/command/MixinCommandFill": {
+      "Lnet/minecraft/command/ICommandSender;getEntityWorld()Lnet/minecraft/world/World;": "Lnet/minecraft/command/ICommandSender;func_130014_f_()Lnet/minecraft/world/World;",
+      "execute": "Lnet/minecraft/command/CommandFill;func_184881_a(Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/command/ICommandSender;[Ljava/lang/String;)V",
+      "Lnet/minecraft/world/World;isBlockLoaded(Lnet/minecraft/util/math/BlockPos;)Z": "Lnet/minecraft/world/World;func_175667_e(Lnet/minecraft/util/math/BlockPos;)Z"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/MixinChunk_Cubes": {
+      "read": "Lnet/minecraft/world/chunk/Chunk;func_186033_a(Lnet/minecraft/network/PacketBuffer;IZ)V",
+      "generateHeightMap": "Lnet/minecraft/world/chunk/Chunk;func_76590_a()V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/IIntegratedServer": {
+      "worldSettings": "field_71350_m:Lnet/minecraft/world/WorldSettings;"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinWorld": {
+      "Lnet/minecraft/world/chunk/Chunk;isPopulated()Z": "Lnet/minecraft/world/chunk/Chunk;func_150802_k()Z"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/INetHandlerPlayServer": {
+      "teleportId": "field_184363_z:I"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/IViewFrustum": {
+      "getRenderChunk": "func_178161_a(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/client/renderer/chunk/RenderChunk;"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinWorldInfo": {
+      "updateTagCompound": "Lnet/minecraft/world/storage/WorldInfo;func_76064_a(Lnet/minecraft/nbt/NBTTagCompound;Lnet/minecraft/nbt/NBTTagCompound;)V",
+      "\u003cinit\u003e(Lnet/minecraft/world/storage/WorldInfo;)V": "Lnet/minecraft/world/storage/WorldInfo;\u003cinit\u003e(Lnet/minecraft/world/storage/WorldInfo;)V",
+      "populateFromWorldSettings": "Lnet/minecraft/world/storage/WorldInfo;func_176127_a(Lnet/minecraft/world/WorldSettings;)V",
+      "\u003cinit\u003e(Lnet/minecraft/nbt/NBTTagCompound;)V": "Lnet/minecraft/world/storage/WorldInfo;\u003cinit\u003e(Lnet/minecraft/nbt/NBTTagCompound;)V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/vanillaclient/ICPacketPlayerDigging": {
+      "position": "field_179717_a:Lnet/minecraft/util/math/BlockPos;"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/IPlayerChunkMapEntry": {
+      "pos": "field_187284_d:Lnet/minecraft/util/math/ChunkPos;",
+      "players": "field_187283_c:Ljava/util/List;",
+      "chunk": "field_187286_f:Lnet/minecraft/world/chunk/Chunk;",
+      "lastUpdateInhabitedTime": "field_187289_i:J",
+      "sentToPlayers": "field_187290_j:Z"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/MixinWorldGenBlockBlob": {
+      "generate": "Lnet/minecraft/world/gen/feature/WorldGenBlockBlob;func_180709_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;)Z"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketEntityLookMove": {
+      "writePacketData": "Lnet/minecraft/network/play/server/SPacketEntity$S17PacketEntityLookMove;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/vanillaclient/ICPacketPlayerTryUseItemOnBlock": {
+      "position": "field_179725_b:Lnet/minecraft/util/math/BlockPos;"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/IGuiCreateWorld": {
+      "selectedIndex": "field_146331_K:I"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinBlockBeaconAsyncUpdate": {
+      "net.minecraft.block.BlockBeacon$1": "net/minecraft/block/BlockBeacon$1"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketEntityTeleport": {
+      "writePacketData": "Lnet/minecraft/network/play/server/SPacketEntityTeleport;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V",
+      "Lnet/minecraft/network/play/server/SPacketEntityTeleport;posY:D": "Lnet/minecraft/network/play/server/SPacketEntityTeleport;field_149457_c:D",
+      "Lnet/minecraft/network/play/server/SPacketEntityTeleport;posX:D": "Lnet/minecraft/network/play/server/SPacketEntityTeleport;field_149456_b:D",
+      "Lnet/minecraft/network/play/server/SPacketEntityTeleport;posZ:D": "Lnet/minecraft/network/play/server/SPacketEntityTeleport;field_149454_d:D"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketUseBed": {
+      "writePacketData": "Lnet/minecraft/network/play/server/SPacketUseBed;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V",
+      "Lnet/minecraft/network/play/server/SPacketUseBed;bedPos:Lnet/minecraft/util/math/BlockPos;": "Lnet/minecraft/network/play/server/SPacketUseBed;field_179799_b:Lnet/minecraft/util/math/BlockPos;"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketBlockAction": {
+      "Lnet/minecraft/network/play/server/SPacketBlockAction;blockPosition:Lnet/minecraft/util/math/BlockPos;": "Lnet/minecraft/network/play/server/SPacketBlockAction;field_179826_a:Lnet/minecraft/util/math/BlockPos;",
+      "writePacketData": "Lnet/minecraft/network/play/server/SPacketBlockAction;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/noncritical/common/command/MixinCommandsHeightLimits": {
+      "Lnet/minecraft/world/gen/structure/StructureBoundingBox;minY:I": "Lnet/minecraft/world/gen/structure/StructureBoundingBox;field_78895_b:I",
+      "Lnet/minecraft/world/gen/structure/StructureBoundingBox;maxY:I": "Lnet/minecraft/world/gen/structure/StructureBoundingBox;field_78894_e:I",
+      "execute": "func_184881_a(Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/command/ICommandSender;[Ljava/lang/String;)V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/vanillaclient/ICPacketPlayer": {
+      "x": "field_149479_a:D",
+      "y": "field_149477_b:D",
+      "z": "field_149478_c:D"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinPlayerList": {
+      "Lnet/minecraft/world/gen/ChunkProviderServer;provideChunk(II)Lnet/minecraft/world/chunk/Chunk;": "Lnet/minecraft/world/gen/ChunkProviderServer;func_186025_d(II)Lnet/minecraft/world/chunk/Chunk;",
+      "Lnet/minecraft/world/chunk/Chunk;markDirty()V": "Lnet/minecraft/world/chunk/Chunk;func_76630_e()V",
+      "recreatePlayerEntity": "Lnet/minecraft/server/management/PlayerList;func_72368_a(Lnet/minecraft/entity/player/EntityPlayerMP;IZ)Lnet/minecraft/entity/player/EntityPlayerMP;",
+      "playerLoggedOut": "Lnet/minecraft/server/management/PlayerList;func_72367_e(Lnet/minecraft/entity/player/EntityPlayerMP;)V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/client/MixinChunkCache_Cubic": {
+      "getBiome": "Lnet/minecraft/world/ChunkCache;func_180494_b(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/world/biome/Biome;"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinBlockFalling_HeightLimits": {
+      "Lnet/minecraft/world/World;isAirBlock(Lnet/minecraft/util/math/BlockPos;)Z": "Lnet/minecraft/world/World;func_175623_d(Lnet/minecraft/util/math/BlockPos;)Z",
+      "Lnet/minecraft/block/BlockFalling;fallInstantly:Z": "Lnet/minecraft/block/BlockFalling;field_149832_M:Z",
+      "Lnet/minecraft/block/BlockFalling;canFallThrough(Lnet/minecraft/block/state/IBlockState;)Z": "Lnet/minecraft/block/BlockFalling;func_185759_i(Lnet/minecraft/block/state/IBlockState;)Z",
+      "checkFallable": "Lnet/minecraft/block/BlockFalling;func_176503_e(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;)V",
+      "Lnet/minecraft/world/World;getBlockState(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/state/IBlockState;": "Lnet/minecraft/world/World;func_180495_p(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/state/IBlockState;",
+      "Lnet/minecraft/world/World;setBlockState(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/state/IBlockState;)Z": "Lnet/minecraft/world/World;func_175656_a(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/state/IBlockState;)Z"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinItemChorusFruit": {
+      "onItemUseFinish": "Lnet/minecraft/item/ItemChorusFruit;func_77654_b(Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;Lnet/minecraft/entity/EntityLivingBase;)Lnet/minecraft/item/ItemStack;",
+      "Lnet/minecraft/world/World;getActualHeight()I": "Lnet/minecraft/world/World;func_72940_L()I"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketExplosion": {
+      "Lnet/minecraft/network/play/server/SPacketExplosion;posY:D": "Lnet/minecraft/network/play/server/SPacketExplosion;field_149156_b:D",
+      "Lnet/minecraft/network/play/server/SPacketExplosion;posZ:D": "Lnet/minecraft/network/play/server/SPacketExplosion;field_149157_c:D",
+      "Lnet/minecraft/network/play/server/SPacketExplosion;posX:D": "Lnet/minecraft/network/play/server/SPacketExplosion;field_149158_a:D",
+      "writePacketData": "Lnet/minecraft/network/play/server/SPacketExplosion;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/MixinWorldGenLakes": {
+      "generate": "Lnet/minecraft/world/gen/feature/WorldGenLakes;func_180709_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;)Z"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/tree/MixinWorldGenTaiga2": {
+      "generate": "Lnet/minecraft/world/gen/feature/WorldGenTaiga2;func_180709_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;)Z"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketEffect": {
+      "Lnet/minecraft/network/play/server/SPacketEffect;soundPos:Lnet/minecraft/util/math/BlockPos;": "Lnet/minecraft/network/play/server/SPacketEffect;field_179747_b:Lnet/minecraft/util/math/BlockPos;",
+      "writePacketData": "Lnet/minecraft/network/play/server/SPacketEffect;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketMoveVehicle": {
+      "writePacketData": "Lnet/minecraft/network/play/server/SPacketMoveVehicle;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V",
+      "Lnet/minecraft/network/play/server/SPacketMoveVehicle;y:D": "Lnet/minecraft/network/play/server/SPacketMoveVehicle;field_186961_b:D",
+      "Lnet/minecraft/network/play/server/SPacketMoveVehicle;z:D": "Lnet/minecraft/network/play/server/SPacketMoveVehicle;field_186962_c:D",
+      "Lnet/minecraft/network/play/server/SPacketMoveVehicle;x:D": "Lnet/minecraft/network/play/server/SPacketMoveVehicle;field_186960_a:D"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinCubicEndWorkaround": {
+      "Lnet/minecraft/world/WorldServer;getTopSolidOrLiquidBlock(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/util/math/BlockPos;": "Lnet/minecraft/world/WorldServer;func_175672_r(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/util/math/BlockPos;",
+      "Lnet/minecraft/world/World;getTopSolidOrLiquidBlock(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/util/math/BlockPos;": "Lnet/minecraft/world/World;func_175672_r(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/util/math/BlockPos;"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/tree/MixinWorldGenTaiga1": {
+      "generate": "Lnet/minecraft/world/gen/feature/WorldGenTaiga1;func_180709_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;)Z"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketBlockChange": {
+      "writePacketData": "Lnet/minecraft/network/play/server/SPacketBlockChange;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V",
+      "Lnet/minecraft/network/play/server/SPacketBlockChange;blockPosition:Lnet/minecraft/util/math/BlockPos;": "Lnet/minecraft/network/play/server/SPacketBlockChange;field_179828_a:Lnet/minecraft/util/math/BlockPos;"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketSpawnMob": {
+      "writePacketData": "Lnet/minecraft/network/play/server/SPacketSpawnMob;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V",
+      "Lnet/minecraft/network/play/server/SPacketSpawnMob;x:D": "Lnet/minecraft/network/play/server/SPacketSpawnMob;field_149041_c:D",
+      "Lnet/minecraft/network/play/server/SPacketSpawnMob;z:D": "Lnet/minecraft/network/play/server/SPacketSpawnMob;field_149039_e:D",
+      "Lnet/minecraft/network/play/server/SPacketSpawnMob;y:D": "Lnet/minecraft/network/play/server/SPacketSpawnMob;field_149038_d:D"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinChunk_Cubes": {
+      "getBlockState(III)Lnet/minecraft/block/state/IBlockState;": "Lnet/minecraft/world/chunk/Chunk;func_186032_a(III)Lnet/minecraft/block/state/IBlockState;",
+      "relightBlock": "Lnet/minecraft/world/chunk/Chunk;func_76615_h(III)V",
+      "removeEntityAtIndex": "Lnet/minecraft/world/chunk/Chunk;func_76608_a(Lnet/minecraft/entity/Entity;I)V",
+      "onTick": "Lnet/minecraft/world/chunk/Chunk;func_150804_b(Z)V",
+      "getTopFilledSegment": "Lnet/minecraft/world/chunk/Chunk;func_76625_h()I",
+      "getPrecipitationHeight": "Lnet/minecraft/world/chunk/Chunk;func_177440_h(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/util/math/BlockPos;",
+      "\u003cinit\u003e(Lnet/minecraft/world/World;Lnet/minecraft/world/chunk/ChunkPrimer;II)V": "Lnet/minecraft/world/chunk/Chunk;\u003cinit\u003e(Lnet/minecraft/world/World;Lnet/minecraft/world/chunk/ChunkPrimer;II)V",
+      "getEntitiesWithinAABBForEntity": "Lnet/minecraft/world/chunk/Chunk;func_177414_a(Lnet/minecraft/entity/Entity;Lnet/minecraft/util/math/AxisAlignedBB;Ljava/util/List;Lcom/google/common/base/Predicate;)V",
+      "Lnet/minecraft/world/chunk/Chunk;entityLists:[Lnet/minecraft/util/ClassInheritanceMultiMap;": "Lnet/minecraft/world/chunk/Chunk;field_76645_j:[Lnet/minecraft/util/ClassInheritanceMultiMap;",
+      "checkLight()V": "Lnet/minecraft/world/chunk/Chunk;func_150809_p()V",
+      "enqueueRelightChecks": "Lnet/minecraft/world/chunk/Chunk;func_76594_o()V",
+      "\u003cinit\u003e(Lnet/minecraft/world/World;II)V": "Lnet/minecraft/world/chunk/Chunk;\u003cinit\u003e(Lnet/minecraft/world/World;II)V",
+      "getBlockLightOpacity(III)I": "Lnet/minecraft/world/chunk/Chunk;func_150808_b(III)I",
+      "Lnet/minecraft/world/chunk/storage/ExtendedBlockStorage;set(IIILnet/minecraft/block/state/IBlockState;)V": "Lnet/minecraft/world/chunk/storage/ExtendedBlockStorage;func_177484_a(IIILnet/minecraft/block/state/IBlockState;)V",
+      "getEntitiesOfTypeWithinAABB": "Lnet/minecraft/world/chunk/Chunk;func_177430_a(Ljava/lang/Class;Lnet/minecraft/util/math/AxisAlignedBB;Ljava/util/List;Lcom/google/common/base/Predicate;)V",
+      "setStorageArrays": "Lnet/minecraft/world/chunk/Chunk;func_76602_a([Lnet/minecraft/world/chunk/storage/ExtendedBlockStorage;)V",
+      "onUnload": "Lnet/minecraft/world/chunk/Chunk;func_76623_d()V",
+      "setLightFor": "Lnet/minecraft/world/chunk/Chunk;func_177431_a(Lnet/minecraft/world/EnumSkyBlock;Lnet/minecraft/util/math/BlockPos;I)V",
+      "propagateSkylightOcclusion": "Lnet/minecraft/world/chunk/Chunk;func_76595_e(II)V",
+      "Lnet/minecraft/util/math/MathHelper;floor(D)I": "Lnet/minecraft/util/math/MathHelper;func_76128_c(D)I",
+      "Lnet/minecraft/world/chunk/Chunk;relightBlock(III)V": "Lnet/minecraft/world/chunk/Chunk;func_76615_h(III)V",
+      "Lnet/minecraft/world/chunk/Chunk;storageArrays:[Lnet/minecraft/world/chunk/storage/ExtendedBlockStorage;": "Lnet/minecraft/world/chunk/Chunk;field_76652_q:[Lnet/minecraft/world/chunk/storage/ExtendedBlockStorage;",
+      "getLightSubtracted": "Lnet/minecraft/world/chunk/Chunk;func_177443_a(Lnet/minecraft/util/math/BlockPos;I)I",
+      "setBlockState": "Lnet/minecraft/world/chunk/Chunk;func_177436_a(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/state/IBlockState;)Lnet/minecraft/block/state/IBlockState;",
+      "getLightFor": "Lnet/minecraft/world/chunk/Chunk;func_177413_a(Lnet/minecraft/world/EnumSkyBlock;Lnet/minecraft/util/math/BlockPos;)I",
+      "addEntity": "Lnet/minecraft/world/chunk/Chunk;func_76612_a(Lnet/minecraft/entity/Entity;)V",
+      "Lnet/minecraft/world/chunk/Chunk;dirty:Z": "Lnet/minecraft/world/chunk/Chunk;field_76643_l:Z",
+      "removeTileEntity": "Lnet/minecraft/world/chunk/Chunk;func_177425_e(Lnet/minecraft/util/math/BlockPos;)V",
+      "addTileEntity(Lnet/minecraft/tileentity/TileEntity;)V": "Lnet/minecraft/world/chunk/Chunk;func_150813_a(Lnet/minecraft/tileentity/TileEntity;)V",
+      "onLoad": "Lnet/minecraft/world/chunk/Chunk;func_76631_c()V",
+      "Lnet/minecraft/world/chunk/Chunk;loaded:Z": "Lnet/minecraft/world/chunk/Chunk;field_76636_d:Z",
+      "generateSkylightMap": "Lnet/minecraft/world/chunk/Chunk;func_76603_b()V",
+      "recheckGaps": "Lnet/minecraft/world/chunk/Chunk;func_150803_c(Z)V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/client/vertviewdist/MixinRenderGlobal": {
+      "setupTerrain": "Lnet/minecraft/client/renderer/RenderGlobal;func_174970_a(Lnet/minecraft/entity/Entity;DLnet/minecraft/client/renderer/culling/ICamera;IZ)V",
+      "Lnet/minecraft/client/renderer/RenderGlobal;loadRenderers()V": "Lnet/minecraft/client/renderer/RenderGlobal;func_72712_a()V",
+      "loadRenderers": "Lnet/minecraft/client/renderer/RenderGlobal;func_72712_a()V",
+      "Lnet/minecraft/client/renderer/RenderGlobal;renderDistanceChunks:I": "Lnet/minecraft/client/renderer/RenderGlobal;field_72739_F:I"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketPlayerPosLook": {
+      "writePacketData": "Lnet/minecraft/network/play/server/SPacketPlayerPosLook;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V",
+      "Lnet/minecraft/network/play/server/SPacketPlayerPosLook;z:D": "Lnet/minecraft/network/play/server/SPacketPlayerPosLook;field_148939_c:D",
+      "Lnet/minecraft/network/play/server/SPacketPlayerPosLook;y:D": "Lnet/minecraft/network/play/server/SPacketPlayerPosLook;field_148938_b:D",
+      "Lnet/minecraft/network/play/server/SPacketPlayerPosLook;x:D": "Lnet/minecraft/network/play/server/SPacketPlayerPosLook;field_148940_a:D"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/vanillaclient/ICPacketTabComplete": {
+      "targetBlock": "field_179710_b:Lnet/minecraft/util/math/BlockPos;"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinWorld_HeightLimits": {
+      "getLightFor": "Lnet/minecraft/world/World;func_175642_b(Lnet/minecraft/world/EnumSkyBlock;Lnet/minecraft/util/math/BlockPos;)I",
+      "isAreaLoaded(IIIIIIZ)Z": "Lnet/minecraft/world/World;func_175663_a(IIIIIIZ)Z",
+      "updateEntities": "Lnet/minecraft/world/World;func_72939_s()V",
+      "Lnet/minecraft/world/World;isChunkLoaded(IIZ)Z": "Lnet/minecraft/world/World;func_175680_a(IIZ)Z",
+      "spawnEntity": "Lnet/minecraft/world/World;func_72838_d(Lnet/minecraft/entity/Entity;)Z",
+      "isBlockLoaded(Lnet/minecraft/util/math/BlockPos;Z)Z": "Lnet/minecraft/world/World;func_175668_a(Lnet/minecraft/util/math/BlockPos;Z)Z",
+      "getLight(Lnet/minecraft/util/math/BlockPos;Z)I": "Lnet/minecraft/world/World;func_175721_c(Lnet/minecraft/util/math/BlockPos;Z)I",
+      "Lnet/minecraft/util/math/BlockPos;getY()I": "Lnet/minecraft/util/math/BlockPos;func_177956_o()I",
+      "Lnet/minecraft/world/World;getChunk(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/world/chunk/Chunk;": "Lnet/minecraft/world/World;func_175726_f(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/world/chunk/Chunk;",
+      "getBiome": "Lnet/minecraft/world/World;func_180494_b(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/world/biome/Biome;",
+      "updateEntityWithOptionalForce": "Lnet/minecraft/world/World;func_72866_a(Lnet/minecraft/entity/Entity;Z)V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinWorldEntitySpawner": {
+      "findChunksForSpawning": "Lnet/minecraft/world/WorldEntitySpawner;func_77192_a(Lnet/minecraft/world/WorldServer;ZZZ)I"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinEntityTracker": {
+      "track(Lnet/minecraft/entity/Entity;IIZ)V": "Lnet/minecraft/entity/EntityTracker;func_72785_a(Lnet/minecraft/entity/Entity;IIZ)V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/common/MixinPathNavigate": {
+      "getPathToPos": "Lnet/minecraft/pathfinding/PathNavigate;func_179680_a(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/pathfinding/Path;",
+      "pathFollow": "Lnet/minecraft/pathfinding/PathNavigate;func_75508_h()V",
+      "getPathToEntityLiving": "Lnet/minecraft/pathfinding/PathNavigate;func_75494_a(Lnet/minecraft/entity/Entity;)Lnet/minecraft/pathfinding/Path;"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/MixinWorldGenIcePath": {
+      "generate": "Lnet/minecraft/world/gen/feature/WorldGenIcePath;func_180709_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;)Z"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/common/MixinWorld_CollisionCheck": {
+      "getCollisionBoxes(Lnet/minecraft/entity/Entity;Lnet/minecraft/util/math/AxisAlignedBB;ZLjava/util/List;)Z": "Lnet/minecraft/world/World;func_191504_a(Lnet/minecraft/entity/Entity;Lnet/minecraft/util/math/AxisAlignedBB;ZLjava/util/List;)Z"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/MixinWorldGenIceSpike": {
+      "generate": "Lnet/minecraft/world/gen/feature/WorldGenIceSpike;func_180709_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;)Z"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/noncritical/common/command/MixinCommandTeleport": {
+      "execute": "Lnet/minecraft/command/server/CommandTeleport;func_184881_a(Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/command/ICommandSender;[Ljava/lang/String;)V",
+      "Lnet/minecraft/command/server/CommandTeleport;getEntity(Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/command/ICommandSender;Ljava/lang/String;)Lnet/minecraft/entity/Entity;": "Lnet/minecraft/command/server/CommandTeleport;func_184885_b(Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/command/ICommandSender;Ljava/lang/String;)Lnet/minecraft/entity/Entity;"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinStructureStart": {
+      "writeStructureComponentsToNBT": "Lnet/minecraft/world/gen/structure/StructureStart;func_143021_a(II)Lnet/minecraft/nbt/NBTTagCompound;",
+      "readStructureComponentsFromNBT": "Lnet/minecraft/world/gen/structure/StructureStart;func_143020_a(Lnet/minecraft/world/World;Lnet/minecraft/nbt/NBTTagCompound;)V",
+      "Lnet/minecraft/nbt/NBTTagCompound;setInteger(Ljava/lang/String;I)V": "Lnet/minecraft/nbt/NBTTagCompound;func_74768_a(Ljava/lang/String;I)V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinBlockLilyPad_HeightLimits": {
+      "canBlockStay": "Lnet/minecraft/block/BlockLilyPad;func_180671_f(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/state/IBlockState;)Z"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/vanillaclient/ISPacketMultiBlockChange": {
+      "chunkPos": "field_148925_b:Lnet/minecraft/util/math/ChunkPos;",
+      "changedBlocks": "field_179845_b:[Lnet/minecraft/network/play/server/SPacketMultiBlockChange$BlockUpdateData;"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/MixinWorldGenDungeons": {
+      "generate": "Lnet/minecraft/world/gen/feature/WorldGenDungeons;func_180709_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;)Z"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/MixinDebugRenderChunkBorder": {
+      "render": "Lnet/minecraft/client/renderer/debug/DebugRendererChunkBorder;func_190060_a(FJ)V"
+    },
+    "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketSpawnObject": {
+      "Lnet/minecraft/network/play/server/SPacketSpawnObject;z:D": "Lnet/minecraft/network/play/server/SPacketSpawnObject;field_149014_d:D",
+      "Lnet/minecraft/network/play/server/SPacketSpawnObject;x:D": "Lnet/minecraft/network/play/server/SPacketSpawnObject;field_149016_b:D",
+      "writePacketData": "Lnet/minecraft/network/play/server/SPacketSpawnObject;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V",
+      "Lnet/minecraft/network/play/server/SPacketSpawnObject;y:D": "Lnet/minecraft/network/play/server/SPacketSpawnObject;field_149017_c:D"
+    }
+  },
+  "data": {
+    "notch": {
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketSpawnPainting": {
+        "writePacketData": "Lib;b(Lgy;)V",
+        "Lnet/minecraft/network/play/server/SPacketSpawnPainting;position:Lnet/minecraft/util/math/BlockPos;": "Lib;c:Let;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/vanillaclient/ICPacketUpdateSign": {
+        "pos": "a:Let;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinAnvilSaveHandler": {
+        "getChunkLoader": "Lbey;a(Laym;)Layf;",
+        "net/minecraft/world/chunk/storage/AnvilChunkLoader": "aye"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/common/MixinChunkCache": {
+        "getBlockState": "Land;o(Let;)Lawt;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/common/MixinWalkNodeProcessor": {
+        "getSafePoint": "Lbeo;a(IIIIDLfa;)Lbej;",
+        "getPathNodeType": "Lbeo;a(Lamy;IIILvq;IIIZZ)Lbeh;",
+        "Lnet/minecraft/world/World;collidesWithAnyBlock(Lnet/minecraft/util/math/AxisAlignedBB;)Z": "Lamu;a(Lbhb;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/client/MixinChunkCache_Vanilla": {
+        "getBiome": "Land;b(Let;)Lanh;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketSpawnGlobalEntity": {
+        "Lnet/minecraft/network/play/server/SPacketSpawnGlobalEntity;z:D": "Lhz;d:D",
+        "Lnet/minecraft/network/play/server/SPacketSpawnGlobalEntity;y:D": "Lhz;c:D",
+        "writePacketData": "Lhz;b(Lgy;)V",
+        "Lnet/minecraft/network/play/server/SPacketSpawnGlobalEntity;x:D": "Lhz;b:D"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/common/MixinWorldServer_UpdateBlocks": {
+        "Lnet/minecraft/world/GameRules;getInt(Ljava/lang/String;)I": "Lamr;c(Ljava/lang/String;)I",
+        "updateBlocks": "Loo;j()V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/IChunkProviderClient": {
+        "loadedChunks": "c:Lit/unimi/dsi/fastutil/longs/Long2ObjectMap;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/IContainerLocalRenderInformation": {
+        "net.minecraft.client.renderer.RenderGlobal$ContainerLocalRenderInformation": "buy$a",
+        "renderChunk": "a:Lbxr;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinTeleporter": {
+        "Lnet/minecraft/util/math/BlockPos;add(III)Lnet/minecraft/util/math/BlockPos;": "Let;a(III)Let;",
+        "Lnet/minecraft/util/math/BlockPos;down()Lnet/minecraft/util/math/BlockPos;": "Let;b()Let;",
+        "placeInExistingPortal": "Lanc;b(Lvg;F)Z",
+        "(Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/math/BlockPos;": "(Lvg;)Let;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/fakeheight/MixinBiomeDecorator": {
+        "genDecorations": "Lank;a(Lanh;Lamu;Ljava/util/Random;)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinMinecraftServer": {
+        "initialWorldChunkLoad": "Lnet/minecraft/server/MinecraftServer;l()V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketCustomSound": {
+        "writePacketData": "Lix;b(Lgy;)V",
+        "Lnet/minecraft/network/play/server/SPacketCustomSound;x:I": "Lix;c:I",
+        "Lnet/minecraft/network/play/server/SPacketCustomSound;z:I": "Lix;e:I",
+        "Lnet/minecraft/network/play/server/SPacketCustomSound;y:I": "Lix;d:I"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinTileEntityEndGateway": {
+        "Lnet/minecraft/world/chunk/Chunk;getTopFilledSegment()I": "Laxw;g()I",
+        "findExitPortal": "Lawf;k()V",
+        "findSpawnpointInChunk": "Lawf;a(Laxw;)Let;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketSpawnPosition": {
+        "writePacketData": "Lkn;b(Lgy;)V",
+        "Lnet/minecraft/network/play/server/SPacketSpawnPosition;spawnBlockPos:Lnet/minecraft/util/math/BlockPos;": "Lkn;a:Let;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinBlockChorusFlower": {
+        "updateTick": "Lapj;b(Lamu;Let;Lawt;Ljava/util/Random;)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketBlockBreakAnim": {
+        "Lnet/minecraft/network/play/server/SPacketBlockBreakAnim;position:Lnet/minecraft/util/math/BlockPos;": "Lig;b:Let;",
+        "writePacketData": "Lig;b(Lgy;)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinChunkCache_HeightLimits": {
+        "getBlockState": "Land;o(Let;)Lawt;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/noncritical/client/MixinViewFrustum_VertViewDistance": {
+        "setCountChunksXYZ": "Lbvh;a(I)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/tree/MixinWorldGenShrub": {
+        "generate": "Lazx;b(Lamu;Ljava/util/Random;Let;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinNetHandlerPlayServer": {
+        "processCustomPayload": "Lpa;a(Llh;)V",
+        "Lnet/minecraft/network/PacketThreadUtil;checkThreadAndEnqueue(Lnet/minecraft/network/Packet;Lnet/minecraft/network/INetHandler;Lnet/minecraft/util/IThreadListener;)V": "Lhv;a(Lht;Lhb;Ltr;)V",
+        "processUpdateSign": "Lpa;a(Llx;)V",
+        "processTryUseItemOnBlock": "Lpa;a(Lma;)V",
+        "processTabComplete": "Lpa;a(Lkz;)V",
+        "processPlayer": "Lpa;a(Llk;)V",
+        "processConfirmTeleport": "Lpa;a(Lky;)V",
+        "processVehicleMove": "Lpa;a(Lll;)V",
+        "sendPacket": "Lpa;a(Lht;)V",
+        "processPlayerDigging": "Lpa;a(Llp;)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/client/vertviewdist/MixinEntityRenderer": {
+        "updateRenderer": "Lbuq;e()V",
+        "setupCameraTransform": "Lbuq;a(FI)V",
+        "renderWorldPass": "Lbuq;a(IFJ)V",
+        "updateFogColor": "Lbuq;h(F)V",
+        "Lnet/minecraft/client/settings/GameSettings;renderDistanceChunks:I": "Lbid;e:I"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/noncritical/client/MixinRenderWorker": {
+        "processTask": "Lbxn;a(Lbxl;)V",
+        "Lnet/minecraft/client/renderer/chunk/ChunkRenderWorker;isChunkExisting(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/world/World;)Z": "Lbxn;a(Let;Lamu;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/MixinRenderGlobal": {
+        "renderEntities": "Lbuy;a(Lvg;Lbxy;F)V",
+        "Lnet/minecraft/client/renderer/Tessellator;draw()V": "Lbve;b()V",
+        "Lnet/minecraft/client/multiplayer/WorldClient;getChunk(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/world/chunk/Chunk;": "Lbsb;f(Let;)Laxw;",
+        "renderWorldBorder": "Lbuy;a(Lvg;F)V",
+        "Lnet/minecraft/world/chunk/Chunk;getEntityLists()[Lnet/minecraft/util/ClassInheritanceMultiMap;": "Laxw;t()[Lqx;",
+        "Lnet/minecraft/util/math/BlockPos;getY()I": "Let;q()I"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketParticles": {
+        "Lnet/minecraft/network/play/server/SPacketParticles;yCoord:F": "Ljg;c:F",
+        "Lnet/minecraft/network/play/server/SPacketParticles;zCoord:F": "Ljg;d:F",
+        "writePacketData": "Ljg;b(Lgy;)V",
+        "Lnet/minecraft/network/play/server/SPacketParticles;xCoord:F": "Ljg;b:F"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/tree/MixinWorldGenSwamp": {
+        "Lnet/minecraft/block/material/Material;WATER:Lnet/minecraft/block/material/Material;": "Lbcz;h:Lbcz;",
+        "generate": "Lbav;b(Lamu;Ljava/util/Random;Let;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinBlockGrass": {
+        "updateTick": "Larb;b(Lamu;Let;Lawt;Ljava/util/Random;)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/client/optifine/MixinRenderList": {
+        "renderChunkLayer": "a(Lamm;)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketSignEditorOpen": {
+        "writePacketData": "Ljl;b(Lgy;)V",
+        "Lnet/minecraft/network/play/server/SPacketSignEditorOpen;signPosition:Lnet/minecraft/util/math/BlockPos;": "Ljl;a:Let;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinRegionFileCache": {
+        "clearRegionFileReferences": "Layk;a()V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/isblockloaded/MixinEntity": {
+        "getBrightness": "Lvg;aw()F",
+        "Lnet/minecraft/util/math/BlockPos$MutableBlockPos;\u003cinit\u003e(III)V": "Let$a;\u003cinit\u003e(III)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/client/MixinEntity_PrepareSpawn": {
+        "preparePlayerToSpawn": "Lvg;W()V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinBlockSkull_WitherSpawnLimits": {
+        "checkWitherSpawn": "Latt;a(Lamu;Let;Lawd;)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/MixinWorldGenFlowers": {
+        "generate": "Lazv;b(Lamu;Ljava/util/Random;Let;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinNetHandlerPlayServer": {
+        "isMovePlayerPacketInvalid": "Lpa;b(Llk;)Z",
+        "Lnet/minecraft/network/play/client/CPacketPlayer;getZ(D)D": "Llk;c(D)D",
+        "Lnet/minecraft/network/play/client/CPacketPlayer;getY(D)D": "Llk;b(D)D"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/client/MixinEntityPlayerSP": {
+        "onUpdate": "Lbud;B_()V",
+        "Lnet/minecraft/world/World;isBlockLoaded(Lnet/minecraft/util/math/BlockPos;)Z": "Lamu;e(Let;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/MixinWorldGenBigMushroom": {
+        "generate": "Lbab;b(Lamu;Ljava/util/Random;Let;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/tree/MixinWorldGenTree_BirchSavanna": {
+        "generate": "b(Lamu;Ljava/util/Random;Let;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/MixinWorldGenDeadBush": {
+        "generate": "Lazo;b(Lamu;Ljava/util/Random;Let;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/client/IGuiVideoSettings": {
+        "optionsRowList": "h:Lbjm;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinEntityLivingBase": {
+        "Lnet/minecraft/util/math/BlockPos$PooledMutableBlockPos;setPos(DDD)Lnet/minecraft/util/math/BlockPos$PooledMutableBlockPos;": "Let$b;e(DDD)Let$b;",
+        "attemptTeleport": "Lvp;j(DDD)Z",
+        "travel": "Lvp;a(FFF)V",
+        "Lnet/minecraft/util/math/BlockPos;getY()I": "Let;q()I"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/client/optifine/MixinRenderGlobalOptifine_E": {
+        "setupTerrain": "Lbuy;a(Lvg;DLbxy;IZ)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/noncritical/common/command/MixinCommandBase": {
+        "Lnet/minecraft/command/CommandBase;parseDouble(DLjava/lang/String;IIZ)D": "Lbi;b(DLjava/lang/String;IIZ)D",
+        "parseBlockPos": "Lbi;a(Lbn;[Ljava/lang/String;IZ)Let;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/EntityBat_AiHeightLimit": {
+        "updateAITasks": "Lzt;M()V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/MixinViewFrustum_RenderHeightFix": {
+        "getRenderChunk": "Lbvh;a(Let;)Lbxr;",
+        "updateChunkPositions": "Lbvh;a(DD)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/IGuiOptionsRowList": {
+        "options": "u:Ljava/util/List;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinWorld_Tick": {
+        "Lnet/minecraft/world/World;isAreaLoaded(IIIIIIZ)Z": "Lamu;a(IIIIIIZ)Z",
+        "updateEntityWithOptionalForce": "Lamu;a(Lvg;Z)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinEntity_DeathFix": {
+        "onEntityUpdate": "Lvg;Y()V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinWorld": {
+        "checkLightFor": "Lamu;c(Lana;Let;)Z",
+        "getTopSolidOrLiquidBlock": "Lamu;q(Let;)Let;",
+        "markChunkDirty": "Lamu;b(Let;Lavj;)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/IGuiScreen": {
+        "buttonList": "n:Ljava/util/List;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/client/optifine/MixinRenderChunk": {
+        "Lnet/minecraft/client/renderer/BufferBuilder;setTranslation(DDD)V": "Lbuk;c(DDD)V",
+        "preRenderBlocks": "Lbxr;a(Lbuk;Let;)V",
+        "setPosition": "Lbxr;a(III)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/noncritical/common/MixinTileEntityBeacon": {
+        "updateSegmentColors": "Lavh;F()V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinWorldProvider": {
+        "canCoordinateBeSpawn": "Laym;a(II)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/tree/MixinWorldGenTrees": {
+        "generate": "Lbax;b(Lamu;Ljava/util/Random;Let;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/MixinWorld_HeightLimits": {
+        "Lnet/minecraft/util/math/BlockPos;getY()I": "Let;q()I",
+        "getLightFromNeighborsFor": "Lamu;a(Lana;Let;)I",
+        "Lnet/minecraft/util/math/BlockPos;\u003cinit\u003e(III)V": "Let;\u003cinit\u003e(III)V",
+        "Lnet/minecraft/util/math/BlockPos;getZ()I": "Let;r()I"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketUpdateTileEntity": {
+        "Lnet/minecraft/network/play/server/SPacketUpdateTileEntity;nbt:Lnet/minecraft/nbt/NBTTagCompound;": "Lih;c:Lfy;",
+        "writePacketData": "Lih;b(Lgy;)V",
+        "Lnet/minecraft/network/play/server/SPacketUpdateTileEntity;blockPos:Lnet/minecraft/util/math/BlockPos;": "Lih;a:Let;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinBlockStaticLiquid": {
+        "getCanBlockBurn": "Lauf;d(Lamu;Let;)Z",
+        "updateTick": "Lauf;b(Lamu;Let;Lawt;Ljava/util/Random;)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/tree/MixinWorldGenCanopyTree": {
+        "generate": "Lbap;b(Lamu;Ljava/util/Random;Let;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/vanillaclient/ISPacketChunkData": {
+        "fullChunk": "f:Z",
+        "availableSections": "c:I",
+        "chunkX": "a:I",
+        "buffer": "d:[B",
+        "tileEntityTags": "e:Ljava/util/List;",
+        "chunkZ": "b:I"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinEntityTrackerEntry": {
+        "isPlayerWatchingThisChunk": "Los;e(Loq;)Z",
+        "isVisibleTo": "Los;c(Loq;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinWorldServer": {
+        "updateBlocks": "Loo;j()V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinWorldSettings": {
+        "\u003cinit\u003e(JLnet/minecraft/world/GameType;ZZLnet/minecraft/world/WorldType;)V": "Lamx;\u003cinit\u003e(JLams;ZZLamz;)V",
+        "\u003cinit\u003e(Lnet/minecraft/world/storage/WorldInfo;)V": "Lamx;\u003cinit\u003e(Lbfd;)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/vanillaclient/ICPacketVehicleMove": {
+        "x": "a:D",
+        "y": "b:D",
+        "z": "c:D"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinWalkNodeProcessor_HeightLimit": {
+        "getSafePoint": "Lbeo;a(IIIIDLfa;)Lbej;",
+        "getStart": "Lbeo;b()Lbej;",
+        "getPathNodeType(Lnet/minecraft/world/IBlockAccess;III)Lnet/minecraft/pathfinding/PathNodeType;": "Lbeo;a(Lamy;III)Lbeh;",
+        "Lnet/minecraft/world/IBlockAccess;getBlockState(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/state/IBlockState;": "Lamy;o(Let;)Lawt;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinBlockMushroom": {
+        "canBlockStay": "Lasb;f(Lamu;Let;Lawt;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/server/MixinDedicatedServer_HeightLimits": {
+        "init": "Lnz;j()Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinEntityBoat": {
+        "checkInWater": "Lafd;v()Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/noncritical/common/command/MixinCommandTP": {
+        "execute": "Lec;a(Lnet/minecraft/server/MinecraftServer;Lbn;[Ljava/lang/String;)V",
+        "Lnet/minecraft/command/CommandTP;getEntity(Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/command/ICommandSender;Ljava/lang/String;)Lnet/minecraft/entity/Entity;": "Lec;c(Lnet/minecraft/server/MinecraftServer;Lbn;Ljava/lang/String;)Lvg;",
+        "Lnet/minecraft/command/CommandTP;getCommandSenderAsPlayer(Lnet/minecraft/command/ICommandSender;)Lnet/minecraft/entity/player/EntityPlayerMP;": "Lec;a(Lbn;)Loq;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/client/isblockloaded/MixinEntity": {
+        "getBrightnessForRender": "Lvg;av()I",
+        "Lnet/minecraft/util/math/BlockPos$MutableBlockPos;\u003cinit\u003e(III)V": "Let$a;\u003cinit\u003e(III)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinEntityFallingBlock_HeightLimits": {
+        "onUpdate": "Lack;B_()V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinEntityMinecart_KillFix": {
+        "onUpdate": "Lafe;B_()V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/noncritical/client/MixinGuiOverlayDebug": {
+        "call": "Lbjd;b()Ljava/util/List;",
+        "Lnet/minecraft/world/chunk/Chunk;isEmpty()Z": "Laxw;f()Z",
+        "Lnet/minecraft/client/multiplayer/WorldClient;isBlockLoaded(Lnet/minecraft/util/math/BlockPos;)Z": "Lbsb;e(Let;)Z",
+        "Lnet/minecraft/world/chunk/Chunk;getBiome(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/world/biome/BiomeProvider;)Lnet/minecraft/world/biome/Biome;": "Laxw;a(Let;Lanl;)Lanh;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/MixinWorldProvider": {
+        "getVoidFogYFactor": "Laym;j()D"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketSpawnExperienceOrb": {
+        "Lnet/minecraft/network/play/server/SPacketSpawnExperienceOrb;posZ:D": "Lhy;d:D",
+        "writePacketData": "Lhy;b(Lgy;)V",
+        "Lnet/minecraft/network/play/server/SPacketSpawnExperienceOrb;posX:D": "Lhy;b:D",
+        "Lnet/minecraft/network/play/server/SPacketSpawnExperienceOrb;posY:D": "Lhy;c:D"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/noncritical/common/MixinBlockPistonBase_HeightFix": {
+        "canPush": "Lawj;a(Lawt;Lamu;Let;Lfa;ZLfa;)Z",
+        "Lnet/minecraft/util/math/BlockPos;getY()I": "Let;q()I"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketSpawnPlayer": {
+        "writePacketData": "Lic;b(Lgy;)V",
+        "Lnet/minecraft/network/play/server/SPacketSpawnPlayer;y:D": "Lic;d:D",
+        "Lnet/minecraft/network/play/server/SPacketSpawnPlayer;x:D": "Lic;c:D",
+        "Lnet/minecraft/network/play/server/SPacketSpawnPlayer;z:D": "Lic;e:D"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/MixinWorldGenDoublePlants": {
+        "generate": "Lazq;b(Lamu;Ljava/util/Random;Let;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/INetHandlerPlayClient": {
+        "world": "g:Lbsb;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/MixinWorldGenTallGrass": {
+        "generate": "Lbaw;b(Lamu;Ljava/util/Random;Let;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/MixinChunkCache_HeightLimits": {
+        "getLightFor": "Land;b(Lana;Let;)I",
+        "getLightForExt": "Land;a(Lana;Let;)I",
+        "Lnet/minecraft/util/math/BlockPos;getY()I": "Let;q()I",
+        "Lnet/minecraft/world/ChunkCache;getBlockState(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/state/IBlockState;": "Land;o(Let;)Lawt;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketSoundEffect": {
+        "Lnet/minecraft/network/play/server/SPacketSoundEffect;posX:I": "Lkq;c:I",
+        "writePacketData": "Lkq;b(Lgy;)V",
+        "Lnet/minecraft/network/play/server/SPacketSoundEffect;posY:I": "Lkq;d:I",
+        "Lnet/minecraft/network/play/server/SPacketSoundEffect;posZ:I": "Lkq;e:I"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/MixinWorldGenDesertWells": {
+        "generate": "Lazp;b(Lamu;Ljava/util/Random;Let;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/tree/MixinWorldGenHugeTrees": {
+        "isSpaceAt": "Lbai;c(Lamu;Let;I)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/noncritical/common/command/MixinCommandFill": {
+        "Lnet/minecraft/command/ICommandSender;getEntityWorld()Lnet/minecraft/world/World;": "Lbn;e()Lamu;",
+        "execute": "Lch;a(Lnet/minecraft/server/MinecraftServer;Lbn;[Ljava/lang/String;)V",
+        "Lnet/minecraft/world/World;isBlockLoaded(Lnet/minecraft/util/math/BlockPos;)Z": "Lamu;e(Let;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/MixinChunk_Cubes": {
+        "read": "Laxw;a(Lgy;IZ)V",
+        "generateHeightMap": "Laxw;a()V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/IIntegratedServer": {
+        "worldSettings": "m:Lamx;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinWorld": {
+        "Lnet/minecraft/world/chunk/Chunk;isPopulated()Z": "Laxw;i()Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/INetHandlerPlayServer": {
+        "teleportId": "z:I"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/IViewFrustum": {
+        "getRenderChunk": "a(Let;)Lbxr;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinWorldInfo": {
+        "updateTagCompound": "Lbfd;a(Lfy;Lfy;)V",
+        "\u003cinit\u003e(Lnet/minecraft/world/storage/WorldInfo;)V": "Lbfd;\u003cinit\u003e(Lbfd;)V",
+        "populateFromWorldSettings": "Lbfd;a(Lamx;)V",
+        "\u003cinit\u003e(Lnet/minecraft/nbt/NBTTagCompound;)V": "Lbfd;\u003cinit\u003e(Lfy;)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/vanillaclient/ICPacketPlayerDigging": {
+        "position": "a:Let;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/IPlayerChunkMapEntry": {
+        "pos": "d:Lamn;",
+        "players": "c:Ljava/util/List;",
+        "chunk": "f:Laxw;",
+        "lastUpdateInhabitedTime": "i:J",
+        "sentToPlayers": "j:Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/MixinWorldGenBlockBlob": {
+        "generate": "Lazj;b(Lamu;Ljava/util/Random;Let;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketEntityLookMove": {
+        "writePacketData": "Ljj$b;b(Lgy;)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/vanillaclient/ICPacketPlayerTryUseItemOnBlock": {
+        "position": "a:Let;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/IGuiCreateWorld": {
+        "selectedIndex": "M:I"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinBlockBeaconAsyncUpdate": {
+        "net.minecraft.block.BlockBeacon$1": "aot$1"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketEntityTeleport": {
+        "writePacketData": "Lkt;b(Lgy;)V",
+        "Lnet/minecraft/network/play/server/SPacketEntityTeleport;posY:D": "Lkt;c:D",
+        "Lnet/minecraft/network/play/server/SPacketEntityTeleport;posX:D": "Lkt;b:D",
+        "Lnet/minecraft/network/play/server/SPacketEntityTeleport;posZ:D": "Lkt;d:D"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketUseBed": {
+        "writePacketData": "Ljr;b(Lgy;)V",
+        "Lnet/minecraft/network/play/server/SPacketUseBed;bedPos:Lnet/minecraft/util/math/BlockPos;": "Ljr;b:Let;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketBlockAction": {
+        "Lnet/minecraft/network/play/server/SPacketBlockAction;blockPosition:Lnet/minecraft/util/math/BlockPos;": "Lii;a:Let;",
+        "writePacketData": "Lii;b(Lgy;)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/noncritical/common/command/MixinCommandsHeightLimits": {
+        "Lnet/minecraft/world/gen/structure/StructureBoundingBox;minY:I": "Lbbg;b:I",
+        "Lnet/minecraft/world/gen/structure/StructureBoundingBox;maxY:I": "Lbbg;e:I",
+        "execute": "a(Lnet/minecraft/server/MinecraftServer;Lbn;[Ljava/lang/String;)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/vanillaclient/ICPacketPlayer": {
+        "x": "a:D",
+        "y": "b:D",
+        "z": "c:D"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinPlayerList": {
+        "Lnet/minecraft/world/gen/ChunkProviderServer;provideChunk(II)Lnet/minecraft/world/chunk/Chunk;": "Lon;c(II)Laxw;",
+        "Lnet/minecraft/world/chunk/Chunk;markDirty()V": "Laxw;e()V",
+        "recreatePlayerEntity": "Lpl;a(Loq;IZ)Loq;",
+        "playerLoggedOut": "Lpl;e(Loq;)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/client/MixinChunkCache_Cubic": {
+        "getBiome": "Land;b(Let;)Lanh;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinBlockFalling_HeightLimits": {
+        "Lnet/minecraft/world/World;isAirBlock(Lnet/minecraft/util/math/BlockPos;)Z": "Lamu;d(Let;)Z",
+        "Lnet/minecraft/block/BlockFalling;fallInstantly:Z": "Laqm;f:Z",
+        "Lnet/minecraft/block/BlockFalling;canFallThrough(Lnet/minecraft/block/state/IBlockState;)Z": "Laqm;x(Lawt;)Z",
+        "checkFallable": "Laqm;b(Lamu;Let;)V",
+        "Lnet/minecraft/world/World;getBlockState(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/state/IBlockState;": "Lamu;o(Let;)Lawt;",
+        "Lnet/minecraft/world/World;setBlockState(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/state/IBlockState;)Z": "Lamu;a(Let;Lawt;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/client/optifine/MixinViewFrustum": {
+        "net/minecraft/util/math/ChunkPos": "amn"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinItemChorusFruit": {
+        "onItemUseFinish": "Lahk;a(Laip;Lamu;Lvp;)Laip;",
+        "Lnet/minecraft/world/World;getActualHeight()I": "Lamu;ab()I"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketExplosion": {
+        "Lnet/minecraft/network/play/server/SPacketExplosion;posY:D": "Lja;b:D",
+        "Lnet/minecraft/network/play/server/SPacketExplosion;posZ:D": "Lja;c:D",
+        "Lnet/minecraft/network/play/server/SPacketExplosion;posX:D": "Lja;a:D",
+        "writePacketData": "Lja;b(Lgy;)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/MixinWorldGenLakes": {
+        "generate": "Lbae;b(Lamu;Ljava/util/Random;Let;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/tree/MixinWorldGenTaiga2": {
+        "generate": "Lbau;b(Lamu;Ljava/util/Random;Let;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketEffect": {
+        "Lnet/minecraft/network/play/server/SPacketEffect;soundPos:Lnet/minecraft/util/math/BlockPos;": "Ljf;b:Let;",
+        "writePacketData": "Ljf;b(Lgy;)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketMoveVehicle": {
+        "writePacketData": "Ljk;b(Lgy;)V",
+        "Lnet/minecraft/network/play/server/SPacketMoveVehicle;y:D": "Ljk;b:D",
+        "Lnet/minecraft/network/play/server/SPacketMoveVehicle;z:D": "Ljk;c:D",
+        "Lnet/minecraft/network/play/server/SPacketMoveVehicle;x:D": "Ljk;a:D"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinCubicEndWorkaround": {
+        "Lnet/minecraft/world/WorldServer;getTopSolidOrLiquidBlock(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/util/math/BlockPos;": "Loo;q(Let;)Let;",
+        "Lnet/minecraft/world/World;getTopSolidOrLiquidBlock(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/util/math/BlockPos;": "Lamu;q(Let;)Let;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/tree/MixinWorldGenTaiga1": {
+        "generate": "Lbam;b(Lamu;Ljava/util/Random;Let;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketBlockChange": {
+        "writePacketData": "Lij;b(Lgy;)V",
+        "Lnet/minecraft/network/play/server/SPacketBlockChange;blockPosition:Lnet/minecraft/util/math/BlockPos;": "Lij;a:Let;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketSpawnMob": {
+        "writePacketData": "Lia;b(Lgy;)V",
+        "Lnet/minecraft/network/play/server/SPacketSpawnMob;x:D": "Lia;d:D",
+        "Lnet/minecraft/network/play/server/SPacketSpawnMob;z:D": "Lia;f:D",
+        "Lnet/minecraft/network/play/server/SPacketSpawnMob;y:D": "Lia;e:D"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinChunk_Cubes": {
+        "getBlockState(III)Lnet/minecraft/block/state/IBlockState;": "Laxw;a(III)Lawt;",
+        "relightBlock": "Laxw;c(III)V",
+        "removeEntityAtIndex": "Laxw;a(Lvg;I)V",
+        "onTick": "Laxw;b(Z)V",
+        "getTopFilledSegment": "Laxw;g()I",
+        "getPrecipitationHeight": "Laxw;f(Let;)Let;",
+        "\u003cinit\u003e(Lnet/minecraft/world/World;Lnet/minecraft/world/chunk/ChunkPrimer;II)V": "Laxw;\u003cinit\u003e(Lamu;Layw;II)V",
+        "getEntitiesWithinAABBForEntity": "Laxw;a(Lvg;Lbhb;Ljava/util/List;Lcom/google/common/base/Predicate;)V",
+        "Lnet/minecraft/world/chunk/Chunk;entityLists:[Lnet/minecraft/util/ClassInheritanceMultiMap;": "Laxw;o:[Lqx;",
+        "checkLight()V": "Laxw;o()V",
+        "Lnet/minecraft/util/ClassInheritanceMultiMap;add(Ljava/lang/Object;)Z": "Lqx;add(Ljava/lang/Object;)Z",
+        "enqueueRelightChecks": "Laxw;n()V",
+        "\u003cinit\u003e(Lnet/minecraft/world/World;II)V": "Laxw;\u003cinit\u003e(Lamu;II)V",
+        "getBlockLightOpacity(III)I": "Laxw;d(III)I",
+        "Lnet/minecraft/world/chunk/storage/ExtendedBlockStorage;set(IIILnet/minecraft/block/state/IBlockState;)V": "Laxx;a(IIILawt;)V",
+        "getEntitiesOfTypeWithinAABB": "Laxw;a(Ljava/lang/Class;Lbhb;Ljava/util/List;Lcom/google/common/base/Predicate;)V",
+        "setStorageArrays": "Laxw;a([Laxx;)V",
+        "onUnload": "Laxw;d()V",
+        "setLightFor": "Laxw;a(Lana;Let;I)V",
+        "propagateSkylightOcclusion": "Laxw;d(II)V",
+        "Lnet/minecraft/util/math/MathHelper;floor(D)I": "Lrk;c(D)I",
+        "Lnet/minecraft/world/chunk/Chunk;relightBlock(III)V": "Laxw;c(III)V",
+        "Lnet/minecraft/world/chunk/Chunk;storageArrays:[Lnet/minecraft/world/chunk/storage/ExtendedBlockStorage;": "Laxw;f:[Laxx;",
+        "getLightSubtracted": "Laxw;a(Let;I)I",
+        "setBlockState": "Laxw;a(Let;Lawt;)Lawt;",
+        "getLightFor": "Laxw;a(Lana;Let;)I",
+        "addEntity": "Laxw;a(Lvg;)V",
+        "Lnet/minecraft/world/chunk/Chunk;dirty:Z": "Laxw;s:Z",
+        "removeTileEntity": "Laxw;d(Let;)V",
+        "Lnet/minecraft/util/ClassInheritanceMultiMap;remove(Ljava/lang/Object;)Z": "Lqx;remove(Ljava/lang/Object;)Z",
+        "addTileEntity(Lnet/minecraft/tileentity/TileEntity;)V": "Laxw;a(Lavj;)V",
+        "onLoad": "Laxw;c()V",
+        "Lnet/minecraft/world/chunk/Chunk;loaded:Z": "Laxw;j:Z",
+        "generateSkylightMap": "Laxw;b()V",
+        "recheckGaps": "Laxw;h(Z)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/client/vertviewdist/MixinRenderGlobal": {
+        "setupTerrain": "Lbuy;a(Lvg;DLbxy;IZ)V",
+        "Lnet/minecraft/client/renderer/RenderGlobal;loadRenderers()V": "Lbuy;a()V",
+        "loadRenderers": "Lbuy;a()V",
+        "Lnet/minecraft/client/renderer/RenderGlobal;renderDistanceChunks:I": "Lbuy;P:I"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketPlayerPosLook": {
+        "writePacketData": "Ljq;b(Lgy;)V",
+        "Lnet/minecraft/network/play/server/SPacketPlayerPosLook;z:D": "Ljq;c:D",
+        "Lnet/minecraft/network/play/server/SPacketPlayerPosLook;y:D": "Ljq;b:D",
+        "Lnet/minecraft/network/play/server/SPacketPlayerPosLook;x:D": "Ljq;a:D"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/vanillaclient/ICPacketTabComplete": {
+        "targetBlock": "c:Let;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinWorld_HeightLimits": {
+        "getLightFor": "Lamu;b(Lana;Let;)I",
+        "isAreaLoaded(IIIIIIZ)Z": "Lamu;a(IIIIIIZ)Z",
+        "updateEntities": "Lamu;k()V",
+        "Lnet/minecraft/world/World;isChunkLoaded(IIZ)Z": "Lamu;a(IIZ)Z",
+        "spawnEntity": "Lamu;a(Lvg;)Z",
+        "isBlockLoaded(Lnet/minecraft/util/math/BlockPos;Z)Z": "Lamu;a(Let;Z)Z",
+        "getLight(Lnet/minecraft/util/math/BlockPos;Z)I": "Lamu;c(Let;Z)I",
+        "Lnet/minecraft/util/math/BlockPos;getY()I": "Let;q()I",
+        "Lnet/minecraft/world/World;getChunk(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/world/chunk/Chunk;": "Lamu;f(Let;)Laxw;",
+        "getBiome": "Lamu;b(Let;)Lanh;",
+        "updateEntityWithOptionalForce": "Lamu;a(Lvg;Z)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinWorldEntitySpawner": {
+        "findChunksForSpawning": "Lanb;a(Loo;ZZZ)I"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinEntityTracker": {
+        "net/minecraft/entity/EntityTrackerEntry": "os",
+        "track(Lnet/minecraft/entity/Entity;IIZ)V": "Lol;a(Lvg;IIZ)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/common/MixinPathNavigate": {
+        "getPathToPos": "Lze;b(Let;)Lbel;",
+        "net/minecraft/world/ChunkCache": "and",
+        "pathFollow": "Lze;n()V",
+        "getPathToEntityLiving": "Lze;a(Lvg;)Lbel;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/MixinWorldGenIcePath": {
+        "generate": "Lbac;b(Lamu;Ljava/util/Random;Let;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/common/MixinWorld_CollisionCheck": {
+        "getCollisionBoxes(Lnet/minecraft/entity/Entity;Lnet/minecraft/util/math/AxisAlignedBB;ZLjava/util/List;)Z": "Lamu;a(Lvg;Lbhb;ZLjava/util/List;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/MixinWorldGenIceSpike": {
+        "generate": "Lbad;b(Lamu;Ljava/util/Random;Let;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/noncritical/common/command/MixinCommandTeleport": {
+        "execute": "Ldt;a(Lnet/minecraft/server/MinecraftServer;Lbn;[Ljava/lang/String;)V",
+        "Lnet/minecraft/command/server/CommandTeleport;getEntity(Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/command/ICommandSender;Ljava/lang/String;)Lnet/minecraft/entity/Entity;": "Ldt;c(Lnet/minecraft/server/MinecraftServer;Lbn;Ljava/lang/String;)Lvg;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinStructureStart": {
+        "writeStructureComponentsToNBT": "Lbby;a(II)Lfy;",
+        "readStructureComponentsFromNBT": "Lbby;a(Lamu;Lfy;)V",
+        "Lnet/minecraft/nbt/NBTTagCompound;setInteger(Ljava/lang/String;I)V": "Lfy;a(Ljava/lang/String;I)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinBlockLilyPad_HeightLimits": {
+        "canBlockStay": "Lauy;f(Lamu;Let;Lawt;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/vanillaclient/ISPacketMultiBlockChange": {
+        "chunkPos": "a:Lamn;",
+        "changedBlocks": "b:[Lio$a;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/MixinWorldGenDungeons": {
+        "generate": "Lbak;b(Lamu;Ljava/util/Random;Let;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/MixinDebugRenderChunkBorder": {
+        "render": "Lbye;a(FJ)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketSpawnObject": {
+        "Lnet/minecraft/network/play/server/SPacketSpawnObject;z:D": "Lhx;e:D",
+        "Lnet/minecraft/network/play/server/SPacketSpawnObject;x:D": "Lhx;c:D",
+        "writePacketData": "Lhx;b(Lgy;)V",
+        "Lnet/minecraft/network/play/server/SPacketSpawnObject;y:D": "Lhx;d:D"
+      }
+    },
+    "searge": {
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketSpawnPainting": {
+        "writePacketData": "Lnet/minecraft/network/play/server/SPacketSpawnPainting;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V",
+        "Lnet/minecraft/network/play/server/SPacketSpawnPainting;position:Lnet/minecraft/util/math/BlockPos;": "Lnet/minecraft/network/play/server/SPacketSpawnPainting;field_179838_b:Lnet/minecraft/util/math/BlockPos;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/vanillaclient/ICPacketUpdateSign": {
+        "pos": "field_179723_a:Lnet/minecraft/util/math/BlockPos;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinAnvilSaveHandler": {
+        "getChunkLoader": "Lnet/minecraft/world/chunk/storage/AnvilSaveHandler;func_75763_a(Lnet/minecraft/world/WorldProvider;)Lnet/minecraft/world/chunk/storage/IChunkLoader;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/common/MixinChunkCache": {
+        "getBlockState": "Lnet/minecraft/world/ChunkCache;func_180495_p(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/state/IBlockState;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/common/MixinWalkNodeProcessor": {
+        "getSafePoint": "Lnet/minecraft/pathfinding/WalkNodeProcessor;func_186332_a(IIIIDLnet/minecraft/util/EnumFacing;)Lnet/minecraft/pathfinding/PathPoint;",
+        "getPathNodeType": "Lnet/minecraft/pathfinding/WalkNodeProcessor;func_186319_a(Lnet/minecraft/world/IBlockAccess;IIILnet/minecraft/entity/EntityLiving;IIIZZ)Lnet/minecraft/pathfinding/PathNodeType;",
+        "Lnet/minecraft/world/World;collidesWithAnyBlock(Lnet/minecraft/util/math/AxisAlignedBB;)Z": "Lnet/minecraft/world/World;func_184143_b(Lnet/minecraft/util/math/AxisAlignedBB;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/client/MixinChunkCache_Vanilla": {
+        "getBiome": "Lnet/minecraft/world/ChunkCache;func_180494_b(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/world/biome/Biome;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketSpawnGlobalEntity": {
+        "Lnet/minecraft/network/play/server/SPacketSpawnGlobalEntity;z:D": "Lnet/minecraft/network/play/server/SPacketSpawnGlobalEntity;field_149055_d:D",
+        "Lnet/minecraft/network/play/server/SPacketSpawnGlobalEntity;y:D": "Lnet/minecraft/network/play/server/SPacketSpawnGlobalEntity;field_149058_c:D",
+        "writePacketData": "Lnet/minecraft/network/play/server/SPacketSpawnGlobalEntity;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V",
+        "Lnet/minecraft/network/play/server/SPacketSpawnGlobalEntity;x:D": "Lnet/minecraft/network/play/server/SPacketSpawnGlobalEntity;field_149057_b:D"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/common/MixinWorldServer_UpdateBlocks": {
+        "Lnet/minecraft/world/GameRules;getInt(Ljava/lang/String;)I": "Lnet/minecraft/world/GameRules;func_180263_c(Ljava/lang/String;)I",
+        "updateBlocks": "Lnet/minecraft/world/WorldServer;func_147456_g()V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/IChunkProviderClient": {
+        "loadedChunks": "field_73236_b:Lit/unimi/dsi/fastutil/longs/Long2ObjectMap;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/IContainerLocalRenderInformation": {
+        "net.minecraft.client.renderer.RenderGlobal$ContainerLocalRenderInformation": "net/minecraft/client/renderer/RenderGlobal$ContainerLocalRenderInformation",
+        "renderChunk": "field_178036_a:Lnet/minecraft/client/renderer/chunk/RenderChunk;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinTeleporter": {
+        "Lnet/minecraft/util/math/BlockPos;add(III)Lnet/minecraft/util/math/BlockPos;": "Lnet/minecraft/util/math/BlockPos;func_177982_a(III)Lnet/minecraft/util/math/BlockPos;",
+        "Lnet/minecraft/util/math/BlockPos;down()Lnet/minecraft/util/math/BlockPos;": "Lnet/minecraft/util/math/BlockPos;func_177977_b()Lnet/minecraft/util/math/BlockPos;",
+        "placeInExistingPortal": "Lnet/minecraft/world/Teleporter;func_180620_b(Lnet/minecraft/entity/Entity;F)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/fakeheight/MixinBiomeDecorator": {
+        "genDecorations": "Lnet/minecraft/world/biome/BiomeDecorator;func_150513_a(Lnet/minecraft/world/biome/Biome;Lnet/minecraft/world/World;Ljava/util/Random;)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinMinecraftServer": {
+        "initialWorldChunkLoad": "Lnet/minecraft/server/MinecraftServer;func_71222_d()V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketCustomSound": {
+        "writePacketData": "Lnet/minecraft/network/play/server/SPacketCustomSound;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V",
+        "Lnet/minecraft/network/play/server/SPacketCustomSound;x:I": "Lnet/minecraft/network/play/server/SPacketCustomSound;field_186934_c:I",
+        "Lnet/minecraft/network/play/server/SPacketCustomSound;z:I": "Lnet/minecraft/network/play/server/SPacketCustomSound;field_186936_e:I",
+        "Lnet/minecraft/network/play/server/SPacketCustomSound;y:I": "Lnet/minecraft/network/play/server/SPacketCustomSound;field_186935_d:I"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinTileEntityEndGateway": {
+        "Lnet/minecraft/world/chunk/Chunk;getTopFilledSegment()I": "Lnet/minecraft/world/chunk/Chunk;func_76625_h()I",
+        "findExitPortal": "Lnet/minecraft/tileentity/TileEntityEndGateway;func_184311_k()V",
+        "findSpawnpointInChunk": "Lnet/minecraft/tileentity/TileEntityEndGateway;func_184307_a(Lnet/minecraft/world/chunk/Chunk;)Lnet/minecraft/util/math/BlockPos;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketSpawnPosition": {
+        "writePacketData": "Lnet/minecraft/network/play/server/SPacketSpawnPosition;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V",
+        "Lnet/minecraft/network/play/server/SPacketSpawnPosition;spawnBlockPos:Lnet/minecraft/util/math/BlockPos;": "Lnet/minecraft/network/play/server/SPacketSpawnPosition;field_179801_a:Lnet/minecraft/util/math/BlockPos;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinBlockChorusFlower": {
+        "updateTick": "Lnet/minecraft/block/BlockChorusFlower;func_180650_b(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/state/IBlockState;Ljava/util/Random;)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketBlockBreakAnim": {
+        "Lnet/minecraft/network/play/server/SPacketBlockBreakAnim;position:Lnet/minecraft/util/math/BlockPos;": "Lnet/minecraft/network/play/server/SPacketBlockBreakAnim;field_179822_b:Lnet/minecraft/util/math/BlockPos;",
+        "writePacketData": "Lnet/minecraft/network/play/server/SPacketBlockBreakAnim;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinChunkCache_HeightLimits": {
+        "getBlockState": "Lnet/minecraft/world/ChunkCache;func_180495_p(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/state/IBlockState;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/noncritical/client/MixinViewFrustum_VertViewDistance": {
+        "setCountChunksXYZ": "Lnet/minecraft/client/renderer/ViewFrustum;func_178159_a(I)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/tree/MixinWorldGenShrub": {
+        "generate": "Lnet/minecraft/world/gen/feature/WorldGenShrub;func_180709_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinNetHandlerPlayServer": {
+        "processCustomPayload": "Lnet/minecraft/network/NetHandlerPlayServer;func_147349_a(Lnet/minecraft/network/play/client/CPacketCustomPayload;)V",
+        "Lnet/minecraft/network/PacketThreadUtil;checkThreadAndEnqueue(Lnet/minecraft/network/Packet;Lnet/minecraft/network/INetHandler;Lnet/minecraft/util/IThreadListener;)V": "Lnet/minecraft/network/PacketThreadUtil;func_180031_a(Lnet/minecraft/network/Packet;Lnet/minecraft/network/INetHandler;Lnet/minecraft/util/IThreadListener;)V",
+        "processUpdateSign": "Lnet/minecraft/network/NetHandlerPlayServer;func_147343_a(Lnet/minecraft/network/play/client/CPacketUpdateSign;)V",
+        "processTryUseItemOnBlock": "Lnet/minecraft/network/NetHandlerPlayServer;func_184337_a(Lnet/minecraft/network/play/client/CPacketPlayerTryUseItemOnBlock;)V",
+        "processTabComplete": "Lnet/minecraft/network/NetHandlerPlayServer;func_147341_a(Lnet/minecraft/network/play/client/CPacketTabComplete;)V",
+        "processPlayer": "Lnet/minecraft/network/NetHandlerPlayServer;func_147347_a(Lnet/minecraft/network/play/client/CPacketPlayer;)V",
+        "processConfirmTeleport": "Lnet/minecraft/network/NetHandlerPlayServer;func_184339_a(Lnet/minecraft/network/play/client/CPacketConfirmTeleport;)V",
+        "processVehicleMove": "Lnet/minecraft/network/NetHandlerPlayServer;func_184338_a(Lnet/minecraft/network/play/client/CPacketVehicleMove;)V",
+        "sendPacket": "Lnet/minecraft/network/NetHandlerPlayServer;func_147359_a(Lnet/minecraft/network/Packet;)V",
+        "processPlayerDigging": "Lnet/minecraft/network/NetHandlerPlayServer;func_147345_a(Lnet/minecraft/network/play/client/CPacketPlayerDigging;)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/client/vertviewdist/MixinEntityRenderer": {
+        "updateRenderer": "Lnet/minecraft/client/renderer/EntityRenderer;func_78464_a()V",
+        "setupCameraTransform": "Lnet/minecraft/client/renderer/EntityRenderer;func_78479_a(FI)V",
+        "renderWorldPass": "Lnet/minecraft/client/renderer/EntityRenderer;func_175068_a(IFJ)V",
+        "updateFogColor": "Lnet/minecraft/client/renderer/EntityRenderer;func_78466_h(F)V",
+        "Lnet/minecraft/client/settings/GameSettings;renderDistanceChunks:I": "Lnet/minecraft/client/settings/GameSettings;field_151451_c:I"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/noncritical/client/MixinRenderWorker": {
+        "processTask": "Lnet/minecraft/client/renderer/chunk/ChunkRenderWorker;func_178474_a(Lnet/minecraft/client/renderer/chunk/ChunkCompileTaskGenerator;)V",
+        "Lnet/minecraft/client/renderer/chunk/ChunkRenderWorker;isChunkExisting(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/world/World;)Z": "Lnet/minecraft/client/renderer/chunk/ChunkRenderWorker;func_188263_a(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/world/World;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/MixinRenderGlobal": {
+        "renderEntities": "Lnet/minecraft/client/renderer/RenderGlobal;func_180446_a(Lnet/minecraft/entity/Entity;Lnet/minecraft/client/renderer/culling/ICamera;F)V",
+        "Lnet/minecraft/client/renderer/Tessellator;draw()V": "Lnet/minecraft/client/renderer/Tessellator;func_78381_a()V",
+        "Lnet/minecraft/client/multiplayer/WorldClient;getChunk(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/world/chunk/Chunk;": "Lnet/minecraft/client/multiplayer/WorldClient;func_175726_f(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/world/chunk/Chunk;",
+        "renderWorldBorder": "Lnet/minecraft/client/renderer/RenderGlobal;func_180449_a(Lnet/minecraft/entity/Entity;F)V",
+        "Lnet/minecraft/world/chunk/Chunk;getEntityLists()[Lnet/minecraft/util/ClassInheritanceMultiMap;": "Lnet/minecraft/world/chunk/Chunk;func_177429_s()[Lnet/minecraft/util/ClassInheritanceMultiMap;",
+        "Lnet/minecraft/util/math/BlockPos;getY()I": "Lnet/minecraft/util/math/BlockPos;func_177956_o()I"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketParticles": {
+        "Lnet/minecraft/network/play/server/SPacketParticles;yCoord:F": "Lnet/minecraft/network/play/server/SPacketParticles;field_149235_c:F",
+        "Lnet/minecraft/network/play/server/SPacketParticles;zCoord:F": "Lnet/minecraft/network/play/server/SPacketParticles;field_149232_d:F",
+        "writePacketData": "Lnet/minecraft/network/play/server/SPacketParticles;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V",
+        "Lnet/minecraft/network/play/server/SPacketParticles;xCoord:F": "Lnet/minecraft/network/play/server/SPacketParticles;field_149234_b:F"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/tree/MixinWorldGenSwamp": {
+        "Lnet/minecraft/block/material/Material;WATER:Lnet/minecraft/block/material/Material;": "Lnet/minecraft/block/material/Material;field_151586_h:Lnet/minecraft/block/material/Material;",
+        "generate": "Lnet/minecraft/world/gen/feature/WorldGenSwamp;func_180709_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinBlockGrass": {
+        "updateTick": "Lnet/minecraft/block/BlockGrass;func_180650_b(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/state/IBlockState;Ljava/util/Random;)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/client/optifine/MixinRenderList": {
+        "renderChunkLayer": "func_178001_a(Lnet/minecraft/util/BlockRenderLayer;)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketSignEditorOpen": {
+        "writePacketData": "Lnet/minecraft/network/play/server/SPacketSignEditorOpen;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V",
+        "Lnet/minecraft/network/play/server/SPacketSignEditorOpen;signPosition:Lnet/minecraft/util/math/BlockPos;": "Lnet/minecraft/network/play/server/SPacketSignEditorOpen;field_179778_a:Lnet/minecraft/util/math/BlockPos;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinRegionFileCache": {
+        "clearRegionFileReferences": "Lnet/minecraft/world/chunk/storage/RegionFileCache;func_76551_a()V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/isblockloaded/MixinEntity": {
+        "getBrightness": "Lnet/minecraft/entity/Entity;func_70013_c()F"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/client/MixinEntity_PrepareSpawn": {
+        "preparePlayerToSpawn": "Lnet/minecraft/entity/Entity;func_70065_x()V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinBlockSkull_WitherSpawnLimits": {
+        "checkWitherSpawn": "Lnet/minecraft/block/BlockSkull;func_180679_a(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/tileentity/TileEntitySkull;)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/MixinWorldGenFlowers": {
+        "generate": "Lnet/minecraft/world/gen/feature/WorldGenFlowers;func_180709_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinNetHandlerPlayServer": {
+        "isMovePlayerPacketInvalid": "Lnet/minecraft/network/NetHandlerPlayServer;func_183006_b(Lnet/minecraft/network/play/client/CPacketPlayer;)Z",
+        "Lnet/minecraft/network/play/client/CPacketPlayer;getZ(D)D": "Lnet/minecraft/network/play/client/CPacketPlayer;func_187000_c(D)D",
+        "Lnet/minecraft/network/play/client/CPacketPlayer;getY(D)D": "Lnet/minecraft/network/play/client/CPacketPlayer;func_186996_b(D)D"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/client/MixinEntityPlayerSP": {
+        "onUpdate": "Lnet/minecraft/client/entity/EntityPlayerSP;func_70071_h_()V",
+        "Lnet/minecraft/world/World;isBlockLoaded(Lnet/minecraft/util/math/BlockPos;)Z": "Lnet/minecraft/world/World;func_175667_e(Lnet/minecraft/util/math/BlockPos;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/MixinWorldGenBigMushroom": {
+        "generate": "Lnet/minecraft/world/gen/feature/WorldGenBigMushroom;func_180709_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/tree/MixinWorldGenTree_BirchSavanna": {
+        "generate": "func_180709_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/MixinWorldGenDeadBush": {
+        "generate": "Lnet/minecraft/world/gen/feature/WorldGenDeadBush;func_180709_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/client/IGuiVideoSettings": {
+        "optionsRowList": "field_146501_h:Lnet/minecraft/client/gui/GuiListExtended;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinEntityLivingBase": {
+        "Lnet/minecraft/util/math/BlockPos$PooledMutableBlockPos;setPos(DDD)Lnet/minecraft/util/math/BlockPos$PooledMutableBlockPos;": "Lnet/minecraft/util/math/BlockPos$PooledMutableBlockPos;func_189532_c(DDD)Lnet/minecraft/util/math/BlockPos$PooledMutableBlockPos;",
+        "attemptTeleport": "Lnet/minecraft/entity/EntityLivingBase;func_184595_k(DDD)Z",
+        "travel": "Lnet/minecraft/entity/EntityLivingBase;func_191986_a(FFF)V",
+        "Lnet/minecraft/util/math/BlockPos;getY()I": "Lnet/minecraft/util/math/BlockPos;func_177956_o()I"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/client/optifine/MixinRenderGlobalOptifine_E": {
+        "setupTerrain": "Lnet/minecraft/client/renderer/RenderGlobal;func_174970_a(Lnet/minecraft/entity/Entity;DLnet/minecraft/client/renderer/culling/ICamera;IZ)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/noncritical/common/command/MixinCommandBase": {
+        "Lnet/minecraft/command/CommandBase;parseDouble(DLjava/lang/String;IIZ)D": "Lnet/minecraft/command/CommandBase;func_175769_b(DLjava/lang/String;IIZ)D",
+        "parseBlockPos": "Lnet/minecraft/command/CommandBase;func_175757_a(Lnet/minecraft/command/ICommandSender;[Ljava/lang/String;IZ)Lnet/minecraft/util/math/BlockPos;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/EntityBat_AiHeightLimit": {
+        "updateAITasks": "Lnet/minecraft/entity/passive/EntityBat;func_70619_bc()V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/MixinViewFrustum_RenderHeightFix": {
+        "getRenderChunk": "Lnet/minecraft/client/renderer/ViewFrustum;func_178161_a(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/client/renderer/chunk/RenderChunk;",
+        "updateChunkPositions": "Lnet/minecraft/client/renderer/ViewFrustum;func_178163_a(DD)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/IGuiOptionsRowList": {
+        "options": "field_148184_k:Ljava/util/List;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinWorld_Tick": {
+        "Lnet/minecraft/world/World;isAreaLoaded(IIIIIIZ)Z": "Lnet/minecraft/world/World;func_175663_a(IIIIIIZ)Z",
+        "updateEntityWithOptionalForce": "Lnet/minecraft/world/World;func_72866_a(Lnet/minecraft/entity/Entity;Z)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinEntity_DeathFix": {
+        "onEntityUpdate": "Lnet/minecraft/entity/Entity;func_70030_z()V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinWorld": {
+        "checkLightFor": "Lnet/minecraft/world/World;func_180500_c(Lnet/minecraft/world/EnumSkyBlock;Lnet/minecraft/util/math/BlockPos;)Z",
+        "getTopSolidOrLiquidBlock": "Lnet/minecraft/world/World;func_175672_r(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/util/math/BlockPos;",
+        "markChunkDirty": "Lnet/minecraft/world/World;func_175646_b(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/tileentity/TileEntity;)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/IGuiScreen": {
+        "buttonList": "field_146292_n:Ljava/util/List;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/client/optifine/MixinRenderChunk": {
+        "Lnet/minecraft/client/renderer/BufferBuilder;setTranslation(DDD)V": "Lnet/minecraft/client/renderer/BufferBuilder;func_178969_c(DDD)V",
+        "preRenderBlocks": "Lnet/minecraft/client/renderer/chunk/RenderChunk;func_178573_a(Lnet/minecraft/client/renderer/BufferBuilder;Lnet/minecraft/util/math/BlockPos;)V",
+        "setPosition": "Lnet/minecraft/client/renderer/chunk/RenderChunk;func_189562_a(III)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/noncritical/common/MixinTileEntityBeacon": {
+        "updateSegmentColors": "Lnet/minecraft/tileentity/TileEntityBeacon;func_146003_y()V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinWorldProvider": {
+        "canCoordinateBeSpawn": "Lnet/minecraft/world/WorldProvider;func_76566_a(II)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/tree/MixinWorldGenTrees": {
+        "generate": "Lnet/minecraft/world/gen/feature/WorldGenTrees;func_180709_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/MixinWorld_HeightLimits": {
+        "Lnet/minecraft/util/math/BlockPos;getY()I": "Lnet/minecraft/util/math/BlockPos;func_177956_o()I",
+        "getLightFromNeighborsFor": "Lnet/minecraft/world/World;func_175705_a(Lnet/minecraft/world/EnumSkyBlock;Lnet/minecraft/util/math/BlockPos;)I",
+        "Lnet/minecraft/util/math/BlockPos;getZ()I": "Lnet/minecraft/util/math/BlockPos;func_177952_p()I"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketUpdateTileEntity": {
+        "Lnet/minecraft/network/play/server/SPacketUpdateTileEntity;nbt:Lnet/minecraft/nbt/NBTTagCompound;": "Lnet/minecraft/network/play/server/SPacketUpdateTileEntity;field_148860_e:Lnet/minecraft/nbt/NBTTagCompound;",
+        "writePacketData": "Lnet/minecraft/network/play/server/SPacketUpdateTileEntity;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V",
+        "Lnet/minecraft/network/play/server/SPacketUpdateTileEntity;blockPos:Lnet/minecraft/util/math/BlockPos;": "Lnet/minecraft/network/play/server/SPacketUpdateTileEntity;field_179824_a:Lnet/minecraft/util/math/BlockPos;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinBlockStaticLiquid": {
+        "getCanBlockBurn": "Lnet/minecraft/block/BlockStaticLiquid;func_176368_m(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;)Z",
+        "updateTick": "Lnet/minecraft/block/BlockStaticLiquid;func_180650_b(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/state/IBlockState;Ljava/util/Random;)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/tree/MixinWorldGenCanopyTree": {
+        "generate": "Lnet/minecraft/world/gen/feature/WorldGenCanopyTree;func_180709_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/vanillaclient/ISPacketChunkData": {
+        "fullChunk": "field_149279_g:Z",
+        "availableSections": "field_186948_c:I",
+        "chunkX": "field_149284_a:I",
+        "buffer": "field_186949_d:[B",
+        "tileEntityTags": "field_189557_e:Ljava/util/List;",
+        "chunkZ": "field_149282_b:I"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinEntityTrackerEntry": {
+        "isPlayerWatchingThisChunk": "Lnet/minecraft/entity/EntityTrackerEntry;func_73121_d(Lnet/minecraft/entity/player/EntityPlayerMP;)Z",
+        "isVisibleTo": "Lnet/minecraft/entity/EntityTrackerEntry;func_180233_c(Lnet/minecraft/entity/player/EntityPlayerMP;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinWorldServer": {
+        "updateBlocks": "Lnet/minecraft/world/WorldServer;func_147456_g()V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinWorldSettings": {
+        "\u003cinit\u003e(JLnet/minecraft/world/GameType;ZZLnet/minecraft/world/WorldType;)V": "Lnet/minecraft/world/WorldSettings;\u003cinit\u003e(JLnet/minecraft/world/GameType;ZZLnet/minecraft/world/WorldType;)V",
+        "\u003cinit\u003e(Lnet/minecraft/world/storage/WorldInfo;)V": "Lnet/minecraft/world/WorldSettings;\u003cinit\u003e(Lnet/minecraft/world/storage/WorldInfo;)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/vanillaclient/ICPacketVehicleMove": {
+        "x": "field_187007_a:D",
+        "y": "field_187008_b:D",
+        "z": "field_187009_c:D"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinWalkNodeProcessor_HeightLimit": {
+        "getSafePoint": "Lnet/minecraft/pathfinding/WalkNodeProcessor;func_186332_a(IIIIDLnet/minecraft/util/EnumFacing;)Lnet/minecraft/pathfinding/PathPoint;",
+        "getStart": "Lnet/minecraft/pathfinding/WalkNodeProcessor;func_186318_b()Lnet/minecraft/pathfinding/PathPoint;",
+        "getPathNodeType(Lnet/minecraft/world/IBlockAccess;III)Lnet/minecraft/pathfinding/PathNodeType;": "Lnet/minecraft/pathfinding/WalkNodeProcessor;func_186330_a(Lnet/minecraft/world/IBlockAccess;III)Lnet/minecraft/pathfinding/PathNodeType;",
+        "Lnet/minecraft/world/IBlockAccess;getBlockState(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/state/IBlockState;": "Lnet/minecraft/world/IBlockAccess;func_180495_p(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/state/IBlockState;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinBlockMushroom": {
+        "canBlockStay": "Lnet/minecraft/block/BlockMushroom;func_180671_f(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/state/IBlockState;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/server/MixinDedicatedServer_HeightLimits": {
+        "init": "Lnet/minecraft/server/dedicated/DedicatedServer;func_71197_b()Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinEntityBoat": {
+        "checkInWater": "Lnet/minecraft/entity/item/EntityBoat;func_184446_u()Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/noncritical/common/command/MixinCommandTP": {
+        "execute": "Lnet/minecraft/command/CommandTP;func_184881_a(Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/command/ICommandSender;[Ljava/lang/String;)V",
+        "Lnet/minecraft/command/CommandTP;getEntity(Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/command/ICommandSender;Ljava/lang/String;)Lnet/minecraft/entity/Entity;": "Lnet/minecraft/command/CommandTP;func_184885_b(Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/command/ICommandSender;Ljava/lang/String;)Lnet/minecraft/entity/Entity;",
+        "Lnet/minecraft/command/CommandTP;getCommandSenderAsPlayer(Lnet/minecraft/command/ICommandSender;)Lnet/minecraft/entity/player/EntityPlayerMP;": "Lnet/minecraft/command/CommandTP;func_71521_c(Lnet/minecraft/command/ICommandSender;)Lnet/minecraft/entity/player/EntityPlayerMP;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/client/isblockloaded/MixinEntity": {
+        "getBrightnessForRender": "Lnet/minecraft/entity/Entity;func_70070_b()I"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinEntityFallingBlock_HeightLimits": {
+        "onUpdate": "Lnet/minecraft/entity/item/EntityFallingBlock;func_70071_h_()V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinEntityMinecart_KillFix": {
+        "onUpdate": "Lnet/minecraft/entity/item/EntityMinecart;func_70071_h_()V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/noncritical/client/MixinGuiOverlayDebug": {
+        "call": "Lnet/minecraft/client/gui/GuiOverlayDebug;call()Ljava/util/List;",
+        "Lnet/minecraft/world/chunk/Chunk;isEmpty()Z": "Lnet/minecraft/world/chunk/Chunk;func_76621_g()Z",
+        "Lnet/minecraft/client/multiplayer/WorldClient;isBlockLoaded(Lnet/minecraft/util/math/BlockPos;)Z": "Lnet/minecraft/client/multiplayer/WorldClient;func_175667_e(Lnet/minecraft/util/math/BlockPos;)Z",
+        "Lnet/minecraft/world/chunk/Chunk;getBiome(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/world/biome/BiomeProvider;)Lnet/minecraft/world/biome/Biome;": "Lnet/minecraft/world/chunk/Chunk;func_177411_a(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/world/biome/BiomeProvider;)Lnet/minecraft/world/biome/Biome;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/MixinWorldProvider": {
+        "getVoidFogYFactor": "Lnet/minecraft/world/WorldProvider;func_76565_k()D"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketSpawnExperienceOrb": {
+        "Lnet/minecraft/network/play/server/SPacketSpawnExperienceOrb;posZ:D": "Lnet/minecraft/network/play/server/SPacketSpawnExperienceOrb;field_148988_d:D",
+        "writePacketData": "Lnet/minecraft/network/play/server/SPacketSpawnExperienceOrb;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V",
+        "Lnet/minecraft/network/play/server/SPacketSpawnExperienceOrb;posX:D": "Lnet/minecraft/network/play/server/SPacketSpawnExperienceOrb;field_148990_b:D",
+        "Lnet/minecraft/network/play/server/SPacketSpawnExperienceOrb;posY:D": "Lnet/minecraft/network/play/server/SPacketSpawnExperienceOrb;field_148991_c:D"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/noncritical/common/MixinBlockPistonBase_HeightFix": {
+        "canPush": "Lnet/minecraft/block/BlockPistonBase;func_185646_a(Lnet/minecraft/block/state/IBlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/EnumFacing;ZLnet/minecraft/util/EnumFacing;)Z",
+        "Lnet/minecraft/util/math/BlockPos;getY()I": "Lnet/minecraft/util/math/BlockPos;func_177956_o()I"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketSpawnPlayer": {
+        "writePacketData": "Lnet/minecraft/network/play/server/SPacketSpawnPlayer;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V",
+        "Lnet/minecraft/network/play/server/SPacketSpawnPlayer;y:D": "Lnet/minecraft/network/play/server/SPacketSpawnPlayer;field_148953_d:D",
+        "Lnet/minecraft/network/play/server/SPacketSpawnPlayer;x:D": "Lnet/minecraft/network/play/server/SPacketSpawnPlayer;field_148956_c:D",
+        "Lnet/minecraft/network/play/server/SPacketSpawnPlayer;z:D": "Lnet/minecraft/network/play/server/SPacketSpawnPlayer;field_148954_e:D"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/MixinWorldGenDoublePlants": {
+        "generate": "Lnet/minecraft/world/gen/feature/WorldGenDoublePlant;func_180709_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/INetHandlerPlayClient": {
+        "world": "field_147300_g:Lnet/minecraft/client/multiplayer/WorldClient;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/MixinWorldGenTallGrass": {
+        "generate": "Lnet/minecraft/world/gen/feature/WorldGenTallGrass;func_180709_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/MixinChunkCache_HeightLimits": {
+        "getLightFor": "Lnet/minecraft/world/ChunkCache;func_175628_b(Lnet/minecraft/world/EnumSkyBlock;Lnet/minecraft/util/math/BlockPos;)I",
+        "getLightForExt": "Lnet/minecraft/world/ChunkCache;func_175629_a(Lnet/minecraft/world/EnumSkyBlock;Lnet/minecraft/util/math/BlockPos;)I",
+        "Lnet/minecraft/util/math/BlockPos;getY()I": "Lnet/minecraft/util/math/BlockPos;func_177956_o()I",
+        "Lnet/minecraft/world/ChunkCache;getBlockState(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/state/IBlockState;": "Lnet/minecraft/world/ChunkCache;func_180495_p(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/state/IBlockState;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketSoundEffect": {
+        "Lnet/minecraft/network/play/server/SPacketSoundEffect;posX:I": "Lnet/minecraft/network/play/server/SPacketSoundEffect;field_149217_b:I",
+        "writePacketData": "Lnet/minecraft/network/play/server/SPacketSoundEffect;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V",
+        "Lnet/minecraft/network/play/server/SPacketSoundEffect;posY:I": "Lnet/minecraft/network/play/server/SPacketSoundEffect;field_149218_c:I",
+        "Lnet/minecraft/network/play/server/SPacketSoundEffect;posZ:I": "Lnet/minecraft/network/play/server/SPacketSoundEffect;field_149215_d:I"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/MixinWorldGenDesertWells": {
+        "generate": "Lnet/minecraft/world/gen/feature/WorldGenDesertWells;func_180709_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/tree/MixinWorldGenHugeTrees": {
+        "isSpaceAt": "Lnet/minecraft/world/gen/feature/WorldGenHugeTrees;func_175926_c(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;I)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/noncritical/common/command/MixinCommandFill": {
+        "Lnet/minecraft/command/ICommandSender;getEntityWorld()Lnet/minecraft/world/World;": "Lnet/minecraft/command/ICommandSender;func_130014_f_()Lnet/minecraft/world/World;",
+        "execute": "Lnet/minecraft/command/CommandFill;func_184881_a(Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/command/ICommandSender;[Ljava/lang/String;)V",
+        "Lnet/minecraft/world/World;isBlockLoaded(Lnet/minecraft/util/math/BlockPos;)Z": "Lnet/minecraft/world/World;func_175667_e(Lnet/minecraft/util/math/BlockPos;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/MixinChunk_Cubes": {
+        "read": "Lnet/minecraft/world/chunk/Chunk;func_186033_a(Lnet/minecraft/network/PacketBuffer;IZ)V",
+        "generateHeightMap": "Lnet/minecraft/world/chunk/Chunk;func_76590_a()V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/IIntegratedServer": {
+        "worldSettings": "field_71350_m:Lnet/minecraft/world/WorldSettings;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinWorld": {
+        "Lnet/minecraft/world/chunk/Chunk;isPopulated()Z": "Lnet/minecraft/world/chunk/Chunk;func_150802_k()Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/INetHandlerPlayServer": {
+        "teleportId": "field_184363_z:I"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/IViewFrustum": {
+        "getRenderChunk": "func_178161_a(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/client/renderer/chunk/RenderChunk;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinWorldInfo": {
+        "updateTagCompound": "Lnet/minecraft/world/storage/WorldInfo;func_76064_a(Lnet/minecraft/nbt/NBTTagCompound;Lnet/minecraft/nbt/NBTTagCompound;)V",
+        "\u003cinit\u003e(Lnet/minecraft/world/storage/WorldInfo;)V": "Lnet/minecraft/world/storage/WorldInfo;\u003cinit\u003e(Lnet/minecraft/world/storage/WorldInfo;)V",
+        "populateFromWorldSettings": "Lnet/minecraft/world/storage/WorldInfo;func_176127_a(Lnet/minecraft/world/WorldSettings;)V",
+        "\u003cinit\u003e(Lnet/minecraft/nbt/NBTTagCompound;)V": "Lnet/minecraft/world/storage/WorldInfo;\u003cinit\u003e(Lnet/minecraft/nbt/NBTTagCompound;)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/vanillaclient/ICPacketPlayerDigging": {
+        "position": "field_179717_a:Lnet/minecraft/util/math/BlockPos;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/IPlayerChunkMapEntry": {
+        "pos": "field_187284_d:Lnet/minecraft/util/math/ChunkPos;",
+        "players": "field_187283_c:Ljava/util/List;",
+        "chunk": "field_187286_f:Lnet/minecraft/world/chunk/Chunk;",
+        "lastUpdateInhabitedTime": "field_187289_i:J",
+        "sentToPlayers": "field_187290_j:Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/MixinWorldGenBlockBlob": {
+        "generate": "Lnet/minecraft/world/gen/feature/WorldGenBlockBlob;func_180709_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketEntityLookMove": {
+        "writePacketData": "Lnet/minecraft/network/play/server/SPacketEntity$S17PacketEntityLookMove;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/vanillaclient/ICPacketPlayerTryUseItemOnBlock": {
+        "position": "field_179725_b:Lnet/minecraft/util/math/BlockPos;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/IGuiCreateWorld": {
+        "selectedIndex": "field_146331_K:I"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinBlockBeaconAsyncUpdate": {
+        "net.minecraft.block.BlockBeacon$1": "net/minecraft/block/BlockBeacon$1"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketEntityTeleport": {
+        "writePacketData": "Lnet/minecraft/network/play/server/SPacketEntityTeleport;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V",
+        "Lnet/minecraft/network/play/server/SPacketEntityTeleport;posY:D": "Lnet/minecraft/network/play/server/SPacketEntityTeleport;field_149457_c:D",
+        "Lnet/minecraft/network/play/server/SPacketEntityTeleport;posX:D": "Lnet/minecraft/network/play/server/SPacketEntityTeleport;field_149456_b:D",
+        "Lnet/minecraft/network/play/server/SPacketEntityTeleport;posZ:D": "Lnet/minecraft/network/play/server/SPacketEntityTeleport;field_149454_d:D"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketUseBed": {
+        "writePacketData": "Lnet/minecraft/network/play/server/SPacketUseBed;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V",
+        "Lnet/minecraft/network/play/server/SPacketUseBed;bedPos:Lnet/minecraft/util/math/BlockPos;": "Lnet/minecraft/network/play/server/SPacketUseBed;field_179799_b:Lnet/minecraft/util/math/BlockPos;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketBlockAction": {
+        "Lnet/minecraft/network/play/server/SPacketBlockAction;blockPosition:Lnet/minecraft/util/math/BlockPos;": "Lnet/minecraft/network/play/server/SPacketBlockAction;field_179826_a:Lnet/minecraft/util/math/BlockPos;",
+        "writePacketData": "Lnet/minecraft/network/play/server/SPacketBlockAction;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/noncritical/common/command/MixinCommandsHeightLimits": {
+        "Lnet/minecraft/world/gen/structure/StructureBoundingBox;minY:I": "Lnet/minecraft/world/gen/structure/StructureBoundingBox;field_78895_b:I",
+        "Lnet/minecraft/world/gen/structure/StructureBoundingBox;maxY:I": "Lnet/minecraft/world/gen/structure/StructureBoundingBox;field_78894_e:I",
+        "execute": "func_184881_a(Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/command/ICommandSender;[Ljava/lang/String;)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/vanillaclient/ICPacketPlayer": {
+        "x": "field_149479_a:D",
+        "y": "field_149477_b:D",
+        "z": "field_149478_c:D"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinPlayerList": {
+        "Lnet/minecraft/world/gen/ChunkProviderServer;provideChunk(II)Lnet/minecraft/world/chunk/Chunk;": "Lnet/minecraft/world/gen/ChunkProviderServer;func_186025_d(II)Lnet/minecraft/world/chunk/Chunk;",
+        "Lnet/minecraft/world/chunk/Chunk;markDirty()V": "Lnet/minecraft/world/chunk/Chunk;func_76630_e()V",
+        "recreatePlayerEntity": "Lnet/minecraft/server/management/PlayerList;func_72368_a(Lnet/minecraft/entity/player/EntityPlayerMP;IZ)Lnet/minecraft/entity/player/EntityPlayerMP;",
+        "playerLoggedOut": "Lnet/minecraft/server/management/PlayerList;func_72367_e(Lnet/minecraft/entity/player/EntityPlayerMP;)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/client/MixinChunkCache_Cubic": {
+        "getBiome": "Lnet/minecraft/world/ChunkCache;func_180494_b(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/world/biome/Biome;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinBlockFalling_HeightLimits": {
+        "Lnet/minecraft/world/World;isAirBlock(Lnet/minecraft/util/math/BlockPos;)Z": "Lnet/minecraft/world/World;func_175623_d(Lnet/minecraft/util/math/BlockPos;)Z",
+        "Lnet/minecraft/block/BlockFalling;fallInstantly:Z": "Lnet/minecraft/block/BlockFalling;field_149832_M:Z",
+        "Lnet/minecraft/block/BlockFalling;canFallThrough(Lnet/minecraft/block/state/IBlockState;)Z": "Lnet/minecraft/block/BlockFalling;func_185759_i(Lnet/minecraft/block/state/IBlockState;)Z",
+        "checkFallable": "Lnet/minecraft/block/BlockFalling;func_176503_e(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;)V",
+        "Lnet/minecraft/world/World;getBlockState(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/state/IBlockState;": "Lnet/minecraft/world/World;func_180495_p(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/state/IBlockState;",
+        "Lnet/minecraft/world/World;setBlockState(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/state/IBlockState;)Z": "Lnet/minecraft/world/World;func_175656_a(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/state/IBlockState;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinItemChorusFruit": {
+        "onItemUseFinish": "Lnet/minecraft/item/ItemChorusFruit;func_77654_b(Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;Lnet/minecraft/entity/EntityLivingBase;)Lnet/minecraft/item/ItemStack;",
+        "Lnet/minecraft/world/World;getActualHeight()I": "Lnet/minecraft/world/World;func_72940_L()I"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketExplosion": {
+        "Lnet/minecraft/network/play/server/SPacketExplosion;posY:D": "Lnet/minecraft/network/play/server/SPacketExplosion;field_149156_b:D",
+        "Lnet/minecraft/network/play/server/SPacketExplosion;posZ:D": "Lnet/minecraft/network/play/server/SPacketExplosion;field_149157_c:D",
+        "Lnet/minecraft/network/play/server/SPacketExplosion;posX:D": "Lnet/minecraft/network/play/server/SPacketExplosion;field_149158_a:D",
+        "writePacketData": "Lnet/minecraft/network/play/server/SPacketExplosion;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/MixinWorldGenLakes": {
+        "generate": "Lnet/minecraft/world/gen/feature/WorldGenLakes;func_180709_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/tree/MixinWorldGenTaiga2": {
+        "generate": "Lnet/minecraft/world/gen/feature/WorldGenTaiga2;func_180709_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketEffect": {
+        "Lnet/minecraft/network/play/server/SPacketEffect;soundPos:Lnet/minecraft/util/math/BlockPos;": "Lnet/minecraft/network/play/server/SPacketEffect;field_179747_b:Lnet/minecraft/util/math/BlockPos;",
+        "writePacketData": "Lnet/minecraft/network/play/server/SPacketEffect;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketMoveVehicle": {
+        "writePacketData": "Lnet/minecraft/network/play/server/SPacketMoveVehicle;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V",
+        "Lnet/minecraft/network/play/server/SPacketMoveVehicle;y:D": "Lnet/minecraft/network/play/server/SPacketMoveVehicle;field_186961_b:D",
+        "Lnet/minecraft/network/play/server/SPacketMoveVehicle;z:D": "Lnet/minecraft/network/play/server/SPacketMoveVehicle;field_186962_c:D",
+        "Lnet/minecraft/network/play/server/SPacketMoveVehicle;x:D": "Lnet/minecraft/network/play/server/SPacketMoveVehicle;field_186960_a:D"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinCubicEndWorkaround": {
+        "Lnet/minecraft/world/WorldServer;getTopSolidOrLiquidBlock(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/util/math/BlockPos;": "Lnet/minecraft/world/WorldServer;func_175672_r(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/util/math/BlockPos;",
+        "Lnet/minecraft/world/World;getTopSolidOrLiquidBlock(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/util/math/BlockPos;": "Lnet/minecraft/world/World;func_175672_r(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/util/math/BlockPos;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/tree/MixinWorldGenTaiga1": {
+        "generate": "Lnet/minecraft/world/gen/feature/WorldGenTaiga1;func_180709_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketBlockChange": {
+        "writePacketData": "Lnet/minecraft/network/play/server/SPacketBlockChange;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V",
+        "Lnet/minecraft/network/play/server/SPacketBlockChange;blockPosition:Lnet/minecraft/util/math/BlockPos;": "Lnet/minecraft/network/play/server/SPacketBlockChange;field_179828_a:Lnet/minecraft/util/math/BlockPos;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketSpawnMob": {
+        "writePacketData": "Lnet/minecraft/network/play/server/SPacketSpawnMob;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V",
+        "Lnet/minecraft/network/play/server/SPacketSpawnMob;x:D": "Lnet/minecraft/network/play/server/SPacketSpawnMob;field_149041_c:D",
+        "Lnet/minecraft/network/play/server/SPacketSpawnMob;z:D": "Lnet/minecraft/network/play/server/SPacketSpawnMob;field_149039_e:D",
+        "Lnet/minecraft/network/play/server/SPacketSpawnMob;y:D": "Lnet/minecraft/network/play/server/SPacketSpawnMob;field_149038_d:D"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinChunk_Cubes": {
+        "getBlockState(III)Lnet/minecraft/block/state/IBlockState;": "Lnet/minecraft/world/chunk/Chunk;func_186032_a(III)Lnet/minecraft/block/state/IBlockState;",
+        "relightBlock": "Lnet/minecraft/world/chunk/Chunk;func_76615_h(III)V",
+        "removeEntityAtIndex": "Lnet/minecraft/world/chunk/Chunk;func_76608_a(Lnet/minecraft/entity/Entity;I)V",
+        "onTick": "Lnet/minecraft/world/chunk/Chunk;func_150804_b(Z)V",
+        "getTopFilledSegment": "Lnet/minecraft/world/chunk/Chunk;func_76625_h()I",
+        "getPrecipitationHeight": "Lnet/minecraft/world/chunk/Chunk;func_177440_h(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/util/math/BlockPos;",
+        "\u003cinit\u003e(Lnet/minecraft/world/World;Lnet/minecraft/world/chunk/ChunkPrimer;II)V": "Lnet/minecraft/world/chunk/Chunk;\u003cinit\u003e(Lnet/minecraft/world/World;Lnet/minecraft/world/chunk/ChunkPrimer;II)V",
+        "getEntitiesWithinAABBForEntity": "Lnet/minecraft/world/chunk/Chunk;func_177414_a(Lnet/minecraft/entity/Entity;Lnet/minecraft/util/math/AxisAlignedBB;Ljava/util/List;Lcom/google/common/base/Predicate;)V",
+        "Lnet/minecraft/world/chunk/Chunk;entityLists:[Lnet/minecraft/util/ClassInheritanceMultiMap;": "Lnet/minecraft/world/chunk/Chunk;field_76645_j:[Lnet/minecraft/util/ClassInheritanceMultiMap;",
+        "checkLight()V": "Lnet/minecraft/world/chunk/Chunk;func_150809_p()V",
+        "enqueueRelightChecks": "Lnet/minecraft/world/chunk/Chunk;func_76594_o()V",
+        "\u003cinit\u003e(Lnet/minecraft/world/World;II)V": "Lnet/minecraft/world/chunk/Chunk;\u003cinit\u003e(Lnet/minecraft/world/World;II)V",
+        "getBlockLightOpacity(III)I": "Lnet/minecraft/world/chunk/Chunk;func_150808_b(III)I",
+        "Lnet/minecraft/world/chunk/storage/ExtendedBlockStorage;set(IIILnet/minecraft/block/state/IBlockState;)V": "Lnet/minecraft/world/chunk/storage/ExtendedBlockStorage;func_177484_a(IIILnet/minecraft/block/state/IBlockState;)V",
+        "getEntitiesOfTypeWithinAABB": "Lnet/minecraft/world/chunk/Chunk;func_177430_a(Ljava/lang/Class;Lnet/minecraft/util/math/AxisAlignedBB;Ljava/util/List;Lcom/google/common/base/Predicate;)V",
+        "setStorageArrays": "Lnet/minecraft/world/chunk/Chunk;func_76602_a([Lnet/minecraft/world/chunk/storage/ExtendedBlockStorage;)V",
+        "onUnload": "Lnet/minecraft/world/chunk/Chunk;func_76623_d()V",
+        "setLightFor": "Lnet/minecraft/world/chunk/Chunk;func_177431_a(Lnet/minecraft/world/EnumSkyBlock;Lnet/minecraft/util/math/BlockPos;I)V",
+        "propagateSkylightOcclusion": "Lnet/minecraft/world/chunk/Chunk;func_76595_e(II)V",
+        "Lnet/minecraft/util/math/MathHelper;floor(D)I": "Lnet/minecraft/util/math/MathHelper;func_76128_c(D)I",
+        "Lnet/minecraft/world/chunk/Chunk;relightBlock(III)V": "Lnet/minecraft/world/chunk/Chunk;func_76615_h(III)V",
+        "Lnet/minecraft/world/chunk/Chunk;storageArrays:[Lnet/minecraft/world/chunk/storage/ExtendedBlockStorage;": "Lnet/minecraft/world/chunk/Chunk;field_76652_q:[Lnet/minecraft/world/chunk/storage/ExtendedBlockStorage;",
+        "getLightSubtracted": "Lnet/minecraft/world/chunk/Chunk;func_177443_a(Lnet/minecraft/util/math/BlockPos;I)I",
+        "setBlockState": "Lnet/minecraft/world/chunk/Chunk;func_177436_a(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/state/IBlockState;)Lnet/minecraft/block/state/IBlockState;",
+        "getLightFor": "Lnet/minecraft/world/chunk/Chunk;func_177413_a(Lnet/minecraft/world/EnumSkyBlock;Lnet/minecraft/util/math/BlockPos;)I",
+        "addEntity": "Lnet/minecraft/world/chunk/Chunk;func_76612_a(Lnet/minecraft/entity/Entity;)V",
+        "Lnet/minecraft/world/chunk/Chunk;dirty:Z": "Lnet/minecraft/world/chunk/Chunk;field_76643_l:Z",
+        "removeTileEntity": "Lnet/minecraft/world/chunk/Chunk;func_177425_e(Lnet/minecraft/util/math/BlockPos;)V",
+        "addTileEntity(Lnet/minecraft/tileentity/TileEntity;)V": "Lnet/minecraft/world/chunk/Chunk;func_150813_a(Lnet/minecraft/tileentity/TileEntity;)V",
+        "onLoad": "Lnet/minecraft/world/chunk/Chunk;func_76631_c()V",
+        "Lnet/minecraft/world/chunk/Chunk;loaded:Z": "Lnet/minecraft/world/chunk/Chunk;field_76636_d:Z",
+        "generateSkylightMap": "Lnet/minecraft/world/chunk/Chunk;func_76603_b()V",
+        "recheckGaps": "Lnet/minecraft/world/chunk/Chunk;func_150803_c(Z)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/client/vertviewdist/MixinRenderGlobal": {
+        "setupTerrain": "Lnet/minecraft/client/renderer/RenderGlobal;func_174970_a(Lnet/minecraft/entity/Entity;DLnet/minecraft/client/renderer/culling/ICamera;IZ)V",
+        "Lnet/minecraft/client/renderer/RenderGlobal;loadRenderers()V": "Lnet/minecraft/client/renderer/RenderGlobal;func_72712_a()V",
+        "loadRenderers": "Lnet/minecraft/client/renderer/RenderGlobal;func_72712_a()V",
+        "Lnet/minecraft/client/renderer/RenderGlobal;renderDistanceChunks:I": "Lnet/minecraft/client/renderer/RenderGlobal;field_72739_F:I"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketPlayerPosLook": {
+        "writePacketData": "Lnet/minecraft/network/play/server/SPacketPlayerPosLook;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V",
+        "Lnet/minecraft/network/play/server/SPacketPlayerPosLook;z:D": "Lnet/minecraft/network/play/server/SPacketPlayerPosLook;field_148939_c:D",
+        "Lnet/minecraft/network/play/server/SPacketPlayerPosLook;y:D": "Lnet/minecraft/network/play/server/SPacketPlayerPosLook;field_148938_b:D",
+        "Lnet/minecraft/network/play/server/SPacketPlayerPosLook;x:D": "Lnet/minecraft/network/play/server/SPacketPlayerPosLook;field_148940_a:D"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/vanillaclient/ICPacketTabComplete": {
+        "targetBlock": "field_179710_b:Lnet/minecraft/util/math/BlockPos;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinWorld_HeightLimits": {
+        "getLightFor": "Lnet/minecraft/world/World;func_175642_b(Lnet/minecraft/world/EnumSkyBlock;Lnet/minecraft/util/math/BlockPos;)I",
+        "isAreaLoaded(IIIIIIZ)Z": "Lnet/minecraft/world/World;func_175663_a(IIIIIIZ)Z",
+        "updateEntities": "Lnet/minecraft/world/World;func_72939_s()V",
+        "Lnet/minecraft/world/World;isChunkLoaded(IIZ)Z": "Lnet/minecraft/world/World;func_175680_a(IIZ)Z",
+        "spawnEntity": "Lnet/minecraft/world/World;func_72838_d(Lnet/minecraft/entity/Entity;)Z",
+        "isBlockLoaded(Lnet/minecraft/util/math/BlockPos;Z)Z": "Lnet/minecraft/world/World;func_175668_a(Lnet/minecraft/util/math/BlockPos;Z)Z",
+        "getLight(Lnet/minecraft/util/math/BlockPos;Z)I": "Lnet/minecraft/world/World;func_175721_c(Lnet/minecraft/util/math/BlockPos;Z)I",
+        "Lnet/minecraft/util/math/BlockPos;getY()I": "Lnet/minecraft/util/math/BlockPos;func_177956_o()I",
+        "Lnet/minecraft/world/World;getChunk(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/world/chunk/Chunk;": "Lnet/minecraft/world/World;func_175726_f(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/world/chunk/Chunk;",
+        "getBiome": "Lnet/minecraft/world/World;func_180494_b(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/world/biome/Biome;",
+        "updateEntityWithOptionalForce": "Lnet/minecraft/world/World;func_72866_a(Lnet/minecraft/entity/Entity;Z)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinWorldEntitySpawner": {
+        "findChunksForSpawning": "Lnet/minecraft/world/WorldEntitySpawner;func_77192_a(Lnet/minecraft/world/WorldServer;ZZZ)I"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinEntityTracker": {
+        "track(Lnet/minecraft/entity/Entity;IIZ)V": "Lnet/minecraft/entity/EntityTracker;func_72785_a(Lnet/minecraft/entity/Entity;IIZ)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/common/MixinPathNavigate": {
+        "getPathToPos": "Lnet/minecraft/pathfinding/PathNavigate;func_179680_a(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/pathfinding/Path;",
+        "pathFollow": "Lnet/minecraft/pathfinding/PathNavigate;func_75508_h()V",
+        "getPathToEntityLiving": "Lnet/minecraft/pathfinding/PathNavigate;func_75494_a(Lnet/minecraft/entity/Entity;)Lnet/minecraft/pathfinding/Path;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/MixinWorldGenIcePath": {
+        "generate": "Lnet/minecraft/world/gen/feature/WorldGenIcePath;func_180709_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/selectable/common/MixinWorld_CollisionCheck": {
+        "getCollisionBoxes(Lnet/minecraft/entity/Entity;Lnet/minecraft/util/math/AxisAlignedBB;ZLjava/util/List;)Z": "Lnet/minecraft/world/World;func_191504_a(Lnet/minecraft/entity/Entity;Lnet/minecraft/util/math/AxisAlignedBB;ZLjava/util/List;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/MixinWorldGenIceSpike": {
+        "generate": "Lnet/minecraft/world/gen/feature/WorldGenIceSpike;func_180709_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/noncritical/common/command/MixinCommandTeleport": {
+        "execute": "Lnet/minecraft/command/server/CommandTeleport;func_184881_a(Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/command/ICommandSender;[Ljava/lang/String;)V",
+        "Lnet/minecraft/command/server/CommandTeleport;getEntity(Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/command/ICommandSender;Ljava/lang/String;)Lnet/minecraft/entity/Entity;": "Lnet/minecraft/command/server/CommandTeleport;func_184885_b(Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/command/ICommandSender;Ljava/lang/String;)Lnet/minecraft/entity/Entity;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/MixinStructureStart": {
+        "writeStructureComponentsToNBT": "Lnet/minecraft/world/gen/structure/StructureStart;func_143021_a(II)Lnet/minecraft/nbt/NBTTagCompound;",
+        "readStructureComponentsFromNBT": "Lnet/minecraft/world/gen/structure/StructureStart;func_143020_a(Lnet/minecraft/world/World;Lnet/minecraft/nbt/NBTTagCompound;)V",
+        "Lnet/minecraft/nbt/NBTTagCompound;setInteger(Ljava/lang/String;I)V": "Lnet/minecraft/nbt/NBTTagCompound;func_74768_a(Ljava/lang/String;I)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/MixinBlockLilyPad_HeightLimits": {
+        "canBlockStay": "Lnet/minecraft/block/BlockLilyPad;func_180671_f(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/state/IBlockState;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/common/vanillaclient/ISPacketMultiBlockChange": {
+        "chunkPos": "field_148925_b:Lnet/minecraft/util/math/ChunkPos;",
+        "changedBlocks": "field_179845_b:[Lnet/minecraft/network/play/server/SPacketMultiBlockChange$BlockUpdateData;"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/worldgen/MixinWorldGenDungeons": {
+        "generate": "Lnet/minecraft/world/gen/feature/WorldGenDungeons;func_180709_b(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;)Z"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/core/client/MixinDebugRenderChunkBorder": {
+        "render": "Lnet/minecraft/client/renderer/debug/DebugRendererChunkBorder;func_190060_a(FJ)V"
+      },
+      "io/github/opencubicchunks/cubicchunks/core/asm/mixin/fixes/common/vanillaclient/MixinSPacketSpawnObject": {
+        "Lnet/minecraft/network/play/server/SPacketSpawnObject;z:D": "Lnet/minecraft/network/play/server/SPacketSpawnObject;field_149014_d:D",
+        "Lnet/minecraft/network/play/server/SPacketSpawnObject;x:D": "Lnet/minecraft/network/play/server/SPacketSpawnObject;field_149016_b:D",
+        "writePacketData": "Lnet/minecraft/network/play/server/SPacketSpawnObject;func_148840_b(Lnet/minecraft/network/PacketBuffer;)V",
+        "Lnet/minecraft/network/play/server/SPacketSpawnObject;y:D": "Lnet/minecraft/network/play/server/SPacketSpawnObject;field_149017_c:D"
+      }
+    }
+  }
+}

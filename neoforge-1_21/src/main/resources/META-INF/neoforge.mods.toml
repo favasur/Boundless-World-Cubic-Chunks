@@ -1,0 +1,22 @@
+modLoader = "javafml"
+loaderVersion = "[2,)"
+license = "MIT"
+
+[[mods]]
+modId = "cubicchunks"
+version = "${version}"
+displayName = "CubicChunks"
+description = "Infinite vertical world height for Minecraft."
+authors = "OpenCubicChunks"
+
+[[mixins]]
+config = "cubicchunks.mixins.json"
+
+[[mixins]]
+config = "cubicchunks.client.mixins.json"
+
+[[mixins]]
+config = "cubicchunks.fixes.worldgen.mixins.json"
+
+[[mixins]]
+config = "cubicchunks.immersiveportals.mixins.json"

@@ -1,0 +1,4 @@
+1.12.2 Class,1.12.2 Method,1.21.x Class,1.21.x Method,Status,Original Signature,Notes
+io.github.opencubicchunks.cubicchunks.api.util.Coords,,io.github.opencubicchunks.cubicchunks.api.util.Coords,,Not Started,class Coords,Pure utility; low risk
+io.github.opencubicchunks.cubicchunks.api.util.CubePos,,io.github.opencubicchunks.cubicchunks.api.util.CubePos,,Done,class CubePos,Ported to skeleton
+io.github.opencubicchunks.cubicchunks.core.world.cube.Cube,trackSurface,TODO,TODO,Not Started,void trackSurface(),Requires LevelChunkSection

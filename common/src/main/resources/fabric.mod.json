@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "cubicchunks_common",
+  "version": "0.1.0",
+  "name": "OpenCubicChunks (Common Library)",
+  "description": "Common library for OpenCubicChunks. Fabric-loom requires a fabric.mod.json so this submodule pulls Minecraft and the Mixin runtime onto its compile classpath; the loader-specific mods (fabric-1_21, neoforge-1_21, fabric-26, neoforge-26) are the actual mod entry points.",
+  "authors": [
+    "OpenCubicChunks"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/cubicchunks/icon.png",
+  "environment": "*",
+  "entrypoints": {},
+  "depends": {
+    "minecraft": ">=1.21.1",
+    "java": ">=21",
+    "fabricloader": ">=0.16.0"
+  }
+}

@@ -1,0 +1,26 @@
+modLoader = "javafml"
+loaderVersion = "[26,)" # TODO: adjust to actual NeoForge 26.x loader version range when released
+license = "MIT"
+
+[[mods]]
+modId = "cubicchunks"
+version = "${file.jarVersion}"
+displayName = "CubicChunks"
+authors = "OpenCubicChunks"
+description = "Infinite vertical world height for Minecraft. NeoForge 26.x forward-compatible module."
+
+[[dependencies.cubicchunks]]
+modId = "neoforge"
+mandatory = true
+# TODO: update to actual NeoForge 26.x version range when available
+versionRange = "[21.1.0,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.cubicchunks]]
+modId = "minecraft"
+mandatory = true
+# TODO: update to actual Minecraft 1.26.x version range when available
+versionRange = "[1.21.1,1.22)"
+ordering = "NONE"
+side = "BOTH"

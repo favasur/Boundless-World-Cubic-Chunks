@@ -1,0 +1,12 @@
+#################################
+###        general gui        ###
+#################################
+
+cubicchunks.gui.worldmenu.cc_disable=CubicChunks: No
+cubicchunks.gui.worldmenu.cc_default=CubicChunks: Default
+
+#################################
+###          options          ###
+#################################
+
+cubicchunks.gui.vertical_cube_load_distance=Vertical Distance: %d cubes

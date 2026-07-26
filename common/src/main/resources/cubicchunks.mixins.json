@@ -1,0 +1,24 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "io.github.opencubicchunks.cubicchunks.core.asm.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "common.MixinLevel",
+    "common.MixinLevelChunk",
+    "common.MixinServerLevel",
+    "common.MixinServerChunkCache",
+    "common.MixinBlockBeaconAsyncUpdate",
+    "common.MixinEntityFallingBlockHeightLimits",
+    "common.MixinBlockFallingHeightLimits",
+    "common.MixinWalkNodeProcessorHeightLimit",
+    "common.MixinPathNavigateGround",
+    "common.MixinEntityLivingBase",
+    "common.MixinEntityBatAiHeightLimit",
+    "common.MixinLevelIMinMaxHeight",
+    "common.MixinServerPlayer_StackedPortals"
+  ],
+  "accessors": [
+    "common.PathNavigationAccessor"
+  ]
+}
