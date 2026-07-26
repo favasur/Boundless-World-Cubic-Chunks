@@ -42,11 +42,12 @@ nul
 # CubicChunks-1.12.2-*-all.jar
 # [CC]CubicChunksCompatibilityHelper-*.jar
 
-# Immersive Portals jars — they aren't project source. The IP source under
-# `ip_source/` is what downstream consumers build against; the ~5 MB of
-# released jars across both upstream naming families (hyphen + underscore)
-# are pulled from Modrinth / the IP releases page. One broad glob covers
-# future MC versions and loader-suffix variants too; anchored to `.jar`,
-# so it cannot collide with the `.java` files under `ip_source/` or any
-# of the `.json` mixin configs.
+# Immersive Portals jars — they aren't project source. `ip_source/` is
+# shipped alongside as a reference copy of Qouteall's MIT source tree; the
+# CubicChunks build does NOT compile or link against it (IP integration
+# is via `cubicchunks.immersiveportals.mixins.json` at runtime). The ~5 MB
+# of released jars across both upstream naming families (hyphen + underscore)
+# are pulled from Modrinth / the IP releases page. Anchored to `.jar`, so
+# the pattern cannot collide with the `.java` files under `ip_source/` or
+# any of the `.json` mixin configs.
 **/immersive[-_]portals*.jar
