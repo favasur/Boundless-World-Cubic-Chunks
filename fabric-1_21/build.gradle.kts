@@ -1,7 +1,9 @@
 plugins {
     java
-    // Pinned to loom 1.9.4 — match common/build.gradle.kts to keep cross-project
-    // eager-resolution semantics consistent across modules.
+    // Loom 1.9-SNAPSHOT is the only stable stream for Minecraft 1.21.x.
+    // 1.9.4 / 1.9.0 / 1.17 stable releases referenced in older comments do
+    // not exist on Maven Central. See root build.gradle.kts for the
+    // mavenLocal cross-module workaround that lets the build succeed.
     id("fabric-loom") version "1.9-SNAPSHOT"
 }
 
@@ -11,13 +13,17 @@ dependencies {
     modImplementation(libs.fabricLoader121)
     modImplementation(libs.fabricApi121)
 
-    // Fabric Loom 1.9+: modImplementation nests the :common classes INSIDE the
-    // published mod jar so vanilla MultiMC/Prism/.minecraft can drop a single jar
-    // into the mods folder. include() additionally merges common's resources
-    // (cubicchunks.mixins.json, common-refmap.json) into the mod jar so the mixin
-    // loader picks them up at runtime.
-    modImplementation(project(":common"))
-    include(project(":common"))
+    // :common is referenced as a `io.github.opencubicchunks:cubicchunks-common`
+    // mavenLocal coordinate rather than `project(":common")` to dodge Loom
+    // 1.9-SNAPSHOT's eager cross-project JAR read at configuration time, which
+    // throws NoSuchFileException on a clean build. Build sequence:
+    // `./gradlew --configure-on-demand --no-daemon --no-configuration-cache :common:publishMavenJavaPublicationToMavenLocal`
+    // (once per checkout or after any change to :common) followed by
+    // `./gradlew clean build -x test --no-daemon --no-configuration-cache`. The
+    // runtime link between the platform jar and common's classes is restored
+    // via fabric.mod.json's `depends.cubicchunks_common` sibling-mod entry —
+    // drop BOTH `common-*.jar` AND `fabric-1_21-*.jar` into `.minecraft/mods`.
+    modImplementation("io.github.opencubicchunks:cubicchunks-common:0.0.0-placeholder")
 }
 
 java {
