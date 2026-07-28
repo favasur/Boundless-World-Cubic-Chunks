@@ -32,8 +32,10 @@ public class PlayerCubeMap {
     private int newCubeRequestsThisTick = 0;
 
     /** Maximum new cube load requests to start per tick, spread across all players.
-     *  Prevents disk thrash when many cubes enter view distance at once (spawn, portal). */
-    private static final int MAX_NEW_CUBES_PER_TICK = 64;
+     *  Prevents disk thrash when many cubes enter view distance at once (spawn, portal).
+     *  Kept low (8) because each cube triggers population + lighting on the main thread
+     *  via finishCubeOnMainThread, which can easily overwhelm the tick budget. */
+    private static final int MAX_NEW_CUBES_PER_TICK = 8;
 
     public PlayerCubeMap(ServerLevel level, CubeProviderServer provider) {
         this.level = level;

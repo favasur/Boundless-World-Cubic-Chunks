@@ -295,11 +295,17 @@ public class CubeProviderServer implements ICubeProviderServer, ICubeProviderInt
             stacked.checkPlayerProximity();
         }
 
+        // Save at most 32 dirty cubes per tick to prevent disk I/O spikes.
+        // The save loop iterates ALL loaded cubes every tick — with 2000+
+        // cubes loaded, saving every dirty one at once saturates the disk.
+        int saved = 0;
+        int maxSavesPerTick = 32;
         Iterator<Cube> it = this.cubesIterator();
-        while (it.hasNext()) {
+        while (it.hasNext() && saved < maxSavesPerTick) {
             Cube cube = it.next();
             if (cube.needsSaving() && this.cubeIO != null) {
                 this.cubeIO.saveCube(cube);
+                saved++;
             }
         }
     }
