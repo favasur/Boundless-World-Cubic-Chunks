@@ -24,11 +24,9 @@ config = "cubicchunks.immersiveportals.mixins.json"
 [[mixins]]
 config = "cubicchunks.mixins.optifine.json"
 
-# Declare `cubicchunks_common` (the embedded :common modId) as a REQUIRED
-# dependency. The actual JAR-in-JAR embedding is handled by
-# META-INF/jarjar/metadata.json at the modlauncher level — the toml block
-# only expresses the logical dependency, so `type` must be a valid
-# DependencyType enum value (REQUIRED/OPTIONAL/WEAK/DISCOURAGED), NOT the
-# legacy ForgeGradle "jarJar" literal that NeoForge's SPI rejects.
-[[dependencies.cubicchunks]]
-    modId = "cubicchunks_common"
+# The :common module is embedded via JAR-in-JAR (META-INF/jarjar/metadata.json).
+# JIJ is a classpath mechanism — the modlauncher extracts the jar and adds
+# its classes to the classpath at launch. No toml dependency declaration is
+# needed because cubicchunks_common is not a standalone mod with a
+# META-INF/neoforge.mods.toml that FML can discover; declaring it as a
+# dependency would cause FML to look for a mod file that doesn't exist.
