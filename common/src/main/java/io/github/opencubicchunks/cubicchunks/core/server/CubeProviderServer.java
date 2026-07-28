@@ -26,6 +26,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Iterator;
 import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.Map;
@@ -67,6 +68,8 @@ public class CubeProviderServer implements ICubeProviderServer, ICubeProviderInt
     private final EmptyColumn emptyColumn;
     @Nonnull
     private final Map<CubePos, CompletableFuture<Cube>> pendingTasks = new ConcurrentHashMap<>();
+    @Nonnull
+    private final Set<CubePos> knownEmpty = ConcurrentHashMap.newKeySet();
     @Nonnull
     private final Executor mainThreadExecutor;
     @Nonnull
@@ -119,6 +122,12 @@ public class CubeProviderServer implements ICubeProviderServer, ICubeProviderInt
         Cube loaded = this.getLoadedCube(cubeX, cubeY, cubeZ);
         if (loaded != null && meetsRequirement(loaded, req)) {
             return loaded;
+        }
+        // Known-empty positions: skip regeneration. Without this, getBlockState
+        // → getCube(GENERATE) regenerates the same empty cube every tick,
+        // saturating the server and causing spectator-like block pass-through.
+        if (knownEmpty.contains(CubePos.of(cubeX, cubeY, cubeZ))) {
+            return null;
         }
         // Avoid deadlock on the server thread: run synchronously if we are on the main thread.
         if (this.level.getServer().isSameThread()) {
@@ -198,8 +207,10 @@ public class CubeProviderServer implements ICubeProviderServer, ICubeProviderInt
         CubePrimer primer = new CubePrimer();
         Optional<CubePrimer> result = this.cubeGen.tryGenerateCube(cubeX, cubeY, cubeZ, primer, true);
         if (result.isEmpty() || result.get().isEmpty()) {
-            // Empty space: don't allocate a Cube object. The cube will be created on demand
-            // when the player places a non-air block here.
+            // Mark as known-empty so getCube() skips regeneration next time.
+            // Without this, getBlockState → getCube(GENERATE) regenerates the
+            // same empty cube every tick, saturating the server.
+            knownEmpty.add(CubePos.of(cubeX, cubeY, cubeZ));
             return null;
         }
         Cube cube = new Cube(levelChunk, cubeY, result.get());
