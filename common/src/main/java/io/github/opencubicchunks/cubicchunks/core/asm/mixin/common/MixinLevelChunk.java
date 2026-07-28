@@ -124,12 +124,23 @@ public abstract class MixinLevelChunk implements IColumn, IColumnInternal {
         if (!this.cc$isCubicColumn) {
             return;
         }
+        // Guard against out-of-bounds section lookups. Vanilla ChunkAccess.getSection
+        // may not bounds-check in all code paths, and the cubic repositionCamera can
+        // place render chunks at the edge of the vanilla section array (e.g. y=-64).
+        // The renderer's neighbor access (section -5 for a chunk at section -4)
+        // would crash with ArrayIndexOutOfBoundsException without this guard.
+        Level level = ((LevelChunk) (Object) this).getLevel();
+        int minSection = level.getMinSection();
+        int maxSection = minSection + ((LevelChunk) (Object) this).getSections().length;
+        if (sectionIndex < minSection || sectionIndex >= maxSection) {
+            cir.setReturnValue(null);
+            return;
+        }
         Integer bandOffset = ChunkBandOffset.get();
         int blockY;
         if (bandOffset != null) {
             blockY = sectionIndex * 16 + bandOffset;
         } else {
-            Level level = ((LevelChunk) (Object) this).getLevel();
             blockY = sectionIndex * 16 + level.getMinBuildHeight();
         }
         int cubeY = Coords.blockToCube(blockY);
