@@ -1,7 +1,12 @@
 package io.github.opencubicchunks.cubicchunks.core.asm.mixin.common;
 
+import io.github.opencubicchunks.cubicchunks.api.world.ICubeProvider;
+import io.github.opencubicchunks.cubicchunks.api.worldgen.stack.StackedDimensions;
 import io.github.opencubicchunks.cubicchunks.core.CubicChunks;
 import io.github.opencubicchunks.cubicchunks.core.CubicChunksConfig;
+import io.github.opencubicchunks.cubicchunks.core.server.CubeProviderServer;
+import io.github.opencubicchunks.cubicchunks.core.world.ICubicWorldInternal;
+import io.github.opencubicchunks.cubicchunks.core.worldgen.stack.StackedCubeGenerator;
 import io.github.opencubicchunks.cubicchunks.core.worldgen.stack.StackedDimensionTeleporter;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -68,6 +73,10 @@ public abstract class MixinServerPlayer_StackedPortals {
             return;
         }
 
+        // Activate the stacked band BEFORE teleporting so cubes generate
+        // immediately around the player's destination (avoids one-tick air gap).
+        activateStackedBand(currentLevel, targetDim);
+
         // Cancel the vanilla dimension change. Instead, teleport the player
         // vertically within the same overworld ServerLevel to the stacked band.
         CubicChunks.LOGGER.info(
@@ -75,5 +84,22 @@ public abstract class MixinServerPlayer_StackedPortals {
                 self.getName().getString(), targetY, currentDim);
         self.teleportTo(currentLevel, self.getX(), targetY.doubleValue(), self.getZ(), self.getYRot(), self.getXRot());
         cir.setReturnValue(self);
+    }
+
+    /**
+     * Triggers lazy band activation: once a player uses a portal to enter a stacked
+     * sub-dim, that band's cubes start generating. Without this call the player would
+     * be teleported into empty air because the band never generates.
+     */
+    private static void activateStackedBand(ServerLevel level, ResourceLocation targetDim) {
+        ICubeProvider provider = ((ICubicWorldInternal) level).getCubeCache();
+        if (provider instanceof CubeProviderServer cps
+                && cps.getCubeGenerator() instanceof StackedCubeGenerator stacked) {
+            if ("the_nether".equals(targetDim.getPath())) {
+                stacked.activateBand(StackedDimensions.NETHER_ID);
+            } else if ("the_end".equals(targetDim.getPath())) {
+                stacked.activateBand(StackedDimensions.END_ID);
+            }
+        }
     }
 }

@@ -7,6 +7,7 @@ import io.github.opencubicchunks.cubicchunks.api.world.ICubeProviderServer;
 import io.github.opencubicchunks.cubicchunks.api.worldgen.CubePrimer;
 import io.github.opencubicchunks.cubicchunks.api.worldgen.ICubeGenerator;
 import io.github.opencubicchunks.cubicchunks.core.CubicChunks;
+import io.github.opencubicchunks.cubicchunks.core.CubicChunksConfig;
 import io.github.opencubicchunks.cubicchunks.core.lighting.FirstLightProcessor;
 import io.github.opencubicchunks.cubicchunks.core.lighting.LightingManager;
 import io.github.opencubicchunks.cubicchunks.core.server.chunkio.ICubeIO;
@@ -14,6 +15,7 @@ import io.github.opencubicchunks.cubicchunks.core.world.ICubeProviderInternal;
 import io.github.opencubicchunks.cubicchunks.core.world.cube.BlankCube;
 import io.github.opencubicchunks.cubicchunks.core.world.cube.Cube;
 import io.github.opencubicchunks.cubicchunks.core.world.column.CubeMap;
+import io.github.opencubicchunks.cubicchunks.core.worldgen.stack.StackedCubeGenerator;
 import net.minecraft.Util;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -285,6 +287,14 @@ public class CubeProviderServer implements ICubeProviderServer, ICubeProviderInt
         this.playerCubeMap.setViewDistance(viewDistance);
 
         this.playerCubeMap.tick();
+
+        // Lazy band activation: check if any player is approaching a stacked
+        // sub-dim's Y band. Once activated, the band generates cubes normally.
+        if (CubicChunksConfig.stackingDimensionsEnabled
+                && this.cubeGen instanceof StackedCubeGenerator stacked) {
+            stacked.checkPlayerProximity();
+        }
+
         Iterator<Cube> it = this.cubesIterator();
         while (it.hasNext()) {
             Cube cube = it.next();

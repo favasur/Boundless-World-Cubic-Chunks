@@ -15,6 +15,7 @@ import io.github.opencubicchunks.cubicchunks.core.server.DefaultCubeGenerator;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.block.Blocks;
@@ -23,10 +24,13 @@ import net.minecraft.world.level.chunk.ChunkAccess;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * ICubeGenerator that wraps a per-dimension {@link DefaultCubeGenerator} (used for the
@@ -50,10 +54,20 @@ import java.util.Random;
 // wrap-then-fill ICubeGenerator that owns one DefaultCubeGenerator per stacked band.
 public class StackedCubeGenerator implements ICubeGenerator {
 
+    private static final int PROXIMITY_THRESHOLD_BLOCKS = 512;
+
     private final ServerLevel level;
     private final ResourceLocation dimName;
     private final DefaultCubeGenerator overworldGen;
     private final Map<ResourceLocation, BandCubeGenerator> bandGens = new HashMap<>();
+
+    /**
+     * Tracks which stacked bands have been activated (by portal use or player
+     * proximity). A band stays active for the remainder of the session once
+     * activated. Non-active bands behave as empty air — no cubes are generated
+     * or saved to disk until the band is activated.
+     */
+    private final Set<ResourceLocation> activeBands = ConcurrentHashMap.newKeySet();
 
     public StackedCubeGenerator(ServerLevel level) {
         this.level = level;
@@ -100,6 +114,11 @@ public class StackedCubeGenerator implements ICubeGenerator {
         Optional<StackedDimension> matched = resolveStackedSubDim(cubeY);
         if (matched.isPresent() && !isInVanillaColumn(cubeY)) {
             StackedDimension dim = matched.get();
+            // Lazy band activation: only generate cubes in this band if a player
+            // has entered its portal or approached its Y level in the overworld.
+            if (!activeBands.contains(dim.id()) && !dim.id().equals(StackedDimensions.OVERWORLD_ID)) {
+                return primer; // treat as empty air until activated
+            }
             BandCubeGenerator band = this.bandGens.get(dim.id());
             if (band != null) {
                 return band.generateCube(cubeX, cubeY, cubeZ, primer);
@@ -247,6 +266,49 @@ public class StackedCubeGenerator implements ICubeGenerator {
                 return new EndBandStrategy(level, dim);
             }
             return new BandedCubeFillStrategy(level, dim);
+        }
+    }
+
+    /**
+     * Activates a stacked band so it starts generating cubes. Called from the
+     * portal mixin when a player enters a Nether/End portal, or from
+     * {@link #checkPlayerProximity()} when a player flies close to a band's Y level.
+     * Once activated, a band stays active for the remainder of the server session.
+     */
+    public void activateBand(ResourceLocation bandId) {
+        if (activeBands.add(bandId)) {
+            CubicChunks.LOGGER.info("Stacked band {} activated (lazy generation triggered)", bandId);
+        }
+    }
+
+    /**
+     * Returns true if the given stacked band has been activated for cube generation.
+     */
+    public boolean isBandActive(ResourceLocation bandId) {
+        return activeBands.contains(bandId);
+    }
+
+    /**
+     * Scans all online players and activates any stacked band whose Y range is
+     * within {@link #PROXIMITY_THRESHOLD_BLOCKS} blocks of a player. Called once
+     * per tick from {@link io.github.opencubicchunks.cubicchunks.core.server.CubeProviderServer#tick}.
+     */
+    public void checkPlayerProximity() {
+        for (ServerPlayer player : level.players()) {
+            double playerY = player.getY();
+            for (StackedDimension dim : StackedDimensionRegistry.all()) {
+                if (dim.id().equals(StackedDimensions.OVERWORLD_ID)) continue;
+                if (activeBands.contains(dim.id())) continue; // already active
+
+                // Compute the shortest vertical distance from the player to the band.
+                int distAbove = dim.minBlockY() - (int) playerY;
+                int distBelow = (int) playerY - dim.maxBlockY();
+                int dist = Math.max(distAbove, distBelow);
+
+                if (dist <= PROXIMITY_THRESHOLD_BLOCKS) {
+                    activateBand(dim.id());
+                }
+            }
         }
     }
 

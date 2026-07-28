@@ -41,11 +41,13 @@ public final class CubicChunksConfig {
      */
     /**
      * Stacked dimensions place Nether and End as Y-bands within the overworld
-     * instead of separate dimensions. OFF by default because it causes massive
-     * disk I/O during world creation (generating 3 full dimension bands of cubes
-     * simultaneously). Enable via config after world is created.
+     * instead of separate dimensions. ON by default with lazy band activation:
+     * Nether and End bands only generate cubes when a player enters a portal
+     * or flies within 512 blocks of their Y range. This eliminates the disk
+     * thrash previously caused by eager generation of all 3 bands at world
+     * creation time.
      */
-    public static boolean stackingDimensionsEnabled = false;
+    public static boolean stackingDimensionsEnabled = true;
 
     /**
      * Lighting dispatch mode for {@code LightingManager.onTick()}. Default
