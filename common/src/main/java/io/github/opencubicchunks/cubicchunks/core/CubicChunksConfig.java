@@ -39,7 +39,13 @@ public final class CubicChunksConfig {
      * Nether at [{@code -160, -16}] and End at [{@code 400, 720}]. Vanilla 'Nether'
      * and 'End' ServerLevels are absorbed into the overworld's save file.
      */
-    public static boolean stackingDimensionsEnabled = true;
+    /**
+     * Stacked dimensions place Nether and End as Y-bands within the overworld
+     * instead of separate dimensions. OFF by default because it causes massive
+     * disk I/O during world creation (generating 3 full dimension bands of cubes
+     * simultaneously). Enable via config after world is created.
+     */
+    public static boolean stackingDimensionsEnabled = false;
 
     /**
      * Lighting dispatch mode for {@code LightingManager.onTick()}. Default
