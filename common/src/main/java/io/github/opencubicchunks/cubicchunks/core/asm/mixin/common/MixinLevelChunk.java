@@ -255,6 +255,32 @@ public abstract class MixinLevelChunk implements IColumn, IColumnInternal {
 
     private void ensureCubic() {
         if (!this.cc$isCubicColumn) {
+            // The column may have been created during world construction before
+            // MixinServerLevel.cc$init fires (which sets isCubicWorld=true). If
+            // the level is now cubic, lazily init the column so we don't crash
+            // during spawn-position resolution or early cube loading.
+            Level level = ((LevelChunk) (Object) this).getLevel();
+            if (level instanceof io.github.opencubicchunks.cubicchunks.api.world.ICubicWorld ic && ic.isCubicWorld()) {
+                if (this.cc$cubeMap == null) {
+                    this.cc$cubeMap = new CubeMap();
+                }
+                if (this.cc$opacityIndex == null) {
+                    int[] heightMap = new int[256];
+                    Arrays.fill(heightMap, -2147483616);
+                    if (level.isClientSide()) {
+                        this.cc$opacityIndex = new ClientHeightMap((ChunkAccess) (Object) this, heightMap);
+                    } else {
+                        this.cc$opacityIndex = new ServerHeightMap(heightMap);
+                    }
+                }
+                if (this.cc$stagingHeightMap == null) {
+                    this.cc$stagingHeightMap = new StagingHeightMap();
+                }
+                // Set the flag LAST so any other thread that sees "cubic" already
+                // has fully-initialized fields (prevents NPE on concurrent access).
+                this.cc$isCubicColumn = true;
+                return;
+            }
             throw new IllegalStateException("This column is not a cubic column");
         }
     }
