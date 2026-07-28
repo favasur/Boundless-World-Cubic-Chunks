@@ -4,6 +4,5 @@
   "package": "io.github.opencubicchunks.cubicchunks.core.asm.mixin.fixes.worldgen",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "MixinWorldGenDoublePlants"
   ]
 }

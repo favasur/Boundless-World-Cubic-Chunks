@@ -4,7 +4,6 @@
   "package": "io.github.opencubicchunks.cubicchunks.compat.immersiveportals",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "MixinDimStackInfo"
   ],
   "injectors": {
     "defaultRequire": 1

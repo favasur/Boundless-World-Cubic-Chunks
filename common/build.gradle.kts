@@ -51,3 +51,12 @@ java {
     sourceCompatibility = JavaVersion.VERSION_21
     targetCompatibility = JavaVersion.VERSION_21
 }
+
+// Fabric Loom generates a module-info.class that creates a named Java module
+// (e.g. "io.github.opencubicchunks.common.dev"). When NeoForge loads this jar
+// via JIJ, the module system blocks access to Minecraft classes because the
+// module doesn't declare "requires minecraft;". Stripping module-info.class
+// makes the jar an automatic module, which can read all other modules.
+tasks.withType<Jar> {
+    exclude("module-info.class")
+}
