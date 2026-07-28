@@ -54,7 +54,13 @@ import java.util.concurrent.ConcurrentHashMap;
 // wrap-then-fill ICubeGenerator that owns one DefaultCubeGenerator per stacked band.
 public class StackedCubeGenerator implements ICubeGenerator {
 
-    private static final int PROXIMITY_THRESHOLD_BLOCKS = 512;
+    /**
+     * Player must be within 64 blocks (4 cubes) of a band's edge before it
+     * activates. At default spawn Y=64, the Nether band top (Y=-65) is 129
+     * blocks away — well outside this threshold. The player needs to dig below
+     * Y=-1 before the Nether band starts generating.
+     */
+    private static final int PROXIMITY_THRESHOLD_BLOCKS = 64;
 
     private final ServerLevel level;
     private final ResourceLocation dimName;
