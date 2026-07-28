@@ -29,6 +29,11 @@ public class PlayerCubeMap {
     private final Map<CubePos, Set<UUID>> cubeToPlayers = new ConcurrentHashMap<>();
     private final Map<UUID, PlayerTicket> playerTickets = new ConcurrentHashMap<>();
     private int viewDistance = 8;
+    private int newCubeRequestsThisTick = 0;
+
+    /** Maximum new cube load requests to start per tick, spread across all players.
+     *  Prevents disk thrash when many cubes enter view distance at once (spawn, portal). */
+    private static final int MAX_NEW_CUBES_PER_TICK = 64;
 
     public PlayerCubeMap(ServerLevel level, CubeProviderServer provider) {
         this.level = level;
@@ -44,6 +49,7 @@ public class PlayerCubeMap {
     }
 
     public void tick() {
+        this.newCubeRequestsThisTick = 0;
         Set<UUID> online = new HashSet<>();
         for (ServerPlayer player : this.level.players()) {
             online.add(player.getUUID());
@@ -77,17 +83,35 @@ public class PlayerCubeMap {
         }
 
         // Load and send cubes that entered the view distance.
+        // Rate-limited: prevents disk thrash by spreading generation over multiple ticks.
+        // Already-loaded cubes (e.g. second player joining an existing area) pass freely.
         for (CubePos pos : desired) {
-            if (!current.contains(pos) && pending.add(pos)) {
-                this.provider.getCubeFuture(pos.getX(), pos.getY(), pos.getZ(), CubeProviderServer.Requirement.LIGHT)
-                        .thenAccept(cube -> this.sendCube(player, cube, current, pending, desired, pos));
+            if (current.contains(pos) || pending.contains(pos)) {
+                continue;
             }
+            // Only throttle NEW generation that needs disk I/O.
+            if (this.provider.getLoadedCube(pos) == null) {
+                if (this.newCubeRequestsThisTick >= MAX_NEW_CUBES_PER_TICK) {
+                    break; // deferred to next tick
+                }
+                this.newCubeRequestsThisTick++;
+            }
+            pending.add(pos);
+            this.provider.getCubeFuture(pos.getX(), pos.getY(), pos.getZ(), CubeProviderServer.Requirement.LIGHT)
+                    .thenAccept(cube -> this.sendCube(player, cube, current, pending, desired, pos));
         }
     }
 
     private void sendCube(ServerPlayer player, Cube cube, Set<CubePos> current, Set<CubePos> pending, Set<CubePos> desired, CubePos pos) {
         pending.remove(pos);
-        if (cube == null || current.contains(pos)) {
+        if (cube == null) {
+            // Air cube: add to current so we don't re-request disk I/O every tick.
+            // Unload is harmless — the client ignores unload packets for empty cubes,
+            // and removePlayerFromCube is a no-op when getLoadedCube returns null.
+            current.add(pos);
+            return;
+        }
+        if (current.contains(pos)) {
             return;
         }
         if (!desired.contains(pos)) {
