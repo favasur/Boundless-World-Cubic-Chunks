@@ -24,7 +24,6 @@ import net.minecraft.world.level.chunk.ChunkAccess;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -123,13 +122,21 @@ public class StackedCubeGenerator implements ICubeGenerator {
             // Lazy band activation: only generate cubes in this band if a player
             // has entered its portal or approached its Y level in the overworld.
             if (!activeBands.contains(dim.id()) && !dim.id().equals(StackedDimensions.OVERWORLD_ID)) {
-                return primer; // treat as empty air until activated
+                // Inactive above-world bands → air (gap to End).
+                // Inactive below-world bands → fall through to overworldGen for
+                // stone fill, preventing players from falling into infinite void.
+                int maxBuildCubeY = Coords.blockToCube(this.level.getMaxBuildHeight());
+                if (cubeY > maxBuildCubeY) {
+                    return primer;
+                }
+                // below-world → let overworldGen fill with stone (see below)
+            } else {
+                BandCubeGenerator band = this.bandGens.get(dim.id());
+                if (band != null) {
+                    return band.generateCube(cubeX, cubeY, cubeZ, primer);
+                }
+                return BandedCubeFill.fillBand(primer, dim, this.level, cubeX, cubeY, cubeZ);
             }
-            BandCubeGenerator band = this.bandGens.get(dim.id());
-            if (band != null) {
-                return band.generateCube(cubeX, cubeY, cubeZ, primer);
-            }
-            return BandedCubeFill.fillBand(primer, dim, this.level, cubeX, cubeY, cubeZ);
         }
         // Empty-space rule (above-world only): when cubeY is above the overworld's
         // vanilla window AND outside any stacked band, return air so the gap between

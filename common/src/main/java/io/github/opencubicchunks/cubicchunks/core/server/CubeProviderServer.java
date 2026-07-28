@@ -59,8 +59,6 @@ public class CubeProviderServer implements ICubeProviderServer, ICubeProviderInt
     private final ICubeGenerator cubeGen;
     @Nonnull
     private final CubeMap cubeMap = new CubeMap();
-    @Nonnull
-    private final CubePrimer cubePrimer = new CubePrimer();
     @Nullable
     private final ICubeIO cubeIO;
     @Nonnull
@@ -194,15 +192,17 @@ public class CubeProviderServer implements ICubeProviderServer, ICubeProviderInt
             }
         }
 
-        Optional<CubePrimer> primer = this.cubeGen.tryGenerateCube(cubeX, cubeY, cubeZ, this.cubePrimer, true);
-        if (primer.isEmpty() || primer.get().isEmpty()) {
+        // Per-invocation primer — never shared across threads.
+        // The old shared field caused race conditions: one thread would reset
+        // biomes3d to null while another was mid-generation, crashing with NPE.
+        CubePrimer primer = new CubePrimer();
+        Optional<CubePrimer> result = this.cubeGen.tryGenerateCube(cubeX, cubeY, cubeZ, primer, true);
+        if (result.isEmpty() || result.get().isEmpty()) {
             // Empty space: don't allocate a Cube object. The cube will be created on demand
             // when the player places a non-air block here.
-            this.cubePrimer.reset();
             return null;
         }
-        Cube cube = new Cube(levelChunk, cubeY, primer.get());
-        this.cubePrimer.reset();
+        Cube cube = new Cube(levelChunk, cubeY, result.get());
         return cube;
     }
 
