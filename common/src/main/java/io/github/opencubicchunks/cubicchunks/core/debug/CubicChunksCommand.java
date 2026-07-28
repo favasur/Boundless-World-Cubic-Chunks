@@ -1,7 +1,7 @@
 package io.github.opencubicchunks.cubicchunks.core.debug;
 
 import io.github.opencubicchunks.cubicchunks.core.CubicChunks;
-import io.github.opencubicchunks.cubicchunks.core.asm.mixin.ICubicWorldInternal;
+import io.github.opencubicchunks.cubicchunks.core.world.ICubicWorldInternal;
 import io.github.opencubicchunks.cubicchunks.core.server.CubeProviderServer;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;

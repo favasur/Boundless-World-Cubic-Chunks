@@ -1,7 +1,7 @@
 package io.github.opencubicchunks.cubicchunks.core.asm.mixin.common;
 
 import io.github.opencubicchunks.cubicchunks.api.world.ICubeProvider;
-import io.github.opencubicchunks.cubicchunks.core.asm.mixin.ICubicWorldInternal;
+import io.github.opencubicchunks.cubicchunks.core.world.ICubicWorldInternal;
 import net.minecraft.server.level.ServerChunkCache;
 import net.minecraft.server.level.ServerLevel;
 import org.spongepowered.asm.mixin.Mixin;

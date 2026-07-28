@@ -5,7 +5,7 @@ import io.github.opencubicchunks.cubicchunks.api.worldgen.stack.StackedDimension
 import io.github.opencubicchunks.cubicchunks.common.CubicChunksConstants;
 import io.github.opencubicchunks.cubicchunks.core.CubicChunks;
 import io.github.opencubicchunks.cubicchunks.core.CubicChunksConfig;
-import io.github.opencubicchunks.cubicchunks.core.asm.mixin.ICubicWorldInternal;
+import io.github.opencubicchunks.cubicchunks.core.world.ICubicWorldInternal;
 import io.github.opencubicchunks.cubicchunks.core.network.ClientPacketHandler;
 import io.github.opencubicchunks.cubicchunks.core.network.NetworkDispatcher;
 import io.github.opencubicchunks.cubicchunks.core.network.payload.ColumnDataPayload;

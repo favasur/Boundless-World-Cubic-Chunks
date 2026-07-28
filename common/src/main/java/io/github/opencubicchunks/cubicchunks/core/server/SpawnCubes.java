@@ -60,7 +60,7 @@ public class SpawnCubes implements ITicket {
     private void addTickets(Level world) {
         if (this.radiusXZGenerate >= 0 && this.radiusYGenerate >= 0 && this.spawnPoint != null
                 && world instanceof net.minecraft.server.level.ServerLevel level) {
-            var cache = (CubeProviderServer) ((io.github.opencubicchunks.cubicchunks.core.asm.mixin.ICubicWorldInternal) level).getCubeCache();
+            var cache = (CubeProviderServer) ((io.github.opencubicchunks.cubicchunks.core.world.ICubicWorldInternal) level).getCubeCache();
             CubicChunks.LOGGER.info("Loading cubes for spawn...");
             int sx = Coords.blockToCube(this.spawnPoint.getX());
             int sy = Coords.blockToCube(this.spawnPoint.getY());
