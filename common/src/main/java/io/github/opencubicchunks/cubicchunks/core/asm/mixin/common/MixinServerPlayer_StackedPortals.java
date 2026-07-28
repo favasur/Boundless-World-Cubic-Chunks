@@ -59,7 +59,8 @@ public abstract class MixinServerPlayer_StackedPortals {
             method = "changeDimension(Lnet/minecraft/world/level/portal/DimensionTransition;)Lnet/minecraft/world/level/portal/DimensionTransition;",
             at = @At("HEAD"),
             cancellable = true,
-            require = 1
+            require = 0,
+            remap = false
     )
     private void cc$interceptStackedPortal(DimensionTransition transition, CallbackInfoReturnable<DimensionTransition> cir) {
         if (!CubicChunksConfig.stackingDimensionsEnabled) {
