@@ -124,7 +124,7 @@ public abstract class MixinLevelChunk implements IColumn, IColumnInternal {
         if (!this.cc$isCubicColumn) {
             return;
         }
-        Integer bandOffset = cc$BAND_Y_OFFSET.get();
+        Integer bandOffset = ChunkBandOffset.get();
         int blockY;
         if (bandOffset != null) {
             blockY = sectionIndex * 16 + bandOffset;
@@ -144,26 +144,9 @@ public abstract class MixinLevelChunk implements IColumn, IColumnInternal {
     }
 
     /**
-     * Thread-local that lets vanilla {@code ChunkGenerator#applyBiomeDecoration}
-     * treat the overworld column's {@link LevelChunk#getSection(int)} and the
-     * inner {@code setBlockState} path as if the chunk generator's Y window
-     * were shifted into our stacked-band Y window. Push via
-     * {@link #cc$pushBandYOffset(Integer)} at the boundary of the call,
-     * pop in a finally block. Driven by {@code BandedFeaturePlacer} for the
-     * End band where the 12k offset would otherwise land End features in the
-     * overworld's body section.
+     * Band Y offset is now managed by {@link ChunkBandOffset} — extracted
+     * to a utility class because Mixin forbids non-private static methods.
      */
-    private static final ThreadLocal<Integer> cc$BAND_Y_OFFSET = new ThreadLocal<>();
-
-    public static Integer cc$pushBandYOffset(Integer offset) {
-        Integer prev = cc$BAND_Y_OFFSET.get();
-        cc$BAND_Y_OFFSET.set(offset);
-        return prev;
-    }
-
-    public static void cc$clearBandYOffset() {
-        cc$BAND_Y_OFFSET.remove();
-    }
 
     /**
      * Read-side route for {@link ChunkAccess#getNoiseBiome(int, int, int)}.
@@ -182,7 +165,7 @@ public abstract class MixinLevelChunk implements IColumn, IColumnInternal {
         if (!this.cc$isCubicColumn) {
             return;
         }
-        Integer bandOffset = cc$BAND_Y_OFFSET.get();
+        Integer bandOffset = ChunkBandOffset.get();
         if (bandOffset == null) {
             return;
         }
@@ -222,7 +205,7 @@ public abstract class MixinLevelChunk implements IColumn, IColumnInternal {
         // Honor the band-Y ThreadLocal when set. Vanilla vanilla endGen writes
         // at overworld Y=[0..255]; with offset=12320 we land the writes in
         // our End band cubes.
-        Integer bandOffset = cc$BAND_Y_OFFSET.get();
+        Integer bandOffset = ChunkBandOffset.get();
         int posY = bandOffset != null ? pos.getY() + bandOffset : pos.getY();
         int cubeY = Coords.blockToCube(posY);
         Cube cube = this.cc$getLoadedCube(cubeY);

@@ -22,7 +22,7 @@ import net.minecraft.core.HolderGetter;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
 import io.github.opencubicchunks.cubicchunks.core.CubicChunks;
-import io.github.opencubicchunks.cubicchunks.core.asm.mixin.common.MixinLevelChunk;
+import io.github.opencubicchunks.cubicchunks.core.asm.mixin.common.ChunkBandOffset;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -240,7 +240,7 @@ public final class BandedFeaturePlacer {
                                 levelChunk.getPos(), inner.toString());
                     }
                 } else if (tryDim.id().equals(StackedDimensions.END_ID)) {
-                    Integer prevOffset = MixinLevelChunk.cc$pushBandYOffset(tryDim.minBlockY());
+                    Integer prevOffset = ChunkBandOffset.push(tryDim.minBlockY());
                     try {
                         java.lang.reflect.Method m = java.util.Arrays.stream(gen.getClass().getMethods())
                                 .filter(x -> x.getName().equals("applyBiomeDecoration") && x.getParameterCount() == 3)
@@ -251,9 +251,9 @@ public final class BandedFeaturePlacer {
                                 levelChunk.getPos(), inner.toString());
                     } finally {
                         if (prevOffset == null) {
-                            MixinLevelChunk.cc$clearBandYOffset();
+                            ChunkBandOffset.clear();
                         } else {
-                            MixinLevelChunk.cc$pushBandYOffset(prevOffset);
+                            ChunkBandOffset.push(prevOffset);
                         }
                     }
                 }
