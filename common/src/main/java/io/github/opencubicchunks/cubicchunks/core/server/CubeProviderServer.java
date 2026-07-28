@@ -205,7 +205,7 @@ public class CubeProviderServer implements ICubeProviderServer, ICubeProviderInt
         // The old shared field caused race conditions: one thread would reset
         // biomes3d to null while another was mid-generation, crashing with NPE.
         CubePrimer primer = new CubePrimer();
-        Optional<CubePrimer> result = this.cubeGen.tryGenerateCube(cubeX, cubeY, cubeZ, primer, true);
+        Optional<CubePrimer> result = this.cubeGen.tryGenerateCube(cubeX, cubeY, cubeZ, primer, true, levelChunk);
         if (result.isEmpty() || result.get().isEmpty()) {
             // Mark as known-empty so getCube() skips regeneration next time.
             // Without this, getBlockState → getCube(GENERATE) regenerates the

@@ -34,7 +34,9 @@ public class PopulateCubeEvent extends CubeGeneratorEvent {
     private final boolean hasVillageGenerated;
 
     public PopulateCubeEvent(Level world, Random rand, int cubeX, int cubeY, int cubeZ, boolean hasVillageGenerated) {
-        super(((io.github.opencubicchunks.cubicchunks.api.world.ICubicWorldServer) world).getCubeGenerator());
+        super(world instanceof io.github.opencubicchunks.cubicchunks.api.world.ICubicWorldServer server
+                ? server.getCubeGenerator()
+                : null);
         this.world = world;
         this.rand = rand;
         this.cubeX = cubeX;

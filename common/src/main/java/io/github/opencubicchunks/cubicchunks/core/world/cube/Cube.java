@@ -537,7 +537,11 @@ public class Cube implements ICube {
             ((IColumnInternal) this.getColumn()).removeFromStagingHeightmap(this);
         }
     }    @Override public boolean needsSaving() {
-        return true;
+        // Only persist cubes whose block/biome state has actually changed since the
+        // last save. Without this guard, every empty (NULL_STORAGE) cube created by
+        // the generator's "known-empty" path would still be written to disk on each
+        // tick, blowing up region files with all-air entries.
+        return this.isModified;
     }
 
 

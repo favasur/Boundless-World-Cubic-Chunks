@@ -22,8 +22,30 @@ public interface ICubeGenerator {
 
     CubePrimer generateCube(int cubeX, int cubeY, int cubeZ, CubePrimer primer);
 
+    /**
+     * 1.21 port: variant that accepts a column already loaded by the cube provider,
+     * so the generator can read directly from {@code sections[]} at the correct
+     * chunk status instead of doing its own {@code getChunk(false)} round-trip.
+     * The default falls back to {@link #generateCube(int, int, int, CubePrimer)}.
+     */
+    default CubePrimer generateCube(int cubeX, int cubeY, int cubeZ, CubePrimer primer, @org.jetbrains.annotations.Nullable ChunkAccess preloadedColumn) {
+        return generateCube(cubeX, cubeY, cubeZ, primer);
+    }
+
     default Optional<CubePrimer> tryGenerateCube(int cubeX, int cubeY, int cubeZ, CubePrimer primer, boolean force) {
         return Optional.of(generateCube(cubeX, cubeY, cubeZ, primer));
+    }
+
+    /**
+     * 1.21 port: tryGenerateCube variant that accepts a column already loaded by
+     * the cube provider, so the generator can read directly from {@code sections[]}
+     * at the correct chunk status instead of doing its own {@code getChunk(false)}
+     * round-trip. The default delegates to {@link #tryGenerateCube(int, int, int,
+     * CubePrimer, boolean)}.
+     */
+    default Optional<CubePrimer> tryGenerateCube(int cubeX, int cubeY, int cubeZ, CubePrimer primer, boolean force,
+                                                 @org.jetbrains.annotations.Nullable ChunkAccess preloadedColumn) {
+        return tryGenerateCube(cubeX, cubeY, cubeZ, primer, force);
     }
 
     void generateColumn(ChunkAccess column);

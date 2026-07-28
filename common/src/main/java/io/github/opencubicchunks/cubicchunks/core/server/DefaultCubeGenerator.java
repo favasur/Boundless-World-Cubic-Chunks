@@ -133,6 +133,11 @@ public class DefaultCubeGenerator implements ICubeGenerator {
 
     @Override
     public CubePrimer generateCube(int cubeX, int cubeY, int cubeZ, CubePrimer primer) {
+        return this.generateCube(cubeX, cubeY, cubeZ, primer, null);
+    }
+
+    @Override
+    public CubePrimer generateCube(int cubeX, int cubeY, int cubeZ, CubePrimer primer, @org.jetbrains.annotations.Nullable ChunkAccess preloadedColumn) {
         this.tryInit();
         int minBlockY = cubeY << 4;
         int maxBlockY = minBlockY + 15;
@@ -161,7 +166,13 @@ public class DefaultCubeGenerator implements ICubeGenerator {
         // slice the matching section. Vanilla calls us only after the column moves to
         // FEATURES so this path normally returns real terrain.
         try {
-            ChunkAccess column = this.level.getChunkSource().getChunk(cubeX, cubeZ, false);
+            // Prefer the column the cube provider already loaded synchronously: its
+            // status is guaranteed at least FULL (or whatever generate flag we passed).
+            // Falling back to getChunk(false) re-reads the cached reference, which can
+            // return a lower-status chunk if vanilla hasn't finished this column.
+            ChunkAccess column = preloadedColumn != null
+                    ? preloadedColumn
+                    : this.level.getChunkSource().getChunk(cubeX, cubeZ, true);
             if (column == null || column instanceof EmptyColumn) {
                 return primer.setAll(DEFAULT_FILLER_BLOCK);
             }
@@ -169,14 +180,25 @@ public class DefaultCubeGenerator implements ICubeGenerator {
                 return primer.setAll(DEFAULT_FILLER_BLOCK);
             }
             int minSectionY = levelChunk.getMinSection();
-            int sectionIndex = minSectionY + cubeY;
+            // Absolute section index = (cubeY << 4 - minBuildY) / 16 = cubeY - minSectionY.
+            // The previous formula (minSectionY + cubeY) undercounted by 2*minSectionY,
+            // which for a default overworld (minSectionY=-4) routed cubeY=7's lookup
+            // into section[3] (Y=[-16,0)) instead of the correct section[11] (Y=[112,128)).
+            int sectionIndex = cubeY - minSectionY;
             LevelChunkSection[] sections = levelChunk.getSections();
             if (sectionIndex < 0 || sectionIndex >= sections.length) {
                 return primer.setAll(DEFAULT_FILLER_BLOCK);
             }
             LevelChunkSection section = sections[sectionIndex];
             if (section == null) {
-                return primer.setAll(this.extensionBlockTop);
+                // Section index is in range but the section was never allocated (vanilla
+                // doesn't allocate a section if all blocks there are air at SURFACE — sky
+                // above maxBuildHeight in pre-1.21 worlds, for example). Fill with the
+                // configured extension block so cubes at this Y still have a non-AIR
+                // sentinel. Above the build limit use extensionBlockTop (default AIR);
+                // below use extensionBlockBottom (default STONE) so caves don't show AIR.
+                BlockState fill = cubeY * 16 < minBuildY ? this.extensionBlockBottom : this.extensionBlockTop;
+                return primer.setAll(fill);
             }
             Biomes.applyBiomesForCube(primer, levelChunk, cubeY);
             for (int y = 0; y < 16; y++) {
@@ -263,7 +285,13 @@ public class DefaultCubeGenerator implements ICubeGenerator {
 
     @Override
     public Optional<CubePrimer> tryGenerateCube(int cubeX, int cubeY, int cubeZ, CubePrimer primer, boolean force) {
-        return Optional.of(this.generateCube(cubeX, cubeY, cubeZ, primer));
+        return Optional.of(this.generateCube(cubeX, cubeY, cubeZ, primer, null));
+    }
+
+    @Override
+    public Optional<CubePrimer> tryGenerateCube(int cubeX, int cubeY, int cubeZ, CubePrimer primer, boolean force,
+                                                net.minecraft.world.level.chunk.ChunkAccess preloadedColumn) {
+        return Optional.of(this.generateCube(cubeX, cubeY, cubeZ, primer, preloadedColumn));
     }
 
     @Override
