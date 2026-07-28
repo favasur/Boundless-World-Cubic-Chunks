@@ -58,6 +58,7 @@ public abstract class MixinViewArea {
         int i = Mth.ceil(camX);
         int j = Mth.ceil(camY);
         int k = Mth.ceil(camZ);
+        int minSection = this.level.getMinSection();
 
         for (int xIndex = 0; xIndex < this.sectionGridSizeX; xIndex++) {
             int lX = this.sectionGridSizeX * 16;
@@ -72,7 +73,13 @@ public abstract class MixinViewArea {
                 for (int yIndex = 0; yIndex < this.sectionGridSizeY; yIndex++) {
                     int lY = this.sectionGridSizeY * 16;
                     int baseY = j - 8 - lY / 2;
-                    int originY = baseY + Math.floorMod(yIndex * 16 - baseY, lY);
+                    // Shift yIndex by minSection so the origin maps to the same grid
+                    // index that getRenderSectionAt and setDirty compute. Vanilla's
+                    // indexing is: gridIdx = sectionY - minSection (mod gridSizeY).
+                    // Without this shift, repositionCamera puts render chunks at
+                    // grid indices that getRenderSectionAt/setDirty never target.
+                    int shiftedY = yIndex + minSection;
+                    int originY = baseY + Math.floorMod(shiftedY * 16 - baseY, lY);
 
                     SectionRenderDispatcher.RenderSection section = this.sections[this.getSectionIndex(xIndex, yIndex, zIndex)];
                     BlockPos pos = section.getOrigin();

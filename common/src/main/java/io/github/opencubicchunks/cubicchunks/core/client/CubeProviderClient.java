@@ -94,9 +94,11 @@ public class CubeProviderClient implements ICubeProvider {
 
     @Override
     public void markForRenderUpdate(CubePos pos) {
-        // Vanilla ViewArea.setDirty does Math.floorDiv(coord, 16) on every axis.
-        // Our coords are cube/section coordinates; convert to block coords (*16)
-        // so the renderer maps to the correct 3D grid index.
+        // Vanilla LevelChunk.setSectionDirty(sectionY) converts chunk coords to
+        // block coords via SectionPos.sectionToBlockCoord() before calling
+        // levelRenderer.setSectionDirty, which passes through to ViewArea.setDirty.
+        // ViewArea.setDirty does Math.floorDiv(coord, 16) internally, so it
+        // expects BLOCK coordinates. Convert our cube/section coords accordingly.
         Minecraft.getInstance().levelRenderer.setSectionDirty(
             pos.getX() * 16, pos.getY() * 16, pos.getZ() * 16
         );

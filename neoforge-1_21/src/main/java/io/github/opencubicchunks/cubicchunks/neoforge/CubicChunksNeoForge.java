@@ -66,8 +66,15 @@ public class CubicChunksNeoForge {
         }
         ServerLevel level = player.serverLevel();
         ICubeProvider provider = ((ICubicWorldInternal) level).getCubeCache();
-        if (provider instanceof CubeProviderServer serverProvider) {
-            serverProvider.getPlayerCubeMap().removePlayer(player);
+        // instanceof forces class loading of CubeProviderServer, which fails
+        // under Sinytra Connector's classloader at runtime. Wrap so the event
+        // handler degrades gracefully instead of crashing the server.
+        try {
+            if (provider instanceof CubeProviderServer serverProvider) {
+                serverProvider.getPlayerCubeMap().removePlayer(player);
+            }
+        } catch (NoClassDefFoundError ignored) {
+            // Connector classloader cannot resolve CubeProviderServer at runtime
         }
     }
 
