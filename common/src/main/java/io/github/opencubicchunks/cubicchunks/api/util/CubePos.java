@@ -19,7 +19,7 @@ public final class CubePos implements XYZAddressable, Comparable<CubePos> {
     }
 
     public static CubePos of(int x, int y, int z) {
-        return CubePos.of(x, y, z);
+        return new CubePos(x, y, z);
     }
 
     public static CubePos fromBlockCoords(int blockX, int blockY, int blockZ) {
