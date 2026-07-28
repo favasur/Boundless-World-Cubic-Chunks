@@ -58,6 +58,19 @@ public class CubeProviderClient implements ICubeProvider {
         CubePos pos = cube.getCoords();
         this.cubeMap.put(cube);
         cube.onLoad();
+
+        // Inject the cube's section into the column's section array so the vanilla
+        // renderer can find it. The renderer reads from LevelChunk.getSections(),
+        // not from our cubeMap — without this injection, terrain blocks exist in
+        // memory but are invisible to the rendering pipeline.
+        if (cube.getStorage() != null && cube.getColumn() instanceof LevelChunk chunk) {
+            int idx = pos.getY() - chunk.getMinSection();
+            net.minecraft.world.level.chunk.LevelChunkSection[] sections = chunk.getSections();
+            if (idx >= 0 && idx < sections.length) {
+                sections[idx] = cube.getStorage();
+            }
+        }
+
         this.markForRenderUpdate(pos);
     }
 
@@ -66,6 +79,16 @@ public class CubeProviderClient implements ICubeProvider {
         if (cube != null) {
             cube.onUnload();
             this.cubeMap.remove(pos.getX(), pos.getY(), pos.getZ());
+
+            // Mirror the loadCube injection: clear the section from the
+            // column's array so the renderer stops drawing this cube.
+            if (cube.getColumn() instanceof LevelChunk chunk) {
+                int idx = pos.getY() - chunk.getMinSection();
+                net.minecraft.world.level.chunk.LevelChunkSection[] sections = chunk.getSections();
+                if (idx >= 0 && idx < sections.length) {
+                    sections[idx] = null;
+                }
+            }
         }
     }
 
