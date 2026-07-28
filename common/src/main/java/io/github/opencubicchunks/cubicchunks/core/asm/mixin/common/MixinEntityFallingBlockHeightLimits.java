@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(FallingBlockEntity.class)
 public abstract class MixinEntityFallingBlockHeightLimits {
 
-    @Inject(method = "tick", at = @At("HEAD"))
+    @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
     private void cc$tick(CallbackInfo ci) {
         FallingBlockEntity self = (FallingBlockEntity) (Object) this;
         Level level = self.level();
