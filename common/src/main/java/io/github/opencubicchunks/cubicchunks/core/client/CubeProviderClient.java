@@ -94,8 +94,12 @@ public class CubeProviderClient implements ICubeProvider {
 
     @Override
     public void markForRenderUpdate(CubePos pos) {
-        // Mark the cube's render section dirty so the client rebuilds it.
-        Minecraft.getInstance().levelRenderer.setSectionDirty(pos.getX(), pos.getY(), pos.getZ());
+        // Vanilla ViewArea.setDirty does Math.floorDiv(coord, 16) on every axis.
+        // Our coords are cube/section coordinates; convert to block coords (*16)
+        // so the renderer maps to the correct 3D grid index.
+        Minecraft.getInstance().levelRenderer.setSectionDirty(
+            pos.getX() * 16, pos.getY() * 16, pos.getZ() * 16
+        );
     }
 
     @Override
