@@ -4,6 +4,8 @@ import io.github.opencubicchunks.cubicchunks.api.util.CubePos;
 import io.github.opencubicchunks.cubicchunks.api.world.ICubicWorld;
 import io.github.opencubicchunks.cubicchunks.core.asm.mixin.ICubicWorldInternal;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BeaconBlockEntity;
 import net.minecraft.world.phys.AABB;
@@ -20,13 +22,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class MixinBlockBeaconAsyncUpdate {
 
     @Inject(method = "applyEffects", at = @At("HEAD"), cancellable = true)
-    private void cc$applyEffects(CallbackInfo ci) {
-        BeaconBlockEntity self = (BeaconBlockEntity) (Object) this;
-        Level level = self.getLevel();
+    private static void cc$applyEffects(Level level, BlockPos pos, int beaconLevel,
+                                         Holder<MobEffect> primary, Holder<MobEffect> secondary,
+                                         CallbackInfo ci) {
         if (!((ICubicWorldInternal) level).isCubicWorld()) {
             return;
         }
-        BlockPos pos = self.getBlockPos();
         CubePos cubePos = CubePos.of(pos.getX() >> 4, pos.getY() >> 4, pos.getZ() >> 4);
         int minY = cubePos.getMinBlockY();
         int maxY = cubePos.getMaxBlockY();
@@ -37,14 +38,16 @@ public abstract class MixinBlockBeaconAsyncUpdate {
 
     @Inject(method = "onDataChanged", at = @At("HEAD"), cancellable = true)
     private void cc$onDataChanged(CallbackInfo ci) {
-        if (Math.abs(((BeaconBlockEntity) (Object) this).getBlockPos().getY()) > 30_000) {
+        BeaconBlockEntity self = (BeaconBlockEntity) (Object) this;
+        if (Math.abs(self.getBlockPos().getY()) > 30_000) {
             ci.cancel();
         }
     }
 
     @Inject(method = "calculateEffects", at = @At("HEAD"), cancellable = true)
     private void cc$calculateEffects(AABB box, CallbackInfo ci) {
-        if (((BeaconBlockEntity) (Object) this).getLevel() == null) {
+        BeaconBlockEntity self = (BeaconBlockEntity) (Object) this;
+        if (self.getLevel() == null) {
             ci.cancel();
         }
     }
