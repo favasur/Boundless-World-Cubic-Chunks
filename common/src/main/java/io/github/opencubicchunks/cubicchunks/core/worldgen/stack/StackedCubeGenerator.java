@@ -131,12 +131,18 @@ public class StackedCubeGenerator implements ICubeGenerator {
             }
             return BandedCubeFill.fillBand(primer, dim, this.level, cubeX, cubeY, cubeZ);
         }
-        // Empty-space rule: when cubeY is outside any registered stacked dim AND outside
-        // the overworld's vanilla window, leave the primer as air so the Cube ctor's
-        // "no blocks = no isModified" branch keeps the disk usage at zero for the
-        // endless vertical buffer between bands and at the world's sky / bedrock caps.
+        // Empty-space rule (above-world only): when cubeY is above the overworld's
+        // vanilla window AND outside any stacked band, return air so the gap between
+        // the overworld top and the End band doesn't fill the disk with generated cubes.
+        // BELOW the overworld band, fall through to overworldGen — it fills with stone
+        // (extensionBlockBottom) to give the world a solid floor and prevent players
+        // from falling into the infinite void.
         if (matched.isEmpty() && !isInVanillaColumn(cubeY)) {
-            return primer;
+            int maxBuildCubeY = Coords.blockToCube(this.level.getMaxBuildHeight());
+            if (cubeY > maxBuildCubeY) {
+                return primer; // above-world air gap
+            }
+            // below-world → let overworldGen fill with stone
         }
         return this.overworldGen.generateCube(cubeX, cubeY, cubeZ, primer);
     }
