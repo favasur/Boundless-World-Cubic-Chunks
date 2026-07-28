@@ -24,13 +24,11 @@ config = "cubicchunks.immersiveportals.mixins.json"
 [[mixins]]
 config = "cubicchunks.mixins.optifine.json"
 
-# JAR-in-JAR dependency on the bundled :common module — its stand-alone modId
-# is `cubicchunks_common` (see common/src/main/resources/fabric.mod.json). The
-# NeoForge launcher reads this block and unwraps the JIJ child at
-# `META-INF/jarjar/io.github.opencubicchunks.common-…jar` as that sub-mod, so
-# common's classes resolve at runtime. Reference `cubicchunks_common` (the
-# embedded modId), not `cubicchunks` (the parent), or the launcher will skip it.
+# Declare `cubicchunks_common` (the embedded :common modId) as a REQUIRED
+# dependency. The actual JAR-in-JAR embedding is handled by
+# META-INF/jarjar/metadata.json at the modlauncher level — the toml block
+# only expresses the logical dependency, so `type` must be a valid
+# DependencyType enum value (REQUIRED/OPTIONAL/WEAK/DISCOURAGED), NOT the
+# legacy ForgeGradle "jarJar" literal that NeoForge's SPI rejects.
 [[dependencies.cubicchunks]]
     modId = "cubicchunks_common"
-    type = "jarJar"
-    targetPackage = "io.github.opencubicchunks.cubicchunks"

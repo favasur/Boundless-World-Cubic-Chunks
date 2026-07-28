@@ -33,13 +33,12 @@ versionRange = "[1.21.1,1.22)"
 ordering = "NONE"
 side = "BOTH"
 
-# JAR-in-JAR dependency on the bundled :common module — same pattern as
-# neoforge-1_21/src/main/resources/META-INF/neoforge.mods.toml. Required
-# because neoforge-26 does not yet have a real :common dep pin.
+# Same pattern as neoforge-1_21: declare `cubicchunks_common` as a REQUIRED
+# dependency. JAR-in-JAR embedding is handled by META-INF/jarjar/metadata.json;
+# the toml block expresses the logical dependency, so `type` must be a valid
+# DependencyType, NOT the legacy ForgeGradle "jarJar" literal.
 [[dependencies.cubicchunks]]
-modId = "cubicchunks_common"
-type = "jarJar"
-targetPackage = "io.github.opencubicchunks.cubicchunks"
+    modId = "cubicchunks_common"
 
 # Mirror neoforge-1_21's mixin config loadout so the transition to 26.x is
 # a version bump, not a manifest rewrite. The configs themselves live in
