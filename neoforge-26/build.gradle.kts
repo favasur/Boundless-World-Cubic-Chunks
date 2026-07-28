@@ -81,5 +81,8 @@ if (!build26x) {
         filesMatching("META-INF/neoforge.mods.toml") {
             expand("version" to project.version.toString())
         }
+        from(project(":common").sourceSets.main.get().resources.srcDirs) {
+            include("cubicchunks*.json")
+        }
     }
 }

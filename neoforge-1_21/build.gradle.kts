@@ -46,9 +46,13 @@ java {
     }
 }
 
-// Drive `processResources` to substitute the literal `${version}` placeholder
-// in META-INF/neoforge.mods.toml from `project.version`; without this FML
-// rejects the published jar with `InvalidModFileException: Illegal version`.
+// Drive `processResources` to:
+// 1. Substitute `${version}` in META-INF/neoforge.mods.toml from
+//    `project.version` (FML rejects the literal placeholder).
+// 2. Copy mixin config JSONs from :common into the neoforge jar. The
+//    `[[mixins]]` declarations in neoforge.mods.toml reference these files,
+//    and Mixin's classloader can't find them inside the JIJ'd common jar
+//    (JIJ union filesystems don't expose resources to ClassLoader).
 // `inputs.property` registers `project.version` as a hashable task input so
 // edits to `libs.versions.cubicchunks` invalidate this task's incremental
 // cache automatically (no `--rerun-tasks` required).
@@ -56,6 +60,9 @@ tasks.processResources {
     inputs.property("cubicchunks.version", project.version.toString())
     filesMatching("META-INF/neoforge.mods.toml") {
         expand("version" to project.version.toString())
+    }
+    from(project(":common").sourceSets.main.get().resources.srcDirs) {
+        include("cubicchunks*.json")
     }
 }
 
