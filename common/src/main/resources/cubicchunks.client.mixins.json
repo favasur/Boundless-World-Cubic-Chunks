@@ -6,6 +6,7 @@
   "client": [
     "client.MixinClientLevel",
     "client.MixinClientLevelPalette",
+    "client.MixinDebugRenderChunkBorder",
     "client.MixinViewArea",
     "common.MixinGuiOverlayDebug"
   ]
