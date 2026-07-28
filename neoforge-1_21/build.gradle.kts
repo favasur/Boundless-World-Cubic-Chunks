@@ -18,9 +18,11 @@ dependencies {
     // consume the "namedElements" configuration — the Mojang-mapped jar — or
     // the JIJ'd classes will throw NoClassDefFoundError at runtime.
     implementation(project(":common", configuration = "namedElements"))
-    // NeoForge's JAR-in-JAR loader pattern: the published mod jar will contain
-    // :common's classes inline, so a single drop into .minecraft/mods is enough.
-    jarJar(project(":common", configuration = "namedElements"))
+
+    // Instead of using jarJar (which creates a separate Java module that can't
+    // read the minecraft module, causing IllegalAccessError), we merge the
+    // common module's classes directly into the neoforge jar via from(). This
+    // eliminates the module boundary — all classes load in the same module.
 }
 
 neoForge {
@@ -68,6 +70,25 @@ tasks.processResources {
     }
     from(project(":common").sourceSets.main.get().resources.srcDirs) {
         include("cubicchunks*.json")
+    }
+}
+
+// Merge :common classes directly into the neoforge jar instead of using JIJ.
+// JIJ creates a separate Java module that can't read the minecraft module
+// (IllegalAccessError: module cubicchunks.common does not read module
+// minecraft). Merging eliminates the module boundary entirely.
+val commonJar by configurations.creating
+dependencies {
+    commonJar(project(":common", configuration = "namedElements"))
+}
+tasks.jar {
+    from(provider { commonJar.files.map { zipTree(it) } }) {
+        exclude("META-INF/MANIFEST.MF")   // don't overwrite our manifest
+        exclude("META-INF/mods.toml")     // don't overwrite neoforge.mods.toml
+        exclude("META-INF/neoforge.mods.toml")
+        exclude("fabric.mod.json")       // Fabric metadata not needed
+        exclude("module-info.class")     // redundant — already excluded upstream
+        exclude("cubicchunks*.json")     // already copied by processResources
     }
 }
 

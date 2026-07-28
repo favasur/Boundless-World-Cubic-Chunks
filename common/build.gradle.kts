@@ -59,4 +59,11 @@ java {
 // makes the jar an automatic module, which can read all other modules.
 tasks.withType<Jar> {
     exclude("module-info.class")
+    // Set a stable Automatic-Module-Name so NeoForge's JIJ classloader
+    // creates a predictable module name regardless of jar filename.
+    // Without this, the name is derived from the filename
+    // (io.github.opencubicchunks.common-0.4-dev.jar -> io.github.opencubicchunks.common.dev).
+    manifest {
+        attributes("Automatic-Module-Name" to "cubicchunks.common")
+    }
 }
