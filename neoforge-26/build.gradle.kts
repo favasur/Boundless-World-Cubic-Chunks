@@ -17,10 +17,14 @@ plugins {
 version = libs.versions.cubicchunks.get()
 
 dependencies {
-    implementation(project(":common"))
+    // :common is built by Fabric Loom, which defaults its primary artifact to
+    // intermediary-mapped names. NeoForge runs on Mojang official mappings, so
+    // we MUST consume the "namedElements" configuration or the JIJ'd classes
+    // will throw NoClassDefFoundError at runtime.
+    implementation(project(":common", configuration = "namedElements"))
     // JAR-in-JAR mirror of neoforge-1_21 — the published mod jar will contain
     // :common's classes inline, so a single drop into .minecraft/mods is enough.
-    jarJar(project(":common"))
+    jarJar(project(":common", configuration = "namedElements"))
 }
 
 neoForge {
