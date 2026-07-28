@@ -123,13 +123,9 @@ public class CubeProviderServer implements ICubeProviderServer, ICubeProviderInt
         if (loaded != null && meetsRequirement(loaded, req)) {
             return loaded;
         }
-        // Known-empty positions: skip regeneration. Without this, getBlockState
-        // → getCube(GENERATE) regenerates the same empty cube every tick,
-        // saturating the server and causing spectator-like block pass-through.
-        if (knownEmpty.contains(CubePos.of(cubeX, cubeY, cubeZ))) {
-            return null;
-        }
         // Avoid deadlock on the server thread: run synchronously if we are on the main thread.
+        // Known-empty short-circuit happens inside loadAndFinishCubeSync so the empty cube
+        // is still instantiated (and tracked in cubeMap) rather than returned as null.
         if (this.level.getServer().isSameThread()) {
             return this.loadAndFinishCubeSync(cubeX, cubeY, cubeZ, req);
         }
@@ -187,6 +183,17 @@ public class CubeProviderServer implements ICubeProviderServer, ICubeProviderInt
             return null;
         }
 
+        // Known-empty positions: skip the disk read and worldgen pass, but still
+        // instantiate a tracked empty Cube so the column's cubeMap, PlayerCubeMap,
+        // and PlayerCubeMap's onCubeCreated pipeline see it. Returning null here
+        // would leave the column without an entry at this Y, so MixinLevelChunk
+        // falls back to AIR and the player falls through solid ground; and the
+        // save loop would treat the cube as ungenerated, kicking off generation
+        // indefinitely during the save & exit blocking phase.
+        if (knownEmpty.contains(CubePos.of(cubeX, cubeY, cubeZ))) {
+            return new Cube(levelChunk, cubeY);
+        }
+
         // Try loading from disk first.
         if (this.cubeIO != null) {
             try {
@@ -207,11 +214,13 @@ public class CubeProviderServer implements ICubeProviderServer, ICubeProviderInt
         CubePrimer primer = new CubePrimer();
         Optional<CubePrimer> result = this.cubeGen.tryGenerateCube(cubeX, cubeY, cubeZ, primer, true, levelChunk);
         if (result.isEmpty() || result.get().isEmpty()) {
-            // Mark as known-empty so getCube() skips regeneration next time.
-            // Without this, getBlockState → getCube(GENERATE) regenerates the
-            // same empty cube every tick, saturating the server.
+            // Mark the position as known-empty so we skip worldgen on subsequent calls,
+            // and instantiate a tracked empty Cube (NULL_STORAGE) so the column's
+            // cubeMap, PlayerCubeMap, and isCubeGenerated() all see the cube.
+            // needsSaving() returns isModified=false for this cube, so it doesn't
+            // bloat the region files.
             knownEmpty.add(CubePos.of(cubeX, cubeY, cubeZ));
-            return null;
+            return new Cube(levelChunk, cubeY);
         }
         Cube cube = new Cube(levelChunk, cubeY, result.get());
         return cube;
