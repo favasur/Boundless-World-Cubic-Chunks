@@ -4,6 +4,7 @@ import io.github.opencubicchunks.cubicchunks.api.util.Coords;
 import io.github.opencubicchunks.cubicchunks.api.util.CubePos;
 import io.github.opencubicchunks.cubicchunks.api.world.ICube;
 import io.github.opencubicchunks.cubicchunks.api.world.ICubeProvider;
+import io.github.opencubicchunks.cubicchunks.api.world.ICubeProviderServer;
 import io.github.opencubicchunks.cubicchunks.core.world.ICubicWorldInternal;
 import io.github.opencubicchunks.cubicchunks.core.lighting.LightingManager;
 import io.github.opencubicchunks.cubicchunks.core.world.cube.StubCubeProvider;
@@ -34,6 +35,17 @@ public abstract class MixinLevel implements ICubicWorldInternal, LevelHeightAcce
     protected LightingManager lightingManager;
     @Nullable
     protected ICubeProvider cc$cubeCache;
+
+    /**
+     * Guards against infinite recursion when {@link #cc$getBlockState} triggers
+     * synchronous cube generation via {@code getCube(GENERATE)}. Vanilla
+     * structure/feature generators call {@code getBlockState} during placement,
+     * and if those reads land in the same cube being generated, we would loop.
+     * Setting this flag on entry causes nested calls to fall through to vanilla
+     * (returning AIR), breaking the cycle while still allowing the outer call to
+     * complete with the freshly-generated cube.
+     */
+    private final ThreadLocal<Boolean> cc$inGetBlockState = ThreadLocal.withInitial(() -> false);
 
     @Override
     public void initCubicWorld() {
@@ -146,18 +158,30 @@ public abstract class MixinLevel implements ICubicWorldInternal, LevelHeightAcce
             cancellable = true
     )
     private void cc$getBlockState(BlockPos pos, CallbackInfoReturnable<BlockState> cir) {
-        if (!this.isCubicWorld) {
+        if (!this.isCubicWorld || this.cc$inGetBlockState.get()) {
             return;
         }
-        ICube cube = this.getCubeCache().getLoadedCube(
-                Coords.blockToCube(pos.getX()),
-                Coords.blockToCube(pos.getY()),
-                Coords.blockToCube(pos.getZ())
-        );
+        int cubeX = Coords.blockToCube(pos.getX());
+        int cubeY = Coords.blockToCube(pos.getY());
+        int cubeZ = Coords.blockToCube(pos.getZ());
+        ICube cube = this.getCubeCache().getLoadedCube(cubeX, cubeY, cubeZ);
+        if (cube == null) {
+            // Cube not in cache yet — load synchronously so the player has ground
+            // to stand on. Without this, physics/collision sees AIR and the player
+            // sinks into the floor, takes void damage, and can't place/break blocks.
+            this.cc$inGetBlockState.set(true);
+            try {
+                ICubeProvider cache = this.getCubeCache();
+                if (cache instanceof ICubeProviderServer serverCache) {
+                    cube = serverCache.getCube(cubeX, cubeY, cubeZ,
+                            ICubeProviderServer.Requirement.GENERATE);
+                }
+            } finally {
+                this.cc$inGetBlockState.set(false);
+            }
+        }
         if (cube != null) {
             cir.setReturnValue(cube.getBlockState(pos));
-        } else {
-            cir.setReturnValue(Blocks.AIR.defaultBlockState());
         }
     }
 
