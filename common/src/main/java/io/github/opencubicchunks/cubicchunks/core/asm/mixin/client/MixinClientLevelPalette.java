@@ -28,7 +28,7 @@ import java.util.Optional;
 public abstract class MixinClientLevelPalette {
 
     @Inject(method = "getSkyColor", at = @At("RETURN"), cancellable = true)
-    private void cc$overrideSkyColor(float temperature, CallbackInfoReturnable<Vec3> cir) {
+    private void cc$overrideSkyColor(Vec3 cameraPos, float temperature, CallbackInfoReturnable<Vec3> cir) {
         Optional<StackedDimension> active = activeBandFromCamera((ClientLevel) (Object) this);
         if (active.isEmpty()) return;
         cir.setReturnValue(paletteVec3(active.get().palette().skyColorRgb()));
