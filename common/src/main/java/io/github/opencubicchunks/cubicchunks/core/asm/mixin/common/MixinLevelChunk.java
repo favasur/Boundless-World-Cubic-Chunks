@@ -310,6 +310,23 @@ public abstract class MixinLevelChunk implements IColumn, IColumnInternal {
                 section = new LevelChunkSection(this.cc$biomeRegistry());
                 cube.setStorage(section);
             }
+            // Mirror the cube's section reference into vanilla's sections[] so
+            // chunk-serialization packets (e.g. ClientboundLevelChunkWithLightPacket)
+            // emit the up-to-date state. cube.storage and vanilla sections[i] are
+            // allocated as SEPARATE LevelChunkSection objects in the
+            // Cube(LevelChunk, int, CubePrimer) constructor: the generator copies
+            // vanilla sections[i] into a CubePrimer, then Cube copies the primer into
+            // a fresh LevelChunkSection. After that the two never re-converge unless
+            // we mirror. Without this mirror, targeted block updates write AIR into
+            // cube.storage but sections[i] still holds the original block; any
+            // subsequent chunk-light/section packet re-broadcasts the stale section,
+            // visibly re-appearing a block the player just broke.
+            LevelChunkSection[] sectionsMirror = chunk.getSections();
+            int minSectionMirror = chunk.getMinSection();
+            int arrayIndexMirror = sectionIndex - minSectionMirror;
+            if (arrayIndexMirror >= 0 && arrayIndexMirror < sectionsMirror.length) {
+                sectionsMirror[arrayIndexMirror] = section;
+            }
             return section;
         }
         // No cube yet: write to vanilla's own section so generateCube picks it up
