@@ -127,6 +127,40 @@ public abstract class MixinLevelChunk implements IColumn, IColumnInternal {
     }
 
     /**
+     * Mirror of {@link #cc$getBlockState} for fluid reads. Vanilla 1.21.1's
+     * {@code LevelChunk.getFluidState(BlockPos)} accesses {@code sections[]}
+     * directly via array index — not through {@code chunk.getSection(int)} —
+     * so the {@link #cc$getSection} never-null fallback never fires here.
+     * Without this override, a Zombie, Bat, or any entity calling
+     * {@code getFluidState} during entity base-tick crashes with NPE on
+     * {@code LevelChunkSection.hasOnlyAir()} for an in-range cubeY whose cube
+     * hasn't loaded yet (the regression that hit the user at Y=-40 with the
+     * 04:25:23 crash).
+     */
+    @Inject(
+            method = "getFluidState(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/material/FluidState;",
+            at = @At("HEAD"),
+            cancellable = true
+    )
+    private void cc$getFluidState(BlockPos pos, CallbackInfoReturnable<net.minecraft.world.level.material.FluidState> cir) {
+        if (!this.cc$isCubicColumn) {
+            return;
+        }
+        int cubeY = Coords.blockToCube(pos.getY());
+        Cube cube = this.cc$getLoadedCube(cubeY);
+        if (cube == null) {
+            cir.setReturnValue(net.minecraft.world.level.material.Fluids.EMPTY.defaultFluidState());
+            return;
+        }
+        LevelChunkSection storage = cube.getStorage();
+        if (storage == null) {
+            cir.setReturnValue(net.minecraft.world.level.material.Fluids.EMPTY.defaultFluidState());
+            return;
+        }
+        cir.setReturnValue(storage.getFluidState(pos.getX() & 15, pos.getY() & 15, pos.getZ() & 15));
+    }
+
+    /**
      * Read-side route for {@link net.minecraft.world.level.chunk.ChunkAccess#getSection}.
      * Carvers, density checks, and any feature that reads existing block state
      * pulls {@code getSection} from the overworld chunk column. Vanilla's
