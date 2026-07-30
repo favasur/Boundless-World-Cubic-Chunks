@@ -2,12 +2,12 @@
   "required": true,
   "minVersion": "0.8",
   "package": "io.github.opencubicchunks.cubicchunks.core.asm.mixin",
-  "compatibilityLevel": "JAVA_21",
-  "client": [
+  "compatibilityLevel": "JAVA_21",  "client": [
     "client.MixinClientLevel",
     "client.MixinClientLevelPalette",
     "client.MixinDebugRenderChunkBorder",
+    "client.MixinRenderChunk",
     "client.MixinViewArea",
     "common.MixinGuiOverlayDebug"
-  ]
+  ] 
 }
