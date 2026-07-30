@@ -4,6 +4,7 @@ import io.github.opencubicchunks.cubicchunks.api.util.Coords;
 import io.github.opencubicchunks.cubicchunks.api.world.IColumn;
 import io.github.opencubicchunks.cubicchunks.api.world.ICube;
 import io.github.opencubicchunks.cubicchunks.api.world.IHeightMap;
+import io.github.opencubicchunks.cubicchunks.core.CubicChunks;
 import io.github.opencubicchunks.cubicchunks.core.world.ICubicWorldInternal;
 import io.github.opencubicchunks.cubicchunks.core.world.ClientHeightMap;
 import io.github.opencubicchunks.cubicchunks.core.world.IColumnInternal;
@@ -26,6 +27,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
 import net.minecraft.world.level.biome.Biome;
 
 import javax.annotation.Nullable;
@@ -85,9 +87,20 @@ public abstract class MixinLevelChunk implements IColumn, IColumnInternal {
      */
     private LevelChunkSection cc$getOrCreateEmptySection() {
         if (this.cc$emptySection == null) {
-            this.cc$emptySection = new LevelChunkSection(((LevelChunk) (Object) this).getLevel().registryAccess().registryOrThrow(Registries.BIOME));
+            this.cc$emptySection = new LevelChunkSection(this.cc$biomeRegistry());
         }
         return this.cc$emptySection;
+    }
+
+    /**
+     * Cached biome registry lookup. Avoids spelling out
+     * {@code registryAccess().registryOrThrow(Registries.BIOME)} each call
+     * site; keeps the constructor signature for {@code LevelChunkSection}
+     * in one place so future mapping changes only require updating this
+     * helper.
+     */
+    private Registry<Biome> cc$biomeRegistry() {
+        return ((LevelChunk) (Object) this).getLevel().registryAccess().registryOrThrow(Registries.BIOME);
     }
 
     @Inject(
@@ -226,6 +239,19 @@ public abstract class MixinLevelChunk implements IColumn, IColumnInternal {
      * runs heightmap updates, lighting rechecks, block entity logic, and the
      * chunk dirty flag, but it reads/writes the actual blocks from the cube's
      * LevelChunkSection storage.
+     *
+     * <p>Critically, when a cube for the target cubeY does NOT yet exist (the
+     * common case during vanilla feature placement like mob-spawner spawning,
+     * where {@code chunk.setBlockState(pos, mobSpawner, false)} runs BEFORE we
+     * ever generate the cube), we must NOT register an empty/feature-only cube
+     * via {@code addLoadedCube}, otherwise {@code CubeProviderServer.getCube}
+     * will later short-circuit on the registered-but-feature-only cube and never
+     * run {@code generateCube}, leaving the cube with AIR everywhere except the
+     * spawner (or visible "deep slate cubes in mid-air" once vanilla cave carvers
+     * cause adjacent cubes to fill weirdly). Instead we just write to vanilla's
+     * own section so vanilla's column data ends up in {@code sections[]}; the
+     * column is at FULL status by the time we generate a cube, which copies
+     * {@code sections[]} into the cube primer.</p>
      */
     @Redirect(
             method = "setBlockState(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Z)Lnet/minecraft/world/level/block/state/BlockState;",
@@ -237,30 +263,48 @@ public abstract class MixinLevelChunk implements IColumn, IColumnInternal {
         if (!this.cc$isCubicColumn) {
             return chunk.getSection(sectionIndex);
         }
-        // Honor the band-Y ThreadLocal when set. Vanilla vanilla endGen writes
-        // at overworld Y=[0..255]; with offset=12320 we land the writes in
-        // our End band cubes.
         Integer bandOffset = ChunkBandOffset.get();
         int posY = bandOffset != null ? pos.getY() + bandOffset : pos.getY();
         int cubeY = Coords.blockToCube(posY);
         Cube cube = this.cc$getLoadedCube(cubeY);
-        // Avoid creating cube objects for air placements in empty space.
-        if (cube == null && state.isAir()) {
-            return this.cc$getOrCreateEmptySection();
+        if (cube != null) {
+            // Cube is already registered: route the write into its storage so
+            // readers stay in sync mid-game (e.g. when a player breaks/places).
+            cube.markDirty();
+            LevelChunkSection section = cube.getStorage();
+            if (section == null) {
+                section = new LevelChunkSection(this.cc$biomeRegistry());
+                cube.setStorage(section);
+            }
+            return section;
         }
-        if (cube == null) {
-            cube = this.cc$getOrCreateCube(cubeY);
-            // Register on-demand cube creation with the world's cube provider so it is
-            // tracked, saved, and synchronized to players.
-            ((ICubicWorldInternal) ((LevelChunk) (Object) this).getLevel()).getCubeCache().addLoadedCube(cube);
+        // No cube yet: write to vanilla's own section so generateCube picks it up
+        // later. We bypass cc$getSection here by reading sections[] directly to
+        // avoid recursing into the @Inject mapping. For pre-empted/null vanilla
+        // sections we allocate a fresh LevelChunkSection and store it back,
+        // marking the column dirty so vanilla's save path serializes the new data.
+        // We do NOT route writes through the shared empty section: even AIR writes
+        // mutate per-block bookkeeping (palette index counts, ticking bits, bloom
+        // filter) that isn't safe to share across otherwise-unrelated cubes.
+        LevelChunkSection[] sections = chunk.getSections();
+        int minSection = chunk.getMinSection();
+        int arrayIndex = sectionIndex - minSection;
+        if (arrayIndex >= 0 && arrayIndex < sections.length) {
+            LevelChunkSection vanilla = sections[arrayIndex];
+            if (vanilla != null) {
+                return vanilla;
+            }
+            LevelChunkSection allocated = new LevelChunkSection(this.cc$biomeRegistry());
+            sections[arrayIndex] = allocated;
+            chunk.setUnsaved(true);
+            return allocated;
         }
-        cube.markDirty();
-        LevelChunkSection section = cube.getStorage();
-        if (section == null) {
-            section = new LevelChunkSection(((LevelChunk) (Object) this).getLevel().registryAccess().registryOrThrow(Registries.BIOME));
-            cube.setStorage(section);
-        }
-        return section;
+        // Out-of-bounds arrayIndex (shouldn't happen; vanilla's setBlockState
+        // bounds-checks before invoking this redirect target). Surface the
+        // unexpected caller via a warning so Mojang mapping drift becomes visible.
+        CubicChunks.LOGGER.warn("cc$redirectSetSection: OOB arrayIndex {} for posY={} cubeY={}",
+                sectionIndex, pos.getY(), Coords.blockToCube(pos.getY()));
+        return this.cc$getOrCreateEmptySection();
     }
 
     // IColumn implementation
