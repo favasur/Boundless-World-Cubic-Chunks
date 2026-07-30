@@ -9,6 +9,7 @@ import io.github.opencubicchunks.cubicchunks.core.world.ICubicWorldInternal;
 import io.github.opencubicchunks.cubicchunks.core.lighting.LightingManager;
 import io.github.opencubicchunks.cubicchunks.core.world.cube.StubCubeProvider;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.SectionPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelHeightAccessor;
 import net.minecraft.world.level.block.Blocks;
@@ -212,12 +213,20 @@ public abstract class MixinLevel implements ICubicWorldInternal, LevelHeightAcce
 
     @Override
     public boolean isBlockColumnLoaded(BlockPos pos) {
-        return false;
+        // 1.21.1: vanilla uses this to decide whether to tick entities, run
+        // physics, accept block interactions, etc. Returning false here freezes
+        // the player in place ("stuck in air"). Delegate to the level's own
+        // chunk source — for both cubic and non-cubic worlds this matches the
+        // column's true load state, because CubeProviderServer.getColumn loads
+        // columns through the vanilla chunk source.
+        int sectionX = SectionPos.blockToSectionCoord(pos.getX());
+        int sectionZ = SectionPos.blockToSectionCoord(pos.getZ());
+        return ((Level) (Object) this).hasChunk(sectionX, sectionZ);
     }
 
     @Override
     public boolean isBlockColumnLoaded(BlockPos pos, boolean allowEmpty) {
-        return false;
+        return this.isBlockColumnLoaded(pos);
     }
 
     @Override

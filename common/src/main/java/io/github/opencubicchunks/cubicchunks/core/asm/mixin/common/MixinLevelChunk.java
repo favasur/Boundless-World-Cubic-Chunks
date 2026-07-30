@@ -75,6 +75,21 @@ public abstract class MixinLevelChunk implements IColumn, IColumnInternal {
         return this.cc$cubeMap.get(cubeY);
     }
 
+    /**
+     * Returns a shared, never-null empty section to satisfy vanilla callers
+     * that unconditionally dereference the result of {@code getSection(int)}
+     * (e.g. {@code LevelChunk.getFluidState} at the {@code hasOnlyAir()} call).
+     * The single instance is safe because vanilla treats it as read-only; only
+     * {@code cc$redirectSetSection} writes, and it always targets the
+     * caller-supplied position's real cube section rather than this stand-in.
+     */
+    private LevelChunkSection cc$getOrCreateEmptySection() {
+        if (this.cc$emptySection == null) {
+            this.cc$emptySection = new LevelChunkSection(((LevelChunk) (Object) this).getLevel().registryAccess().registryOrThrow(Registries.BIOME));
+        }
+        return this.cc$emptySection;
+    }
+
     @Inject(
             method = "getBlockState(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;",
             at = @At("HEAD"),
@@ -124,40 +139,46 @@ public abstract class MixinLevelChunk implements IColumn, IColumnInternal {
         if (!this.cc$isCubicColumn) {
             return;
         }
-        // Guard against out-of-bounds section lookups. Vanilla ChunkAccess.getSection
-        // may not bounds-check in all code paths, and the cubic repositionCamera can
-        // place render chunks at the edge of the vanilla section array (e.g. y=-64).
-        // The renderer's neighbor access (section -5 for a chunk at section -4)
-        // would crash with ArrayIndexOutOfBoundsException without this guard.
         Level level = ((LevelChunk) (Object) this).getLevel();
         int minSection = level.getMinSection();
-        int maxSection = minSection + ((LevelChunk) (Object) this).getSections().length;
+        int sectionsLen = ((LevelChunk) (Object) this).getSections().length;
+        int maxSection = minSection + sectionsLen;
         if (sectionIndex < minSection || sectionIndex >= maxSection) {
-            cir.setReturnValue(null);
+            // OOB: vanilla would return null, but 1.21's getFluidState/getBlockState
+            // callers dereference the result unconditionally, so hand them a shared
+            // empty section instead so the level keeps ticking.
+            cir.setReturnValue(this.cc$getOrCreateEmptySection());
             return;
         }
+        // NOTE: in Mojang mappings 1.21.x, LevelChunk.getSection(int) receives the
+        // ABSOLUTE section index (i.e. floor(blockY / 16) for the position being
+        // queried), NOT an offset from minSection. The blockY range for that
+        // section is [sectionIndex*16 .. sectionIndex*16+15]. Adding minBuildHeight
+        // here is double-counting and would route reads from world Y=-32 to cubeY=-6
+        // instead of cubeY=-2 — making vanilla hits against a cave floor look like
+        // they queried the deepslate layer and find nothing.
         Integer bandOffset = ChunkBandOffset.get();
-        int blockY;
-        if (bandOffset != null) {
-            blockY = sectionIndex * 16 + bandOffset;
-        } else {
-            blockY = sectionIndex * 16 + level.getMinBuildHeight();
-        }
+        int blockY = sectionIndex * 16 + (bandOffset != null ? bandOffset : 0);
         int cubeY = Coords.blockToCube(blockY);
         Cube cube = this.cc$getLoadedCube(cubeY);
         if (cube == null) {
+            // No cube yet at this Y (column hasn't loaded a real cube). Prefer the
+            // vanilla column section if it has data (some vanilla code paths
+            // populate sections[] directly); otherwise return the shared empty
+            // section so callers don't NPE.
+            LevelChunkSection vanilla = ((LevelChunk) (Object) this).getSections()[sectionIndex - minSection];
+            cir.setReturnValue(vanilla != null ? vanilla : this.cc$getOrCreateEmptySection());
             return;
         }
         LevelChunkSection storage = cube.getStorage();
         if (storage != null) {
             cir.setReturnValue(storage);
+            return;
         }
+        // Cube is tracked but empty. Same fallback chain as above.
+        LevelChunkSection vanilla = ((LevelChunk) (Object) this).getSections()[sectionIndex - minSection];
+        cir.setReturnValue(vanilla != null ? vanilla : this.cc$getOrCreateEmptySection());
     }
-
-    /**
-     * Band Y offset is now managed by {@link ChunkBandOffset} — extracted
-     * to a utility class because Mixin forbids non-private static methods.
-     */
 
     /**
      * Read-side route for {@link ChunkAccess#getNoiseBiome(int, int, int)}.
@@ -180,6 +201,9 @@ public abstract class MixinLevelChunk implements IColumn, IColumnInternal {
         if (bandOffset == null) {
             return;
         }
+        // y parameter is the absolute quartY (blockY >> 2). quartY = floor(blockY / 4)
+        // matches the Java signed bit-shift for both positive and negative blockY, so
+        // quartY * 4 reproduces the section-local blockY boundary correctly.
         int blockY = (y * 4) + bandOffset;
         int cubeY = Coords.blockToCube(blockY);
         Cube cube = this.cc$getLoadedCube(cubeY);
@@ -222,10 +246,7 @@ public abstract class MixinLevelChunk implements IColumn, IColumnInternal {
         Cube cube = this.cc$getLoadedCube(cubeY);
         // Avoid creating cube objects for air placements in empty space.
         if (cube == null && state.isAir()) {
-            if (this.cc$emptySection == null) {
-                this.cc$emptySection = new LevelChunkSection(((LevelChunk) (Object) this).getLevel().registryAccess().registryOrThrow(Registries.BIOME));
-            }
-            return this.cc$emptySection;
+            return this.cc$getOrCreateEmptySection();
         }
         if (cube == null) {
             cube = this.cc$getOrCreateCube(cubeY);
